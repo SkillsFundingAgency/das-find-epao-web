@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -7,9 +7,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="5.10.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.1.7" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="3.7.0" />
     <PackageReference Include="nunit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0"/>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
+    <PackageReference Include="SpecFlow" Version="3.4.3" />
+    <PackageReference Include="SpecFlow.NUnit" Version="3.4.3" />
+    <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.4.3" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SFA.DAS.FindEpao.MockServer\SFA.DAS.FindEpao.MockServer.csproj" />
+    <ProjectReference Include="..\SFA.DAS.FindEpao.Web\SFA.DAS.FindEpao.Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\" />
+    <Folder Include="Infrastructure\" />
+    <Folder Include="Steps\" />
+  </ItemGroup>
+
+
 
 </Project>

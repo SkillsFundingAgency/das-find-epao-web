@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SFA.DAS.FindEpao.Web.Models;
+using SFA.DAS.FindEpao.Web.Infrastructure;
 
 namespace SFA.DAS.FindEpao.Web.Controllers
 {
@@ -18,20 +13,11 @@ namespace SFA.DAS.FindEpao.Web.Controllers
             _logger = logger;
         }
 
+        [Route("", Name = RouteNames.ServiceStartDefault, Order = 0)]
+        [Route("start", Name = RouteNames.ServiceStart, Order = 1)]
         public IActionResult Index()
         {
             return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
