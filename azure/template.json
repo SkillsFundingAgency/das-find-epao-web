@@ -111,6 +111,7 @@
         {
             "apiVersion": "2020-06-01",
             "name": "ui-application-insights",
+            "resourceGroup": "[variables('resourceGroupName')]",
             "dependsOn": [
                 "[variables('resourceGroupName')]"
             ],
@@ -158,6 +159,7 @@
         {
             "apiVersion": "2020-06-01",
             "name": "ui-app-service",
+            "resourceGroup": "[variables('resourceGroupName')]",
             "dependsOn": [
                 "apim-product-subscription",
                 "[variables('resourceGroupName')]"
