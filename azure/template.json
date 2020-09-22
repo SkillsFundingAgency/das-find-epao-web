@@ -1,5 +1,5 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-08-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "resourceEnvironmentName": {
@@ -10,6 +10,13 @@
         },
         "serviceName": {
             "type": "string"
+        },
+        "resourceGroupLocation": {
+            "type": "string"
+        },
+        "tags": {
+            "type": "object",
+            "defaultValue": ""
         },
         "sharedEnvResourceGroup": {
             "type": "string"
@@ -64,9 +71,19 @@
     "variables": {
         "deploymentUrlBase": "https://raw.githubusercontent.com/SkillsFundingAgency/das-platform-building-blocks/master/templates/",
         "resourceNamePrefix": "[toLower(concat('das-', parameters('resourceEnvironmentName'),'-', parameters('serviceName')))]",
+        "resourceGroupName": "[concat(variables('resourceNamePrefix'), '-rg')]",
         "uiAppServiceName": "[concat(variables('resourceNamePrefix'), 'ui-as')]"
     },
     "resources": [
+        {
+            "apiVersion": "2020-06-01",
+            "name": "[variables('resourceGroupName')]",
+            "type": "Microsoft.Resources/resourceGroups",
+            "location": "[parameters('resourceGroupLocation')]",
+            "tags": "[parameters('tags')]",
+            "properties": {
+            }
+        },
         {
             "apiVersion": "2017-05-10",
             "name": "ui-app-service-certificate",
@@ -94,6 +111,9 @@
         {
             "apiVersion": "2017-05-10",
             "name": "ui-application-insights",
+            "dependsOn": [
+                "[variables('resourceGroupName')]"
+            ],
             "type": "Microsoft.Resources/deployments",
             "properties": {
                 "mode": "Incremental",
@@ -138,10 +158,11 @@
         {
             "apiVersion": "2017-05-10",
             "name": "ui-app-service",
-            "type": "Microsoft.Resources/deployments",
             "dependsOn": [
-                "apim-product-subscription"
+                "apim-product-subscription",
+                "[variables('resourceGroupName')]"
             ],
+            "type": "Microsoft.Resources/deployments",
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
