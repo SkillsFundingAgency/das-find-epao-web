@@ -31,7 +31,7 @@
             "type": "array",
             "defaultValue": []
         },
-        "uiCustomHostname": {
+        "customHostname": {
             "type": "string"
         },
         "apimBaseUrl": {
@@ -72,12 +72,12 @@
         "deploymentUrlBase": "https://raw.githubusercontent.com/SkillsFundingAgency/das-platform-building-blocks/master/templates/",
         "resourceNamePrefix": "[toLower(concat('das-', parameters('resourceEnvironmentName'),'-', parameters('serviceName')))]",
         "resourceGroupName": "[concat(variables('resourceNamePrefix'), '-rg')]",
-        "uiAppServiceName": "[concat(variables('resourceNamePrefix'), 'ui-as')]"
+        "appServiceName": "[concat(variables('resourceNamePrefix'), '-as')]"
     },
     "resources": [
         {
             "apiVersion": "2020-06-01",
-            "name": "ui-app-service-certificate",
+            "name": "app-service-certificate",
             "resourceGroup": "[parameters('sharedEnvResourceGroup')]",
             "type": "Microsoft.Resources/deployments",
             "properties": {
@@ -101,7 +101,7 @@
         },
         {
             "apiVersion": "2020-06-01",
-            "name": "ui-application-insights",
+            "name": "application-insights",
             "resourceGroup": "[variables('resourceGroupName')]",
             "type": "Microsoft.Resources/deployments",
             "properties": {
@@ -112,17 +112,17 @@
                 },
                 "parameters": {
                     "appInsightsName": {
-                        "value": "[variables('uiAppServiceName')]"
+                        "value": "[variables('appServiceName')]"
                     },
                     "attachedService": {
-                        "value": "[variables('uiAppServiceName')]"
+                        "value": "[variables('appServiceName')]"
                     }
                 }
             }
         },
         {
             "apiVersion": "2020-06-01",
-            "name": "ui-app-service",
+            "name": "app-service",
             "resourceGroup": "[variables('resourceGroupName')]",
             "dependsOn": [
                 "apim-product-subscription"
@@ -136,7 +136,7 @@
                 },
                 "parameters": {
                     "appServiceName": {
-                        "value": "[variables('uiAppServiceName')]"
+                        "value": "[variables('appServiceName')]"
                     },
                     "appServicePlanName": {
                         "value": "[parameters('sharedFrontEndAppServicePlanName')]"
@@ -171,7 +171,7 @@
                             },
                             {
                                 "name": "FindApprenticeshipTrainingApi:Key",
-                                "value": "[reference(resourceId(parameters('sharedApimResourceGroup'),'Microsoft.ApiManagement/service/subscriptions', parameters('sharedApimName'), variables('uiAppServiceName')), '2019-01-01').primaryKey]"
+                                "value": "[reference(resourceId(parameters('sharedApimResourceGroup'),'Microsoft.ApiManagement/service/subscriptions', parameters('sharedApimName'), variables('appServiceName')), '2019-01-01').primaryKey]"
                             },
                             {
                                 "name": "Cdn:Url",
@@ -183,15 +183,15 @@
                             },
                             {
                                 "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
-                                "value": "[reference('ui-application-insights').outputs.InstrumentationKey.value]"
+                                "value": "[reference('application-insights').outputs.InstrumentationKey.value]"
                             }
                         ]
                     },
                     "customHostName": {
-                        "value": "[parameters('uiCustomHostname')]"
+                        "value": "[parameters('customHostname')]"
                     },
                     "certificateThumbprint": {
-                        "value": "[reference('ui-app-service-certificate').outputs.certificateThumbprint.value]"
+                        "value": "[reference('app-service-certificate').outputs.certificateThumbprint.value]"
                     },
                     "ipSecurityRestrictions": {
                         "value": "[parameters('appServiceAllowedIPs')]"
@@ -215,7 +215,7 @@
                         "value": "[parameters('sharedApimName')]"
                     },
                     "subscriptionName": {
-                        "value": "[variables('uiAppServiceName')]"
+                        "value": "[variables('appServiceName')]"
                     },
                     "subscriptionScope": {
                         "value": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', parameters('sharedApimResourceGroup'), '/providers/Microsoft.ApiManagement/service/', parameters('sharedApimName'), '/products/FindApprenticeshipTrainingOuterApi')]"
@@ -225,9 +225,9 @@
         }
     ],
     "outputs": {
-        "UiAppServiceName": {
+        "AppServiceName": {
             "type": "string",
-            "value": "[variables('uiAppServiceName')]"
+            "value": "[variables('appServiceName')]"
         }
     }
 }
