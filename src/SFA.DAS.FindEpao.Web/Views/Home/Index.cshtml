@@ -1,0 +1,25 @@
+﻿@using SFA.DAS.FindEpao.Web.Infrastructure
+@{
+    ViewData["Title"] = "Find an apprenticeship assessment organisation";
+}
+<main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            <h1 class="govuk-heading-xl ">Find an apprenticeship assessment organisation</h1>
+            <p class="govuk-body">Apprentices must complete an assessment to demonstrate what they’ve learnt and that they can perform all aspects of their occupation.</p>
+            <p class="govuk-body">An organisation that is independent from the training provider must carry out the assessment.</p>
+            <p class="govuk-body">Employers can find an assessment organisation or ask their training provider to find one on their behalf.</p>
+            <h2 class="govuk-heading-m ">When to find an assessment organisation</h2>
+            <p class="govuk-body ">Find an assessment organisation early on during the apprenticeship. This will give the employer and apprentice plenty of time to prepare for assessment.</p>
+            
+            <p class="govuk-body govuk-!-margin-top-6">
+                <a asp-route="@RouteNames.Error404" role="button" draggable="false" class="govuk-button govuk-button--start" data-module="govuk-button">
+                    Start now
+                    <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+                        <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"></path>
+                    </svg>
+                </a>
+            </p>
+        </div>
+    </div>
+</main>

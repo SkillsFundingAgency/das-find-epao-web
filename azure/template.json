@@ -1,0 +1,233 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "resourceEnvironmentName": {
+            "type": "string"
+        },
+        "environmentName": {
+            "type": "string"
+        },
+        "serviceName": {
+            "type": "string"
+        },
+        "resourceGroupLocation": {
+            "type": "string"
+        },
+        "tags": {
+            "type": "object",
+            "defaultValue": ""
+        },
+        "sharedEnvResourceGroup": {
+            "type": "string"
+        },
+        "sharedFrontEndAppServicePlanName": {
+            "type": "string"
+        },
+        "sharedFrontEndSubnetResourceId": {
+            "type": "string"
+        },
+        "appServiceAllowedIPs": {
+            "type": "array",
+            "defaultValue": []
+        },
+        "customHostname": {
+            "type": "string"
+        },
+        "apimBaseUrl": {
+            "type": "string"
+        },
+        "outerApiPingUrl": {
+            "type": "string"
+        },
+        "sharedApimResourceGroup": {
+            "type": "string"
+        },
+        "sharedApimName": {
+            "type": "string"
+        },
+        "cdnUrl": {
+            "type": "string"
+        },
+        "keyvaultCertificateName": {
+            "type": "string"
+        },
+        "sharedKeyVaultName": {
+            "type": "string"
+        },
+        "sharedManagementResourceGroup": {
+            "type": "string"
+        },
+        "loggingRedisConnectionString": {
+            "type": "securestring"
+        },
+        "loggingRedisKey": {
+            "type": "string"
+        },
+        "configurationStorageConnectionString": {
+            "type": "securestring"
+        }
+    },
+    "variables": {
+        "deploymentUrlBase": "https://raw.githubusercontent.com/SkillsFundingAgency/das-platform-building-blocks/master/templates/",
+        "resourceNamePrefix": "[toLower(concat('das-', parameters('resourceEnvironmentName'),'-', parameters('serviceName')))]",
+        "resourceGroupName": "[concat(variables('resourceNamePrefix'), '-rg')]",
+        "appServiceName": "[concat(variables('resourceNamePrefix'), '-as')]"
+    },
+    "resources": [
+        {
+            "apiVersion": "2020-06-01",
+            "name": "app-service-certificate",
+            "resourceGroup": "[parameters('sharedEnvResourceGroup')]",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('deploymentUrlBase'),'app-service-certificate.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "keyVaultCertificateName": {
+                        "value": "[parameters('keyvaultCertificateName')]"
+                    },
+                    "keyVaultName": {
+                        "value": "[parameters('sharedKeyVaultName')]"
+                    },
+                    "keyVaultResourceGroup": {
+                        "value": "[parameters('sharedManagementResourceGroup')]"
+                    }
+                }
+            }
+        },
+        {
+            "apiVersion": "2020-06-01",
+            "name": "application-insights",
+            "resourceGroup": "[variables('resourceGroupName')]",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('deploymentUrlBase'),'application-insights.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "appInsightsName": {
+                        "value": "[variables('appServiceName')]"
+                    },
+                    "attachedService": {
+                        "value": "[variables('appServiceName')]"
+                    }
+                }
+            }
+        },
+        {
+            "apiVersion": "2020-06-01",
+            "name": "app-service",
+            "resourceGroup": "[variables('resourceGroupName')]",
+            "dependsOn": [
+                "apim-product-subscription"
+            ],
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('deploymentUrlBase'),'app-service.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "appServiceName": {
+                        "value": "[variables('appServiceName')]"
+                    },
+                    "appServicePlanName": {
+                        "value": "[parameters('sharedFrontEndAppServicePlanName')]"
+                    },
+                    "appServicePlanResourceGroup": {
+                        "value": "[parameters('sharedEnvResourceGroup')]"
+                    },
+                    "subnetResourceId": {
+                        "value": "[parameters('sharedFrontEndSubnetResourceId')]"
+                    },
+                    "appServiceAppSettings": {
+                        "value": [
+                            {
+                                "name": "LoggingRedisConnectionString",
+                                "value": "[parameters('loggingRedisConnectionString')]"
+                            },
+                            {
+                                "name": "LoggingRedisKey",
+                                "value": "[parameters('loggingRedisKey')]"
+                            },
+                            {
+                                "name": "EnvironmentName",
+                                "value": "[parameters('environmentName')]"
+                            },
+                            {
+                                "name": "FindApprenticeshipTrainingApi:BaseUrl",
+                                "value": "[parameters('apimBaseUrl')]"
+                            },
+                            {
+                                "name": "FindApprenticeshipTrainingApi:PingUrl",
+                                "value": "[parameters('outerApiPingUrl')]"
+                            },
+                            {
+                                "name": "FindApprenticeshipTrainingApi:Key",
+                                "value": "[reference(resourceId(parameters('sharedApimResourceGroup'),'Microsoft.ApiManagement/service/subscriptions', parameters('sharedApimName'), variables('appServiceName')), '2019-01-01').primaryKey]"
+                            },
+                            {
+                                "name": "Cdn:Url",
+                                "value": "[parameters('cdnUrl')]"
+                            },
+                            {
+                                "name": "ConfigurationStorageConnectionString",
+                                "value": "[parameters('configurationStorageConnectionString')]"
+                            },
+                            {
+                                "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+                                "value": "[reference('application-insights').outputs.InstrumentationKey.value]"
+                            }
+                        ]
+                    },
+                    "customHostName": {
+                        "value": "[parameters('customHostname')]"
+                    },
+                    "certificateThumbprint": {
+                        "value": "[reference('app-service-certificate').outputs.certificateThumbprint.value]"
+                    },
+                    "ipSecurityRestrictions": {
+                        "value": "[parameters('appServiceAllowedIPs')]"
+                    }
+                }
+            }
+        },
+        {
+            "apiVersion": "2020-06-01",
+            "name": "apim-product-subscription",
+            "resourceGroup": "[parameters('sharedApimResourceGroup')]",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('deploymentUrlBase'),'apim/apim-subscription.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "apimName": {
+                        "value": "[parameters('sharedApimName')]"
+                    },
+                    "subscriptionName": {
+                        "value": "[variables('appServiceName')]"
+                    },
+                    "subscriptionScope": {
+                        "value": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', parameters('sharedApimResourceGroup'), '/providers/Microsoft.ApiManagement/service/', parameters('sharedApimName'), '/products/FindApprenticeshipTrainingOuterApi')]"
+                    }
+                }
+            }
+        }
+    ],
+    "outputs": {
+        "AppServiceName": {
+            "type": "string",
+            "value": "[variables('appServiceName')]"
+        }
+    }
+}
