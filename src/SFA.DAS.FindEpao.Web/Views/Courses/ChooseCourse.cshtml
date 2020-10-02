@@ -1,12 +1,35 @@
 ﻿@using SFA.DAS.FindEpao.Web.Infrastructure
+@using SFA.DAS.FindEpao.Web.Models
+@model ChooseCourseViewModel
 @{
     ViewData["Title"] = "Choose a course";
 }
 <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
+            <partial name="_pageErrorsOverview" />
             <h1 class="govuk-heading-xl ">What is the apprenticeship training course?</h1>
-            
+            <form method="post" asp-route="@RouteNames.ChooseCourse" class="validate-auto-complete">
+                <div class="govuk-form-group">
+                    <label class="govuk-label" for="course-search">
+                        Choose a course
+                    </label>
+                    @if (ViewData.ModelState.ContainsKey("SelectedCourseId") && ViewData.ModelState["SelectedCourseId"].Errors.Any())
+                    {
+                    <span id="Course" class="govuk-error-message">
+                        @ViewData.ModelState["SelectedCourseId"].Errors.First().ErrorMessage
+                    </span>
+                    }
+                    <select id="SelectedCourseId" name="SelectedCourseId" class="govuk-select" aria-describedby="choose-course-hint">
+                        <option value="">Select an apprenticeship training course</option>
+                        @foreach (var course in Model.Courses)
+                        {
+                            <option value="@course.Id" selected="@course.Selected">@course.Description</option>
+                        }
+                    </select>
+                </div>
+                <button class="govuk-button" type="submit">Continue</button>
+            </form>
         </div>
     </div>
 </main>

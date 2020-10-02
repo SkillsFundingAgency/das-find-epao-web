@@ -35,10 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\SFA.DAS.FindEpao.Domain\SFA.DAS.FindEpao.Domain.csproj" />
   </ItemGroup>
 </Project>
