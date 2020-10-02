@@ -24,7 +24,7 @@
                         <option value="">Select an apprenticeship training course</option>
                         @foreach (var course in Model.Courses)
                         {
-                            <option value="@course.Id" selected="@course.Selected">@course.Description</option>
+                            <option value="@course.Id">@course.Description</option>
                         }
                     </select>
                 </div>

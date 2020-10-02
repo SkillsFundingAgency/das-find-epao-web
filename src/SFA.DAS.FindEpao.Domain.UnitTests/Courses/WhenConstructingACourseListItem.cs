@@ -34,7 +34,7 @@ namespace SFA.DAS.FindEpao.Domain.UnitTests.Courses
             var course = new CourseListItem("",expectedTitle,3);
 
             //Assert
-            Assert.AreEqual(expectedString, course.CourseDescription);
+            Assert.AreEqual(expectedString, course.Description);
             Assert.AreEqual(expectedString, course.Title);
 
         }
@@ -46,7 +46,7 @@ namespace SFA.DAS.FindEpao.Domain.UnitTests.Courses
             var actualApprenticeship = new CourseListItem("", "Some title", 1);
 
             //Assert
-            Assert.AreEqual("Some title - Level 1", actualApprenticeship.CourseDescription);
+            Assert.AreEqual("Some title - Level 1", actualApprenticeship.Description);
         }
 
         [Test]
@@ -59,7 +59,7 @@ namespace SFA.DAS.FindEpao.Domain.UnitTests.Courses
             var course = new CourseListItem(null, null, 0);
 
             //Assert
-            Assert.AreEqual(expectedString, course.CourseDescription);
+            Assert.AreEqual(expectedString, course.Description);
         }
     }
 }

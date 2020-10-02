@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using SFA.DAS.FindEpao.Domain.Courses;
+using SFA.DAS.FindEpao.Application.Courses.Queries.GetCourses;
 using SFA.DAS.FindEpao.Web.Infrastructure;
 using SFA.DAS.FindEpao.Web.Models;
 
@@ -10,18 +11,22 @@ namespace SFA.DAS.FindEpao.Web.Controllers
     [Route("[controller]")]
     public class CoursesController : Controller
     {
+        private readonly IMediator _mediator;
+
+        public CoursesController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
         [HttpGet]
         [Route("", Name = RouteNames.ChooseCourse)]
         public async Task<IActionResult> ChooseCourse()
         {
-            await Task.CompletedTask;
+            var result = await _mediator.Send(new GetCoursesQuery());
 
             var viewModel = new ChooseCourseViewModel
             {
-                Courses = new List<CourseListItemViewModel>
-                {
-                    new CourseListItemViewModel(new CourseListItem("1","title", 5))
-                }
+                Courses = result.Courses.Select(item => (CourseListItemViewModel)item)
             };
 
             return View(viewModel);
