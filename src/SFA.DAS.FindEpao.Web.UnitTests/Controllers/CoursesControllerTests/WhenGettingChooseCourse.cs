@@ -34,11 +34,5 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
             model.Courses.Should().BeEquivalentTo(
                 mediatorResult.Courses.Select(item => (CourseListItemViewModel)item));
         }
-
-        [Test, MoqAutoData]
-        public void And_Exception_Then_Returns_BadRequest()
-        {
-
-        }
     }
 }
