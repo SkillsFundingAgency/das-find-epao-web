@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -8,10 +8,16 @@
 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.6" />
     <PackageReference Include="nunit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
     <PackageReference Include="SFA.DAS.Testing.AutoFixture" Version="3.0.169" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SFA.DAS.FindEpao.Domain\SFA.DAS.FindEpao.Domain.csproj" />
+    <ProjectReference Include="..\SFA.DAS.FindEpao.Infrastructure\SFA.DAS.FindEpao.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

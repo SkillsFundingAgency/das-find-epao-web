@@ -20,7 +20,13 @@ namespace SFA.DAS.FindEpao.MockServer
             
             var server = StandAloneApp.Start(settings);
             
-            // map requests and responses here.
+            server.Given(Request.Create().WithPath(s => Regex.IsMatch(s,"/courses$"))
+                .UsingGet()
+            ).RespondWith(
+                Response.Create()
+                    .WithStatusCode(200)
+                    .WithHeader("Content-Type", "application/json")
+                    .WithBodyFromFile("course-list.json"));
 
             return server;
         }

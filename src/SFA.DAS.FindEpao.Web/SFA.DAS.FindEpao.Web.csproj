@@ -37,5 +37,6 @@
   <ItemGroup>
     <ProjectReference Include="..\SFA.DAS.FindEpao.Domain\SFA.DAS.FindEpao.Domain.csproj" />
     <ProjectReference Include="..\SFA.DAS.FindEpao.Application\SFA.DAS.FindEpao.Application.csproj" />
+    <ProjectReference Include="..\SFA.DAS.FindEpao.Infrastructure\SFA.DAS.FindEpao.Infrastructure.csproj" />
   </ItemGroup>
 </Project>
