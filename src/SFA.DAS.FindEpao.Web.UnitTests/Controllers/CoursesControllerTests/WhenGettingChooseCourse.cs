@@ -34,5 +34,26 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
             model.Courses.Should().BeEquivalentTo(
                 mediatorResult.Courses.Select(item => (CourseListItemViewModel)item));
         }
+
+        [Test, MoqAutoData]
+        public async Task And_Invalid_Then_Adds_ModelState_Error(
+            GetChooseCourseRequest request,
+            GetCoursesResult mediatorResult,
+            [Frozen] Mock<IMediator> mockMediator,
+            [Greedy] CoursesController controller)
+        {
+            mockMediator
+                .Setup(mediator => mediator.Send(
+                    It.IsAny<GetCoursesQuery>(), 
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(mediatorResult);
+
+            await controller.ChooseCourse(request);
+
+            controller.ModelState.IsValid.Should().BeFalse();
+            controller.ModelState.ContainsKey("SelectedCourseId").Should().BeTrue();
+            controller.ModelState["SelectedCourseId"].Errors[0].ErrorMessage
+                .Should().Be("Select an apprenticeship training course");
+        }
     }
 }
