@@ -35,7 +35,7 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
             result.RouteName.Should().Be(RouteNames.ChooseCourse);
             result.RouteValues.Should().ContainKey(nameof(GetChooseCourseRequest.SelectedCourseId));
             result.RouteValues[nameof(GetChooseCourseRequest.SelectedCourseId)]
-                .Should().Be(postRequest.SelectedCourseId);
+                .Should().Be("-1");
         }
     }
 }

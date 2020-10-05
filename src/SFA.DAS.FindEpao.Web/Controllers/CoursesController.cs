@@ -56,7 +56,7 @@ namespace SFA.DAS.FindEpao.Web.Controllers
             {
                 return RedirectToRoute(
                     RouteNames.ChooseCourse, 
-                    new GetChooseCourseRequest{SelectedCourseId = request.SelectedCourseId});
+                    new GetChooseCourseRequest{SelectedCourseId = "-1"});
             }
 
             return RedirectToRoute(RouteNames.ServiceStartDefault);
