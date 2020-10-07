@@ -19,19 +19,20 @@ namespace SFA.DAS.FindEpao.Infrastructure.UnitTests.Api
         [Test, AutoData]
         public async Task Then_The_Endpoint_Is_Called_With_Authentication_Header_And_Data_Returned(
             List<string> testObject, 
+            GetTestRequest getTestRequest,
             FindEpaoApi config)
         {
             //Arrange
+            config.BaseUrl = "http://valid-url/";
             var configMock = new Mock<IOptions<FindEpaoApi>>();
             configMock.Setup(x => x.Value).Returns(config);
-            var getTestRequest = new GetTestRequest("https://test.local");
             
             var response = new HttpResponseMessage
             {
                 Content = new StringContent(JsonConvert.SerializeObject(testObject)),
                 StatusCode = HttpStatusCode.Accepted
             };
-            var httpMessageHandler = MessageHandler.SetupMessageHandlerMock(response, getTestRequest.GetUrl, config.Key);
+            var httpMessageHandler = MessageHandler.SetupMessageHandlerMock(response, getTestRequest.BuildGetUrl(config.BaseUrl), config.Key);
             var client = new HttpClient(httpMessageHandler.Object);
             var apiClient = new ApiClient(client, configMock.Object);
 
@@ -42,22 +43,22 @@ namespace SFA.DAS.FindEpao.Infrastructure.UnitTests.Api
             actual.Should().BeEquivalentTo(testObject);
         }
         
-        
         [Test, AutoData]
         public void Then_If_It_Is_Not_Successful_An_Exception_Is_Thrown(
+            GetTestRequest getTestRequest,
             FindEpaoApi config)
         {
             //Arrange
+            config.BaseUrl = "http://valid-url/";
             var configMock = new Mock<IOptions<FindEpaoApi>>();
             configMock.Setup(x => x.Value).Returns(config);
-            var getTestRequest = new GetTestRequest("https://test.local");
             var response = new HttpResponseMessage
             {
                 Content = new StringContent(""),
                 StatusCode = HttpStatusCode.BadRequest
             };
             
-            var httpMessageHandler = MessageHandler.SetupMessageHandlerMock(response, getTestRequest.GetUrl, config.Key);
+            var httpMessageHandler = MessageHandler.SetupMessageHandlerMock(response, getTestRequest.BuildGetUrl(config.BaseUrl), config.Key);
             var client = new HttpClient(httpMessageHandler.Object);
             var apiClient = new ApiClient(client, configMock.Object);
             
@@ -66,14 +67,9 @@ namespace SFA.DAS.FindEpao.Infrastructure.UnitTests.Api
             
         }
 
-        private class GetTestRequest : IGetApiRequest
+        public class GetTestRequest : IGetApiRequest
         {
-            public GetTestRequest (string baseUrl)
-            {
-                BaseUrl = baseUrl;
-            }
-            public string BaseUrl { get; }
-            public string GetUrl => $"{BaseUrl}/test-url/get";
+            public string BuildGetUrl(string baseUrl) => $"{baseUrl}/test-url/get";
         }
     }
 }

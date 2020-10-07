@@ -21,7 +21,7 @@ namespace SFA.DAS.FindEpao.Infrastructure.Api
         {
             AddHeaders();
 
-            var response = await _httpClient.GetAsync(request.GetUrl).ConfigureAwait(false);
+            var response = await _httpClient.GetAsync(request.BuildGetUrl(_config.BaseUrl)).ConfigureAwait(false);
 
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

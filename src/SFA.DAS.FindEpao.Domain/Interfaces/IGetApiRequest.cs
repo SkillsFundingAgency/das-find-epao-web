@@ -1,10 +1,7 @@
-﻿using Newtonsoft.Json;
-
-namespace SFA.DAS.FindEpao.Domain.Interfaces
+﻿namespace SFA.DAS.FindEpao.Domain.Interfaces
 {
-    public interface IGetApiRequest : IBaseApiRequest
+    public interface IGetApiRequest
     {
-        [JsonIgnore]
-        string GetUrl { get; }
+        string BuildGetUrl(string baseUrl);
     }
 }
