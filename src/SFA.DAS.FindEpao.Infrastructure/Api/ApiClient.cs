@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -12,16 +13,20 @@ namespace SFA.DAS.FindEpao.Infrastructure.Api
         private readonly HttpClient _httpClient;
         private readonly FindEpaoApi _config;
 
-        public ApiClient (HttpClient httpClient, IOptions<FindEpaoApi> options)
+        public ApiClient (
+            HttpClient httpClient, 
+            IOptions<FindEpaoApi> options)
         {
             _httpClient = httpClient;
             _config = options.Value;
+            _httpClient.BaseAddress = new Uri(_config.BaseUrl);
         }
+
         public async Task<TResponse> Get<TResponse>(IGetApiRequest request)
         {
             AddHeaders();
 
-            var response = await _httpClient.GetAsync(request.BuildGetUrl(_config.BaseUrl)).ConfigureAwait(false);
+            var response = await _httpClient.GetAsync(request.GetUrl).ConfigureAwait(false);
 
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

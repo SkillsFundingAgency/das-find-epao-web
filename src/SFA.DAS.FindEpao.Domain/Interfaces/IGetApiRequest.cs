@@ -2,6 +2,6 @@
 {
     public interface IGetApiRequest
     {
-        string BuildGetUrl(string baseUrl);
+        string GetUrl { get; }
     }
 }

@@ -36,6 +36,7 @@ namespace SFA.DAS.FindEpao.Infrastructure.UnitTests.Api
         {
             //Arrange
             config.PingUrl = "https://test.local/";
+            config.BaseUrl = "http://valid-url/";
             var configMock = new Mock<IOptions<FindEpaoApi>>();
             configMock.Setup(x => x.Value).Returns(config);
             var response = new HttpResponseMessage

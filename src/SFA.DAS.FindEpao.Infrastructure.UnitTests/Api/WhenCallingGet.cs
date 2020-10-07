@@ -32,7 +32,7 @@ namespace SFA.DAS.FindEpao.Infrastructure.UnitTests.Api
                 Content = new StringContent(JsonConvert.SerializeObject(testObject)),
                 StatusCode = HttpStatusCode.Accepted
             };
-            var httpMessageHandler = MessageHandler.SetupMessageHandlerMock(response, getTestRequest.BuildGetUrl(config.BaseUrl), config.Key);
+            var httpMessageHandler = MessageHandler.SetupMessageHandlerMock(response, $"{config.BaseUrl}{getTestRequest.GetUrl}", config.Key);
             var client = new HttpClient(httpMessageHandler.Object);
             var apiClient = new ApiClient(client, configMock.Object);
 
@@ -58,7 +58,7 @@ namespace SFA.DAS.FindEpao.Infrastructure.UnitTests.Api
                 StatusCode = HttpStatusCode.BadRequest
             };
             
-            var httpMessageHandler = MessageHandler.SetupMessageHandlerMock(response, getTestRequest.BuildGetUrl(config.BaseUrl), config.Key);
+            var httpMessageHandler = MessageHandler.SetupMessageHandlerMock(response, $"{config.BaseUrl}{getTestRequest.GetUrl}", config.Key);
             var client = new HttpClient(httpMessageHandler.Object);
             var apiClient = new ApiClient(client, configMock.Object);
             
@@ -69,7 +69,7 @@ namespace SFA.DAS.FindEpao.Infrastructure.UnitTests.Api
 
         public class GetTestRequest : IGetApiRequest
         {
-            public string BuildGetUrl(string baseUrl) => $"{baseUrl}/test-url/get";
+            public string GetUrl => "test-url/get";
         }
     }
 }
