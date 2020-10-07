@@ -10,10 +10,7 @@
             <partial name="_pageErrorsOverview" />
             <h1 class="govuk-heading-xl ">What is the apprenticeship training course?</h1>
             <form method="post" asp-route="@RouteNames.ChooseCourse" class="validate-auto-complete">
-                <div class="govuk-form-group">
-                    <label class="govuk-label" for="course-search">
-                        Choose a course
-                    </label>
+                <div class="govuk-form-group @(ViewData.ModelState.IsValid ? "" : "govuk-form-group--error")">
                     @if (ViewData.ModelState.ContainsKey("SelectedCourseId") && ViewData.ModelState["SelectedCourseId"].Errors.Any())
                     {
                     <span id="Course" class="govuk-error-message">

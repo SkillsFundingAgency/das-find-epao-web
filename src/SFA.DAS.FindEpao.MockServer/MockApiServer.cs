@@ -14,7 +14,7 @@ namespace SFA.DAS.FindEpao.MockServer
         {
             var settings = new WireMockServerSettings
             {
-                Port = 5003,
+                Port = 5007,
                 Logger = new WireMockConsoleLogger()
             };
             

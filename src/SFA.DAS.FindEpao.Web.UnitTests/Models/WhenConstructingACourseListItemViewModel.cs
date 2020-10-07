@@ -9,7 +9,7 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Models
     public class WhenConstructingACourseListItemViewModel
     {
         [Test, AutoData]
-        public void Then_Sets_Id(
+        public void Then_Maps_All_Properties(
             CourseListItem source)
         {
             CourseListItemViewModel viewModel = source;
