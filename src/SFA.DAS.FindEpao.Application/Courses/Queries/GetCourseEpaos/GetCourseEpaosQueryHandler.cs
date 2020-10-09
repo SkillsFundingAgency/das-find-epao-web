@@ -29,7 +29,14 @@ namespace SFA.DAS.FindEpao.Application.Courses.Queries.GetCourseEpaos
                 throw new ValidationException(validationResult.DataAnnotationResult,null, null);
             }
 
-            return new GetCourseEpaosResult();
+            var courseEpaos = await _courseService.GetCourseEpaos(query.CourseId);
+
+            return new GetCourseEpaosResult
+            {
+                Course = courseEpaos.Course,
+                Epaos = courseEpaos.Epaos,
+                Total = courseEpaos.Total
+            };
         }
     }
 }
