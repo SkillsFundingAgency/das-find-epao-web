@@ -7,7 +7,7 @@ namespace SFA.DAS.FindEpao.Domain.UnitTests.Courses.Api.GetCoursesApiRequest
     public class WhenGettingGetUrl
     {
         [Test, AutoData]
-        public void Then_Sets_BaseUrl(Domain.Courses.Api.GetCoursesApiRequest request)
+        public void Then_Returns_Correct_Path(Domain.Courses.Api.GetCoursesApiRequest request)
         {
             request.GetUrl.Should().Be("courses");
         }
