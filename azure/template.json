@@ -162,15 +162,15 @@
                                 "value": "[parameters('environmentName')]"
                             },
                             {
-                                "name": "FindApprenticeshipTrainingApi:BaseUrl",
+                                "name": "FindEpaoApi:BaseUrl",
                                 "value": "[parameters('apimBaseUrl')]"
                             },
                             {
-                                "name": "FindApprenticeshipTrainingApi:PingUrl",
+                                "name": "FindEpaoApi:PingUrl",
                                 "value": "[parameters('outerApiPingUrl')]"
                             },
                             {
-                                "name": "FindApprenticeshipTrainingApi:Key",
+                                "name": "FindEpaoApi:Key",
                                 "value": "[reference(resourceId(parameters('sharedApimResourceGroup'),'Microsoft.ApiManagement/service/subscriptions', parameters('sharedApimName'), variables('appServiceName')), '2019-01-01').primaryKey]"
                             },
                             {
@@ -218,7 +218,7 @@
                         "value": "[variables('appServiceName')]"
                     },
                     "subscriptionScope": {
-                        "value": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', parameters('sharedApimResourceGroup'), '/providers/Microsoft.ApiManagement/service/', parameters('sharedApimName'), '/products/FindApprenticeshipTrainingOuterApi')]"
+                        "value": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', parameters('sharedApimResourceGroup'), '/providers/Microsoft.ApiManagement/service/', parameters('sharedApimName'), '/products/FindEpaoOuterApi')]"
                     }
                 }
             }

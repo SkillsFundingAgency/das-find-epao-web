@@ -14,13 +14,19 @@ namespace SFA.DAS.FindEpao.MockServer
         {
             var settings = new WireMockServerSettings
             {
-                Port = 5003,
+                Port = 5007,
                 Logger = new WireMockConsoleLogger()
             };
             
             var server = StandAloneApp.Start(settings);
             
-            // map requests and responses here.
+            server.Given(Request.Create().WithPath(s => Regex.IsMatch(s,"/courses$"))
+                .UsingGet()
+            ).RespondWith(
+                Response.Create()
+                    .WithStatusCode(200)
+                    .WithHeader("Content-Type", "application/json")
+                    .WithBodyFromFile("course-list.json"));
 
             return server;
         }

@@ -9,7 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using SFA.DAS.FindEpao.Application.Courses.Queries.GetCourses;
 using SFA.DAS.FindEpao.Domain.Configuration;
+using SFA.DAS.FindEpao.Infrastructure.HealthCheck;
 using SFA.DAS.FindEpao.Web.AppStart;
 
 namespace SFA.DAS.FindEpao.Web
@@ -48,13 +50,13 @@ namespace SFA.DAS.FindEpao.Web
             });
 
             services.AddOptions();
-            /*services.Configure<FindEpaoApi>(_configuration.GetSection("FindEpaoApi"));
-            services.AddSingleton(cfg => cfg.GetService<IOptions<FindEpaoApi>>().Value);*/
+            services.Configure<FindEpaoApi>(_configuration.GetSection("FindEpaoApi"));
+            services.AddSingleton(cfg => cfg.GetService<IOptions<FindEpaoApi>>().Value);
             
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddServiceRegistration();
-            //services.AddMediatR(typeof(GetCourseQueryHandler).Assembly);
+            services.AddMediatR(typeof(GetCoursesQueryHandler).Assembly);
             services.AddMediatRValidation();
             
             services.AddApplicationInsightsTelemetry(_configuration["APPINSIGHTS_INSTRUMENTATIONKEY"]);
@@ -67,7 +69,11 @@ namespace SFA.DAS.FindEpao.Web
 
             if (!_environment.IsDevelopment())
             {
-                services.AddHealthChecks();
+                services.AddHealthChecks()
+                    .AddCheck<FindEpaoOuterApiHealthCheck>(
+                        "Find Epao Outer Api",
+                        failureStatus: HealthStatus.Unhealthy,
+                        tags: new[] {"ready"});
             }
         }
 
@@ -81,7 +87,7 @@ namespace SFA.DAS.FindEpao.Web
             else
             {
                 app.UseHealthChecks();
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error/500");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }

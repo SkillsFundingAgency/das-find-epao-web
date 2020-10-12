@@ -6,7 +6,7 @@ namespace SFA.DAS.FindEpao.MockServer
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Mock Server starting on http://localhost:5003");
+            Console.WriteLine("Mock Server starting on http://localhost:5007");
 
             MockApiServer.Start();
 
