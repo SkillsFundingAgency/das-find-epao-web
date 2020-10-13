@@ -4,30 +4,29 @@ using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using SFA.DAS.FindEpao.Application.Courses.Services;
-using SFA.DAS.FindEpao.Domain.Courses;
 using SFA.DAS.FindEpao.Domain.Courses.Api;
 using SFA.DAS.FindEpao.Domain.Interfaces;
 using SFA.DAS.Testing.AutoFixture;
 
 namespace SFA.DAS.FindEpao.Application.UnitTests.Courses.Services
 {
-    public class WhenCallingGetCourseEpaos
+    public class WhenCallingGetCourseEpaosCount
     {
         [Test, MoqAutoData]
-        public async Task Then_Gets_Courses_From_Api(
+        public async Task Then_Gets_Count_From_Api(
             string courseId,
-            CourseEpaos apiResponse,
+            int apiResponse,
             [Frozen] Mock<IApiClient> mockApiClient,
             CourseService service)
         {
             mockApiClient
-                .Setup(client => client.Get<CourseEpaos>(
-                    It.Is<GetCourseEpaosApiRequest>(request => request.CourseId == courseId)))
+                .Setup(client => client.Get<int>(
+                    It.Is<GetCourseEpaosCountApiRequest>(request => request.CourseId == courseId)))
                 .ReturnsAsync(apiResponse);
 
-            var result = await service.GetCourseEpaos(courseId);
+            var result = await service.GetCourseEpaosCount(courseId);
 
-            result.Should().BeEquivalentTo(apiResponse);
+            result.Should().Be(apiResponse);
         }
     }
 }
