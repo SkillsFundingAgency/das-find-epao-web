@@ -2,6 +2,7 @@
 {
     public class EpaoListItem
     {
-        //id, title, locations, address
+        //id, title, locations, address, all england
+        public int EpaoId { get; set; }
     }
 }

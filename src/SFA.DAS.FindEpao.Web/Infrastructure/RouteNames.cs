@@ -9,5 +9,8 @@
         public const string Error500 = "500";
 
         public const string ChooseCourse = "choose-course";
+        public const string CourseEpaos = "course-epaos";
+        public const string CourseEpaoDetails = "course-epao-details";
+
     }
 }

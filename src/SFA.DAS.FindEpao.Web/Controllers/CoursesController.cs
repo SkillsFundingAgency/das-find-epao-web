@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SFA.DAS.FindEpao.Application.Courses.Queries.GetCourseEpaos;
+using SFA.DAS.FindEpao.Application.Courses.Queries.GetCourseEpaosCount;
 using SFA.DAS.FindEpao.Application.Courses.Queries.GetCourses;
 using SFA.DAS.FindEpao.Web.Infrastructure;
 using SFA.DAS.FindEpao.Web.Models;
@@ -46,11 +47,11 @@ namespace SFA.DAS.FindEpao.Web.Controllers
         [Route("", Name = RouteNames.ChooseCourse)]
         public async Task<IActionResult> PostChooseCourse(PostChooseCourseRequest request)
         {
-            var query = new GetCourseEpaosQuery {CourseId = request.SelectedCourseId};
-
+            GetCourseEpaosResult result;
             try
             {
-                var result = await _mediator.Send(query);
+                var query = new GetCourseEpaosQuery {CourseId = request.SelectedCourseId};
+                result = await _mediator.Send(query);
             }
             catch (ValidationException)
             {
@@ -59,7 +60,18 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                     new GetChooseCourseRequest{SelectedCourseId = "-1"});
             }
 
-            return RedirectToRoute(RouteNames.ServiceStartDefault);
+            if (result?.Total == 1)
+            {
+                return RedirectToRoute(RouteNames.CourseEpaoDetails, new GetCourseEpaoDetailsRequest
+                {
+                    Id = request.SelectedCourseId,
+                    EpaoId = result.Epaos.First().EpaoId
+                });
+            }
+            else
+            {
+                return RedirectToRoute(RouteNames.CourseEpaos, new GetCourseEpaosRequest{ Id = request.SelectedCourseId});
+            }
         }
     }
 }
