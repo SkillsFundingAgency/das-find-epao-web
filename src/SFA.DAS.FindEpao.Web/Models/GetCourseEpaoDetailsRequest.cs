@@ -3,6 +3,6 @@
     public class GetCourseEpaoDetailsRequest
     {
         public string Id { get; set; }
-        public int EpaoId { get; set; }
+        public string EpaoId { get; set; }
     }
 }

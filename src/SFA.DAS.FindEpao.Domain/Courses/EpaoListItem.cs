@@ -1,8 +1,11 @@
-﻿namespace SFA.DAS.FindEpao.Domain.Courses
+﻿using Newtonsoft.Json;
+
+namespace SFA.DAS.FindEpao.Domain.Courses
 {
     public class EpaoListItem
     {
         //id, title, locations, address, all england
-        public int EpaoId { get; set; }
+        [JsonProperty("endPointAssessorOrganisationId")]
+        public string EpaoId { get; set; }
     }
 }

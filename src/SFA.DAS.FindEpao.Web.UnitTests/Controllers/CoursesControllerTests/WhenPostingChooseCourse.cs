@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
 using SFA.DAS.FindEpao.Application.Courses.Queries.GetCourseEpaos;
-using SFA.DAS.FindEpao.Application.Courses.Queries.GetCourseEpaosCount;
 using SFA.DAS.FindEpao.Domain.Courses;
 using SFA.DAS.FindEpao.Web.Controllers;
 using SFA.DAS.FindEpao.Web.Infrastructure;
@@ -84,6 +83,27 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
             result.RouteValues["id"].Should().Be(postRequest.SelectedCourseId);
             result.RouteValues.Should().ContainKey("epaoId");
             result.RouteValues["epaoId"].Should().Be(foundEpao.EpaoId);
+        }
+
+        [Test, MoqAutoData, Ignore("confirm")]
+        public async Task And_Zero_Epao_Then_Redirect_To_(
+            PostChooseCourseRequest postRequest,
+            GetCourseEpaosResult mediatorResult,
+            EpaoListItem foundEpao,
+            [Frozen] Mock<IMediator> mockMediator,
+            [Greedy] CoursesController controller)
+        {
+            mediatorResult.Total = 0;
+            mediatorResult.Epaos = new List<EpaoListItem>();
+            mockMediator
+                .Setup(mediator => mediator.Send(
+                    It.Is<GetCourseEpaosQuery>(query => query.CourseId == postRequest.SelectedCourseId), 
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(mediatorResult);
+
+            var result = await controller.PostChooseCourse(postRequest) as RedirectToRouteResult;
+
+            result.RouteName.Should().Be(RouteNames.Error404);//???
         }
 
         [Test, MoqAutoData, Ignore("future story")]

@@ -1,0 +1,38 @@
+﻿@using SFA.DAS.FindEpao.Web.Infrastructure
+@using SFA.DAS.FindEpao.Web.Models
+@model CourseEpaosViewModel
+@{
+    ViewData["Title"] = $"{Model.Total} assessment organisations";
+}
+<main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            <h1 class="govuk-heading-xl ">@Model.Total assessment organisations</h1>
+            <p>stuff about course</p>
+
+            <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-3 ">
+
+            <div class="das-search-results">
+                <ol class="das-search-results__list">
+                    @foreach (var epao in Model.Epaos)
+                    {
+                        <li class="das-search-results__list-item">
+                            <h2 class="govuk-heading-m das-search-results__heading">
+                                <a class="das-search-results__link" id="epao-@epao.Id" 
+                                   asp-route-id="@Model.Course.Id" 
+                                   asp-route-epaoId="@epao.Id" 
+                                   asp-route="@RouteNames.CourseEpaoDetails">
+                                    @epao.Name
+                                </a>
+                            </h2>
+                            <ul class="govuk-list govuk-!-font-size-16">
+                                <li><span class="govuk-secondary-colour">Locations covered:</span> @epao.Locations</li>
+                                <li><span class="govuk-secondary-colour">Address:</span> @epao.Address</li>
+                            </ul>
+                        </li>
+                    }
+                </ol>
+            </div>
+        </div>
+    </div>
+</main>
