@@ -10,12 +10,11 @@ namespace SFA.DAS.FindEpao.Domain.Courses
             Title = SetDefaultTitleIfEmpty(title);
             Id = id;
             Level = level;
-
         }
 
         [JsonProperty("CourseId")]
         public string Id { get; }
-
+  
         public string Title { get; }
 
         public int Level { get; }

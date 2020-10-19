@@ -8,9 +8,12 @@
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
             <h1 class="govuk-heading-xl ">@Model.Total assessment organisations</h1>
-            <p>stuff about course</p>
+            <p class="govuk-body govuk-!-margin-bottom-6">
+                <span class="govuk-!-font-weight-bold">Showing assessment organisations for </span>
+                <br> @Model.Course.Description
+            </p>
 
-            <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-3 ">
+            <hr class="govuk-section-break govuk-section-break--visible">
 
             <div class="das-search-results">
                 <ol class="das-search-results__list">
@@ -25,10 +28,10 @@
                                     @epao.Name
                                 </a>
                             </h2>
-                            <ul class="govuk-list govuk-!-font-size-16">
-                                <li><span class="govuk-secondary-colour">Locations covered:</span> @epao.Locations</li>
-                                <li><span class="govuk-secondary-colour">Address:</span> @epao.Address</li>
-                            </ul>
+                            <dl class="das-definition-list das-definition-list--meta das-search-results__meta govuk-list">
+                                <dt class="das-definition-list__title">Locations covered</dt><dd>@epao.Locations</dd>
+                                <dt class="das-definition-list__title">Address</dt><dd>@epao.Address</dd>
+                            </dl>
                         </li>
                     }
                 </ol>

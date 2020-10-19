@@ -1,186 +1,69 @@
 {
   "course": {
-    "courseid": 1
+    "courseid": 1,
+    "title": "acrobatics",
+    "level": 3
   },
-  "total" :  2, 
+  "total": 4,
   "epaos": [
     {
-      "deliveryAreasDetails": [
+      "deliveryAreas": [
         {
-          "id": 30282,
-          "organisationStandardId": 0,
-          "deliveryAreaId": 0,
-          "deliveryArea": "East Midlands",
-          "comments": null,
-          "status": "Live"
+          "deliveryAreaId": 4
         },
         {
-          "id": 30283,
-          "organisationStandardId": 0,
-          "deliveryAreaId": 0,
-          "deliveryArea": "East of England",
-          "comments": null,
-          "status": "Live"
+          "deliveryAreaId": 5
         },
         {
-          "id": 30284,
-          "organisationStandardId": 0,
-          "deliveryAreaId": 0,
-          "deliveryArea": "London",
-          "comments": null,
-          "status": "Live"
-        },
-        {
-          "id": 30285,
-          "organisationStandardId": 0,
-          "deliveryAreaId": 0,
-          "deliveryArea": "North East",
-          "comments": null,
-          "status": "Live"
-        },
-        {
-          "id": 30286,
-          "organisationStandardId": 0,
-          "deliveryAreaId": 0,
-          "deliveryArea": "North West",
-          "comments": null,
-          "status": "Live"
-        },
-        {
-          "id": 30287,
-          "organisationStandardId": 0,
-          "deliveryAreaId": 0,
-          "deliveryArea": "South East",
-          "comments": null,
-          "status": "Live"
-        },
-        {
-          "id": 30288,
-          "organisationStandardId": 0,
-          "deliveryAreaId": 0,
-          "deliveryArea": "South West",
-          "comments": null,
-          "status": "Live"
-        },
-        {
-          "id": 30289,
-          "organisationStandardId": 0,
-          "deliveryAreaId": 0,
-          "deliveryArea": "West Midlands",
-          "comments": null,
-          "status": "Live"
-        },
-        {
-          "id": 30290,
-          "organisationStandardId": 0,
-          "deliveryAreaId": 0,
-          "deliveryArea": "Yorkshire and the Humber",
-          "comments": null,
-          "status": "Live"
+          "deliveryAreaId": 9
         }
       ],
-      "id": "2fde1758-1fd2-4466-af15-9539966944a4",
-      "endPointAssessorOrganisationId": "EPA0014",
-      "endPointAssessorUkprn": 10022697,
-      "endPointAssessorName": "NOCN",
-      "primaryContact": "unknown-14",
-      "roATPApproved": false,
-      "roEPAOApproved": false,
-      "organisationType": null,
-      "status": "Live",
+      "epaoId": "EPA0014",
+      "name": "An Assessor",
       "city": "Sheffield",
-      "postcode": "S1 2BJ",
-      "companySummary": null,
-      "charitySummary": null
+      "postcode": "S1 2BJ"
     },
     {
-      "deliveryAreasDetails": [
+      "deliveryAreas": [
         {
-          "id": 30282,
-          "organisationStandardId": 0,
-          "deliveryAreaId": 0,
-          "deliveryArea": "East Midlands",
-          "comments": null,
-          "status": "Live"
+          "deliveryAreaId": 6
         },
         {
-          "id": 30283,
-          "organisationStandardId": 0,
-          "deliveryAreaId": 0,
-          "deliveryArea": "East of England",
-          "comments": null,
-          "status": "Live"
-        },
-        {
-          "id": 30284,
-          "organisationStandardId": 0,
-          "deliveryAreaId": 0,
-          "deliveryArea": "London",
-          "comments": null,
-          "status": "Live"
-        },
-        {
-          "id": 30285,
-          "organisationStandardId": 0,
-          "deliveryAreaId": 0,
-          "deliveryArea": "North East",
-          "comments": null,
-          "status": "Live"
-        },
-        {
-          "id": 30286,
-          "organisationStandardId": 0,
-          "deliveryAreaId": 0,
-          "deliveryArea": "North West",
-          "comments": null,
-          "status": "Live"
-        },
-        {
-          "id": 30287,
-          "organisationStandardId": 0,
-          "deliveryAreaId": 0,
-          "deliveryArea": "South East",
-          "comments": null,
-          "status": "Live"
-        },
-        {
-          "id": 30288,
-          "organisationStandardId": 0,
-          "deliveryAreaId": 0,
-          "deliveryArea": "South West",
-          "comments": null,
-          "status": "Live"
-        },
-        {
-          "id": 30289,
-          "organisationStandardId": 0,
-          "deliveryAreaId": 0,
-          "deliveryArea": "West Midlands",
-          "comments": null,
-          "status": "Live"
-        },
-        {
-          "id": 30290,
-          "organisationStandardId": 0,
-          "deliveryAreaId": 0,
-          "deliveryArea": "Yorkshire and the Humber",
-          "comments": null,
-          "status": "Live"
+          "deliveryAreaId": 7
         }
       ],
-      "id": "2fde1758-1fd2-4466-af15-9539966944a5",
-      "endPointAssessorOrganisationId": "EPA0015",
-      "endPointAssessorUkprn": 10022698,
-      "endPointAssessorName": "NOCN again",
-      "primaryContact": "unknown-15",
-      "roATPApproved": false,
-      "roEPAOApproved": false,
-      "organisationType": null,
-      "status": "Live",
-      "city": "Sheffield",
-      "postcode": "S1 2BJ",
-      "companySummary": null,
-      "charitySummary": null
+      "epaoId": "EPA0015",
+      "name": "Another Assessor",
+      "city": "Buxton",
+      "postcode": "S2 2BJ"
+    },
+    {
+      "deliveryAreas": [
+        {
+          "deliveryAreaId": 4
+        }
+      ],
+      "epaoId": "EPA0016",
+      "name": "Different Company",
+      "city": "Ashbourne",
+      "postcode": "S3 3BJ"
+    },
+    {
+      "deliveryAreas": [
+        {
+          "deliveryAreaId": 4
+        },
+        {
+          "deliveryAreaId": 5
+        },
+        {
+          "deliveryAreaId": 9
+        }
+      ],
+      "epaoId": "EPA0017",
+      "name": "Somebody Else Ltd",
+      "city": "Leek",
+      "postcode": "S4 4BJ"
     }
   ]
 }

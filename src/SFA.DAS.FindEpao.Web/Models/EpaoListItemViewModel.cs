@@ -11,7 +11,7 @@ namespace SFA.DAS.FindEpao.Web.Models
         public string Postcode { get; set; }
         public IEnumerable<DeliveryArea> DeliveryAreas { get; set; }
         public string Locations { get; set; } //needs some logic
-        public string Address { get; set; }//town/city, postcode
+        public string Address => $"{City}, {Postcode}";
 
         public static implicit operator EpaoListItemViewModel(EpaoListItem epao)
         {
