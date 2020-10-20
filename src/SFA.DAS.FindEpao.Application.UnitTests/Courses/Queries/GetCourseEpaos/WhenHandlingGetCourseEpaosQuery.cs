@@ -8,6 +8,7 @@ using Moq;
 using NUnit.Framework;
 using SFA.DAS.FindEpao.Application.Courses.Queries.GetCourseEpaos;
 using SFA.DAS.FindEpao.Domain.Courses;
+using SFA.DAS.FindEpao.Domain.Epaos;
 using SFA.DAS.FindEpao.Domain.Interfaces;
 using SFA.DAS.FindEpao.Domain.Validation;
 using SFA.DAS.Testing.AutoFixture;
@@ -40,8 +41,10 @@ namespace SFA.DAS.FindEpao.Application.UnitTests.Courses.Queries.GetCourseEpaos
         public async Task Then_Gets_CourseEpaos_From_Service(
             GetCourseEpaosQuery query,
             CourseEpaos courseEpaos,
+            DeliveryAreaList deliveryAreas,
             [Frozen] Mock<IValidator<GetCourseEpaosQuery>> mockValidator,
             [Frozen] Mock<ICourseService> mockCourseService,
+            [Frozen] Mock<IEpaoService> mockEpaoService,
             GetCourseEpaosQueryHandler handler)
         {
             mockValidator
@@ -50,11 +53,15 @@ namespace SFA.DAS.FindEpao.Application.UnitTests.Courses.Queries.GetCourseEpaos
             mockCourseService
                 .Setup(service => service.GetCourseEpaos(query.CourseId))
                 .ReturnsAsync(courseEpaos);
+            mockEpaoService
+                .Setup(service => service.GetDeliveryAreas())
+                .ReturnsAsync(deliveryAreas);
 
             var result = await handler.Handle(query, CancellationToken.None);
 
             result.Course.Should().BeEquivalentTo(courseEpaos.Course);
             result.Epaos.Should().BeEquivalentTo(courseEpaos.Epaos);
+            result.DeliveryAreas.Should().BeEquivalentTo(deliveryAreas.DeliveryAreas);
         }
     }
 }

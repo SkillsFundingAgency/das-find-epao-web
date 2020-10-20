@@ -4,6 +4,6 @@ namespace SFA.DAS.FindEpao.Domain.Epaos
 {
     public class DeliveryAreaList
     {
-        public IEnumerable<DeliveryArea> DeliveryAreas { get; set; }
+        public IReadOnlyList<DeliveryArea> DeliveryAreas { get; set; }
     }
 }

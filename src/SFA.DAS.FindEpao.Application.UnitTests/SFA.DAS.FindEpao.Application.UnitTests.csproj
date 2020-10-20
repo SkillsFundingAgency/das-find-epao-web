@@ -18,8 +18,4 @@
     <ProjectReference Include="..\SFA.DAS.FindEpao.Application\SFA.DAS.FindEpao.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Epaos\Queries\" />
-  </ItemGroup>
-
 </Project>

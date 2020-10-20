@@ -11,13 +11,16 @@ namespace SFA.DAS.FindEpao.Application.Courses.Queries.GetCourseEpaos
     {
         private readonly IValidator<GetCourseEpaosQuery> _validator;
         private readonly ICourseService _courseService;
+        private readonly IEpaoService _epaoService;
 
         public GetCourseEpaosQueryHandler(
             IValidator<GetCourseEpaosQuery> validator,
-            ICourseService courseService)
+            ICourseService courseService,
+            IEpaoService epaoService)
         {
             _validator = validator;
             _courseService = courseService;
+            _epaoService = epaoService;
         }
 
         public async Task<GetCourseEpaosResult> Handle(GetCourseEpaosQuery query, CancellationToken cancellationToken)
@@ -29,12 +32,16 @@ namespace SFA.DAS.FindEpao.Application.Courses.Queries.GetCourseEpaos
                 throw new ValidationException(validationResult.DataAnnotationResult,null, null);
             }
 
-            var courseEpaos = await _courseService.GetCourseEpaos(query.CourseId);
+            var courseEpaosTask = _courseService.GetCourseEpaos(query.CourseId);
+            var deliveryAreasTask = _epaoService.GetDeliveryAreas();
+
+            await Task.WhenAll(courseEpaosTask, deliveryAreasTask);
 
             return new GetCourseEpaosResult
             {
-                Course = courseEpaos.Course,
-                Epaos = courseEpaos.Epaos
+                Course = courseEpaosTask.Result.Course,
+                Epaos = courseEpaosTask.Result.Epaos,
+                DeliveryAreas = deliveryAreasTask.Result.DeliveryAreas
             };
         }
     }
