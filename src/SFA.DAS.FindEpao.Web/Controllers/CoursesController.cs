@@ -50,11 +50,11 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                 var query = new GetCourseEpaosQuery {CourseId = request.SelectedCourseId};
                 var result = await _mediator.Send(query);
 
-                if (result?.Total < 1)
+                if (result?.Epaos?.Count < 1)
                 {
                     //todo: future story
                 }
-                if (result?.Total == 1)
+                if (result?.Epaos?.Count == 1)
                 {
                     return RedirectToRoute(RouteNames.CourseEpaoDetails, new GetCourseEpaoDetailsRequest
                     {
@@ -88,7 +88,6 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                 var result = await _mediator.Send(query);
                 var model = new CourseEpaosViewModel
                 {
-                    Total = result.Total,
                     Course = result.Course,
                     Epaos = result.Epaos.Select(item => (EpaoListItemViewModel)item)
                 };

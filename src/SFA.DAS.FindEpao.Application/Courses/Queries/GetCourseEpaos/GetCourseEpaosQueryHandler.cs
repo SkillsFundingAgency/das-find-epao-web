@@ -34,8 +34,7 @@ namespace SFA.DAS.FindEpao.Application.Courses.Queries.GetCourseEpaos
             return new GetCourseEpaosResult
             {
                 Course = courseEpaos.Course,
-                Epaos = courseEpaos.Epaos,
-                Total = courseEpaos.Total
+                Epaos = courseEpaos.Epaos
             };
         }
     }

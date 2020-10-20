@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
@@ -56,7 +55,6 @@ namespace SFA.DAS.FindEpao.Application.UnitTests.Courses.Queries.GetCourseEpaos
 
             result.Course.Should().BeEquivalentTo(courseEpaos.Course);
             result.Epaos.Should().BeEquivalentTo(courseEpaos.Epaos);
-            result.Total.Should().Be(courseEpaos.Total);
         }
     }
 }

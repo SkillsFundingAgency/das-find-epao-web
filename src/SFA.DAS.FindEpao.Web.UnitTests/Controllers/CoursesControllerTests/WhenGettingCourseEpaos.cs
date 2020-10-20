@@ -52,7 +52,6 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
             var result = await controller.CourseEpaos(getRequest) as ViewResult;
 
             var model = result.Model as CourseEpaosViewModel;
-            model.Total.Should().Be(mediatorResult.Total);
             model.Course.Should().BeEquivalentTo((CourseListItemViewModel)mediatorResult.Course);
             model.Epaos.Should().BeEquivalentTo(mediatorResult.Epaos.Select(item => (EpaoListItemViewModel)item));
         }

@@ -68,7 +68,6 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
             [Frozen] Mock<IMediator> mockMediator,
             [Greedy] CoursesController controller)
         {
-            mediatorResult.Total = 1;
             mediatorResult.Epaos = new List<EpaoListItem> {foundEpao};
             mockMediator
                 .Setup(mediator => mediator.Send(
@@ -93,7 +92,6 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
             [Frozen] Mock<IMediator> mockMediator,
             [Greedy] CoursesController controller)
         {
-            mediatorResult.Total = 0;
             mediatorResult.Epaos = new List<EpaoListItem>();
             mockMediator
                 .Setup(mediator => mediator.Send(
