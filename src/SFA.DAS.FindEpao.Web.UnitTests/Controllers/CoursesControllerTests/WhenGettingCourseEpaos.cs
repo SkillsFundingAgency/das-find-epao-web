@@ -53,7 +53,7 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
 
             var model = result.Model as CourseEpaosViewModel;
             model.Course.Should().BeEquivalentTo((CourseListItemViewModel)mediatorResult.Course);
-            model.Epaos.Should().BeEquivalentTo(mediatorResult.Epaos.Select(item => (EpaoListItemViewModel)item));
+            model.Epaos.Should().BeEquivalentTo(mediatorResult.Epaos.Select(item => new EpaoListItemViewModel(item, mediatorResult.DeliveryAreas)));
         }
     }
 }

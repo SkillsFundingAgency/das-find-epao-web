@@ -8,7 +8,7 @@ namespace SFA.DAS.FindEpao.Domain.Courses
         public string Name { get; set; }
         public string City { get; set; }
         public string Postcode { get; set; }
-        public IEnumerable<EpaoDeliveryArea> DeliveryAreas { get; set; }
+        public IReadOnlyList<EpaoDeliveryArea> DeliveryAreas { get; set; }
     }
 
     public class EpaoDeliveryArea

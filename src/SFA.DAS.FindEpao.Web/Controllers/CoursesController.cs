@@ -89,7 +89,7 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                 var model = new CourseEpaosViewModel
                 {
                     Course = result.Course,
-                    Epaos = result.Epaos.Select(item => (EpaoListItemViewModel)item)
+                    Epaos = result.Epaos.Select(item => new EpaoListItemViewModel(item, result.DeliveryAreas))
                 };
                 return View(model);
             }

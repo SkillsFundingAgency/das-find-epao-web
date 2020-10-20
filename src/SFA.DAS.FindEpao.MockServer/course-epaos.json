@@ -50,10 +50,28 @@
     {
       "deliveryAreas": [
         {
+          "deliveryAreaId": 1
+        },
+        {
+          "deliveryAreaId": 2
+        },
+        {
+          "deliveryAreaId": 3
+        },
+        {
           "deliveryAreaId": 4
         },
         {
           "deliveryAreaId": 5
+        },
+        {
+          "deliveryAreaId": 6
+        },
+        {
+          "deliveryAreaId": 7
+        },
+        {
+          "deliveryAreaId": 8
         },
         {
           "deliveryAreaId": 9
