@@ -19,7 +19,7 @@ namespace SFA.DAS.FindEpao.Domain.Courses
 
         public int Level { get; }
 
-        public string Description => Title.Equals("UNKNOWN",StringComparison.CurrentCultureIgnoreCase) ? Title : $"{Title} - Level {Level}";
+        public string Description => Title.Equals("UNKNOWN",StringComparison.CurrentCultureIgnoreCase) ? Title : $"{Title} (level {Level})";
 
         private static string SetDefaultTitleIfEmpty(string title)
         {

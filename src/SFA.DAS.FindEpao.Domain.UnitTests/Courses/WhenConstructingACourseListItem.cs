@@ -46,7 +46,7 @@ namespace SFA.DAS.FindEpao.Domain.UnitTests.Courses
             var actualApprenticeship = new CourseListItem("", "Some title", 1);
 
             //Assert
-            Assert.AreEqual("Some title - Level 1", actualApprenticeship.Description);
+            Assert.AreEqual("Some title (level 1)", actualApprenticeship.Description);
         }
 
         [Test]
