@@ -36,6 +36,14 @@ namespace SFA.DAS.FindEpao.MockServer
                     .WithHeader("Content-Type", "application/json")
                     .WithBodyFromFile("course-epaos.json"));
 
+            server.Given(Request.Create().WithPath(s => Regex.IsMatch(s,"/epaos/delivery-areas$"))
+                .UsingGet()
+            ).RespondWith(
+                Response.Create()
+                    .WithStatusCode(200)
+                    .WithHeader("Content-Type", "application/json")
+                    .WithBodyFromFile("delivery-areas.json"));
+
             return server;
         }
     }

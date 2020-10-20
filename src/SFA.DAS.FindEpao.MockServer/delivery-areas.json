@@ -1,0 +1,58 @@
+{
+  "deliveryAreas": [
+    {
+      "id": 4,
+      "area": "North East",
+      "status": "Live",
+      "ordering": 1
+    },
+    {
+      "id": 5,
+      "area": "North West",
+      "status": "Live",
+      "ordering": 2
+    },
+    {
+      "id": 9,
+      "area": "Yorkshire and the Humber",
+      "status": "Live",
+      "ordering": 3
+    },
+    {
+      "id": 1,
+      "area": "East Midlands",
+      "status": "Live",
+      "ordering": 4
+    },
+    {
+      "id": 8,
+      "area": "West Midlands",
+      "status": "Live",
+      "ordering": 5
+    },
+    {
+      "id": 2,
+      "area": "East of England",
+      "status": "Live",
+      "ordering": 6
+    },
+    {
+      "id": 3,
+      "area": "London",
+      "status": "Live",
+      "ordering": 7
+    },
+    {
+      "id": 6,
+      "area": "South East",
+      "status": "Live",
+      "ordering": 8
+    },
+    {
+      "id": 7,
+      "area": "South West",
+      "status": "Live",
+      "ordering": 9
+    }
+  ]
+}
