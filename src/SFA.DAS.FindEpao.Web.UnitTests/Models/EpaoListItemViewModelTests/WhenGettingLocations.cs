@@ -13,17 +13,17 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Models.EpaoListItemViewModelTests
         {
             var model = new EpaoListItemViewModel
             {
-                DeliveryAreas = new List<DeliveryArea>
+                DeliveryAreas = new List<EpaoDeliveryArea>
                 {
-                    new DeliveryArea {DeliveryAreaId = 1},
-                    new DeliveryArea {DeliveryAreaId = 2},
-                    new DeliveryArea {DeliveryAreaId = 3},
-                    new DeliveryArea {DeliveryAreaId = 4},
-                    new DeliveryArea {DeliveryAreaId = 5},
-                    new DeliveryArea {DeliveryAreaId = 6},
-                    new DeliveryArea {DeliveryAreaId = 7},
-                    new DeliveryArea {DeliveryAreaId = 8},
-                    new DeliveryArea {DeliveryAreaId = 9}
+                    new EpaoDeliveryArea {DeliveryAreaId = 1},
+                    new EpaoDeliveryArea {DeliveryAreaId = 2},
+                    new EpaoDeliveryArea {DeliveryAreaId = 3},
+                    new EpaoDeliveryArea {DeliveryAreaId = 4},
+                    new EpaoDeliveryArea {DeliveryAreaId = 5},
+                    new EpaoDeliveryArea {DeliveryAreaId = 6},
+                    new EpaoDeliveryArea {DeliveryAreaId = 7},
+                    new EpaoDeliveryArea {DeliveryAreaId = 8},
+                    new EpaoDeliveryArea {DeliveryAreaId = 9}
                 }
             };
 
@@ -35,11 +35,11 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Models.EpaoListItemViewModelTests
         {
             var model = new EpaoListItemViewModel
             {
-                DeliveryAreas = new List<DeliveryArea>
+                DeliveryAreas = new List<EpaoDeliveryArea>
                 {
-                    new DeliveryArea {DeliveryAreaId = 1},
-                    new DeliveryArea {DeliveryAreaId = 2},
-                    new DeliveryArea {DeliveryAreaId = 3}
+                    new EpaoDeliveryArea {DeliveryAreaId = 1},
+                    new EpaoDeliveryArea {DeliveryAreaId = 2},
+                    new EpaoDeliveryArea {DeliveryAreaId = 3}
                 }
             };
 

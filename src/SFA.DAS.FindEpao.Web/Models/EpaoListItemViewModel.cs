@@ -9,7 +9,7 @@ namespace SFA.DAS.FindEpao.Web.Models
         public string Name { get; set; }
         public string City { get; set; }
         public string Postcode { get; set; }
-        public IEnumerable<DeliveryArea> DeliveryAreas { get; set; }
+        public IEnumerable<EpaoDeliveryArea> DeliveryAreas { get; set; }
         public string Locations { get; set; } //needs some logic
         public string Address => $"{City}, {Postcode}";
 
