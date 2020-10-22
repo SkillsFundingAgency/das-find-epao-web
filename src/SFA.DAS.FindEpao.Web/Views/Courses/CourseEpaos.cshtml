@@ -14,34 +14,36 @@
                 <br> @Model.Course.Description
             </p>
 
-            <hr class="govuk-section-break govuk-section-break--visible">
+            
+            @if (Model.Epaos.Count() != 0)
+            {
+                <hr class="govuk-section-break govuk-section-break--visible">
+                <div class="das-search-results">
+                    <ol class="das-search-results__list">
+                        @foreach (var epao in Model.Epaos)
+                        {
+                            <li class="das-search-results__list-item">
+                                <h2 class="govuk-heading-m das-search-results__heading">
+                                    <a class="das-search-results__link" id="epao-@epao.EpaoId"
+                                       asp-route-id="@Model.Course.Id"
+                                       asp-route-epaoId="@epao.EpaoId"
+                                       asp-route="@RouteNames.CourseEpaoDetails">
+                                        @epao.Name
+                                    </a>
+                                </h2>
+                                <dl class="das-definition-list das-definition-list--meta das-search-results__meta govuk-list">
+                                    <dt class="das-definition-list__title govuk-!-margin-bottom-1">Locations covered</dt><dd class="govuk-!-margin-bottom-1">@epao.Locations</dd>
+                                    <dt class="das-definition-list__title govuk-!-margin-bottom-1">Address</dt><dd class="govuk-!-margin-bottom-1">@epao.Address</dd>
+                                </dl>
+                            </li>
+                        }
+                    </ol>
 
-            <div class="das-search-results">
-                <ol class="das-search-results__list">
-                    @foreach (var epao in Model.Epaos)
-                    {
-                        <li class="das-search-results__list-item">
-                            <h2 class="govuk-heading-m das-search-results__heading">
-                                <a class="das-search-results__link" id="epao-@epao.EpaoId" 
-                                   asp-route-id="@Model.Course.Id" 
-                                   asp-route-epaoId="@epao.EpaoId" 
-                                   asp-route="@RouteNames.CourseEpaoDetails">
-                                    @epao.Name
-                                </a>
-                            </h2>
-                            <dl class="das-definition-list das-definition-list--meta das-search-results__meta govuk-list">
-                                <dt class="das-definition-list__title govuk-!-margin-bottom-1">Locations covered</dt><dd class="govuk-!-margin-bottom-1">@epao.Locations</dd>
-                                <dt class="das-definition-list__title govuk-!-margin-bottom-1">Address</dt><dd class="govuk-!-margin-bottom-1">@epao.Address</dd>
-                            </dl>
-                        </li>
-                    }
-                </ol>
-                @if (Model.Epaos.Any())
-                {
                     <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-2">
-                }
-                
-            </div>
+
+
+                </div>
+            }
             
         </div>
     </div>
