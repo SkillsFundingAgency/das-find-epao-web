@@ -6,7 +6,7 @@ using SFA.DAS.FindEpao.Web.Models;
 
 namespace SFA.DAS.FindEpao.Web.UnitTests.Models
 {
-    public class WhenConstructingACourseListItemViewModel
+    public class WhenCastingACourseListItemViewModelFromDomainType
     {
         [Test, AutoData]
         public void Then_Maps_All_Properties(

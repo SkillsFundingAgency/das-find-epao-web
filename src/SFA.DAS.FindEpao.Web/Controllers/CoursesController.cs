@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
@@ -46,11 +45,30 @@ namespace SFA.DAS.FindEpao.Web.Controllers
         [Route("", Name = RouteNames.ChooseCourse)]
         public async Task<IActionResult> PostChooseCourse(PostChooseCourseRequest request)
         {
-            var query = new GetCourseEpaosQuery {CourseId = request.SelectedCourseId};
-
             try
             {
+                var query = new GetCourseEpaosQuery {CourseId = request.SelectedCourseId};
                 var result = await _mediator.Send(query);
+
+                if (result?.Epaos?.Count < 1)
+                {
+                    //todo: future story
+                }
+                if (result?.Epaos?.Count == 1)
+                {
+                    return RedirectToRoute(RouteNames.CourseEpaoDetails, new GetCourseEpaoDetailsRequest
+                    {
+                        Id = request.SelectedCourseId,
+                        EpaoId = result.Epaos.First().EpaoId
+                    });
+                }
+                else
+                {
+                    return RedirectToRoute(RouteNames.CourseEpaos, new GetCourseEpaosRequest
+                    {
+                        Id = request.SelectedCourseId
+                    });
+                }
             }
             catch (ValidationException)
             {
@@ -58,8 +76,27 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                     RouteNames.ChooseCourse, 
                     new GetChooseCourseRequest{SelectedCourseId = "-1"});
             }
+        }
 
-            return RedirectToRoute(RouteNames.ServiceStartDefault);
+        [HttpGet]
+        [Route("{id}/assessment-organisations", Name = RouteNames.CourseEpaos)]
+        public async Task<IActionResult> CourseEpaos(GetCourseEpaosRequest request)
+        {
+            try
+            {
+                var query = new GetCourseEpaosQuery {CourseId = request.Id};
+                var result = await _mediator.Send(query);
+                var model = new CourseEpaosViewModel
+                {
+                    Course = result.Course,
+                    Epaos = result.Epaos.Select(item => new EpaoListItemViewModel(item, result.DeliveryAreas))
+                };
+                return View(model);
+            }
+            catch (ValidationException)
+            {
+                return RedirectToRoute(RouteNames.Error404);
+            }
         }
     }
 }

@@ -1,0 +1,50 @@
+﻿@using SFA.DAS.FindEpao.Web.Infrastructure
+@using SFA.DAS.FindEpao.Web.Models
+@model CourseEpaosViewModel
+@{
+    ViewData["Title"] = $"{Model.Total} assessment organisations";
+    ViewData["BackRouteName"] = RouteNames.ChooseCourse;
+}
+<main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            <h1 class="govuk-heading-xl ">@Model.Total assessment organisations</h1>
+            <p class="govuk-body govuk-!-margin-bottom-6">
+                <span class="govuk-!-font-weight-bold">Showing assessment organisations for </span>
+                <br> @Model.Course.Description
+            </p>
+
+            
+            @if (Model.Epaos.Count() != 0)
+            {
+                <hr class="govuk-section-break govuk-section-break--visible">
+                <div class="das-search-results">
+                    <ol class="das-search-results__list">
+                        @foreach (var epao in Model.Epaos)
+                        {
+                            <li class="das-search-results__list-item">
+                                <h2 class="govuk-heading-m das-search-results__heading">
+                                    <a class="das-search-results__link" id="epao-@epao.EpaoId"
+                                       asp-route-id="@Model.Course.Id"
+                                       asp-route-epaoId="@epao.EpaoId"
+                                       asp-route="@RouteNames.CourseEpaoDetails">
+                                        @epao.Name
+                                    </a>
+                                </h2>
+                                <dl class="das-definition-list das-definition-list--meta das-search-results__meta govuk-list">
+                                    <dt class="das-definition-list__title govuk-!-margin-bottom-1">Locations covered</dt><dd class="govuk-!-margin-bottom-1">@epao.Locations</dd>
+                                    <dt class="das-definition-list__title govuk-!-margin-bottom-1">Address</dt><dd class="govuk-!-margin-bottom-1">@epao.Address</dd>
+                                </dl>
+                            </li>
+                        }
+                    </ol>
+
+                    <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-2">
+
+
+                </div>
+            }
+            
+        </div>
+    </div>
+</main>

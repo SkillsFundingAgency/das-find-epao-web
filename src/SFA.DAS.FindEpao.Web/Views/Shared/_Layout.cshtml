@@ -66,7 +66,7 @@
     <div class="govuk-width-container">
         @if (!Context.GetRouteData().Values["Controller"].Equals("Home") && !Context.GetRouteData().Values["Action"].Equals("Index"))
         {
-            <a class="govuk-back-link" asp-route="@RouteNames.ServiceStart">Back</a>
+            <a class="govuk-back-link" asp-route="@(ViewData["BackRouteName"]??RouteNames.ServiceStart)">Back</a>
         }
         
         @RenderBody()

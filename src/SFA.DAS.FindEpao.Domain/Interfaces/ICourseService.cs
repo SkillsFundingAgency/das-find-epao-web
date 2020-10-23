@@ -6,5 +6,6 @@ namespace SFA.DAS.FindEpao.Domain.Interfaces
     public interface ICourseService
     {
         Task<CourseList> GetCourses();
+        Task<CourseEpaos> GetCourseEpaos(string courseId);
     }
 }
