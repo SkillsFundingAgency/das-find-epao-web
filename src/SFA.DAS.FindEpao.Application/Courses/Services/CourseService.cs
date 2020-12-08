@@ -42,5 +42,12 @@ namespace SFA.DAS.FindEpao.Application.Courses.Services
             var courseEpaos = await _apiClient.Get<CourseEpaos>(apiRequest);
             return courseEpaos;
         }
+
+        public async Task<CourseEpao> GetCourseEpao(string courseId, string epaoId)
+        {
+            var apiRequest = new GetCourseEpaoApiRequest(courseId, epaoId);
+            var courseEpao = await _apiClient.Get<CourseEpao>(apiRequest);
+            return courseEpao;
+        }
     }
 }
