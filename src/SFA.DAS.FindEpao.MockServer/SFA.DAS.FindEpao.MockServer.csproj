@@ -6,12 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="course-epao.json" />
     <None Remove="course-epaos.json" />
     <None Remove="course-list.json" />
     <None Remove="delivery-areas.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="course-epao.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="course-epaos.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

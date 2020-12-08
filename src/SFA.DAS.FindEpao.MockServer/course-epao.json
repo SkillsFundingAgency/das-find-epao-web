@@ -1,0 +1,24 @@
+{
+  "course": {
+    "courseid": 1,
+    "title": "acrobatics",
+    "level": 3
+  },
+  "epao": {
+    "deliveryAreas": [
+      {
+        "deliveryAreaId": 4
+      },
+      {
+        "deliveryAreaId": 5
+      },
+      {
+        "deliveryAreaId": 9
+      }
+    ],
+    "epaoId": "EPA0014",
+    "name": "An Assessor",
+    "city": "Sheffield",
+    "postcode": "S1 2BJ"
+  }
+}
