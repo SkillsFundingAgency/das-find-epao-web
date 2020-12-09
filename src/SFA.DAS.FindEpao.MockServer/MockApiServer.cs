@@ -44,6 +44,12 @@ namespace SFA.DAS.FindEpao.MockServer
                     .WithHeader("Content-Type", "application/json")
                     .WithBodyFromFile("delivery-areas.json"));
 
+            server.Given(Request.Create().WithPath(s => Regex.IsMatch(s,"/courses/\\d+/epaos/[eE][pP][aA]9999$"))
+                .UsingGet()
+            ).RespondWith(
+                Response.Create()
+                    .WithStatusCode(404));
+
             server.Given(Request.Create().WithPath(s => Regex.IsMatch(s,"/courses/\\d+/epaos/[eE][pP][aA][0-9]{4,9}$"))
                 .UsingGet()
             ).RespondWith(
