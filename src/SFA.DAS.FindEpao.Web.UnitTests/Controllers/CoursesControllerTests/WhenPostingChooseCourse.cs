@@ -77,7 +77,7 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
 
             var result = await controller.PostChooseCourse(postRequest) as RedirectToRouteResult;
 
-            result.RouteName.Should().Be(RouteNames.CourseEpaoDetails);
+            result.RouteName.Should().Be(RouteNames.CourseEpao);
             result.RouteValues.Should().ContainKey("id");
             result.RouteValues["id"].Should().Be(postRequest.SelectedCourseId);
             result.RouteValues.Should().ContainKey("epaoId");
