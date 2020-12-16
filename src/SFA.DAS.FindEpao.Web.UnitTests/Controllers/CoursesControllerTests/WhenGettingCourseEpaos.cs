@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
 using SFA.DAS.FindEpao.Application.Courses.Queries.GetCourseEpaos;
+using SFA.DAS.FindEpao.Domain.Courses;
 using SFA.DAS.FindEpao.Web.Controllers;
 using SFA.DAS.FindEpao.Web.Infrastructure;
 using SFA.DAS.FindEpao.Web.Models;
@@ -54,6 +56,27 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
             var model = result.Model as CourseEpaosViewModel;
             model.Course.Should().BeEquivalentTo((CourseListItemViewModel)mediatorResult.Course);
             model.Epaos.Should().BeEquivalentTo(mediatorResult.Epaos.Select(item => new EpaoListItemViewModel(item, mediatorResult.DeliveryAreas)));
+        }
+
+        [Test, MoqAutoData]
+        public async Task Then_Has_No_Epaos_Then_Adds_Empty_List(
+            GetCourseEpaosRequest getRequest,
+            GetCourseEpaosResult mediatorResult,
+            [Frozen] Mock<IMediator> mockMediator,
+            [Greedy] CoursesController controller)
+        {
+            mediatorResult.Epaos = new List<EpaoListItem>();
+            mockMediator
+                .Setup(mediator => mediator.Send(
+                    It.Is<GetCourseEpaosQuery>(query => query.CourseId == getRequest.Id), 
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(mediatorResult);
+
+            var result = await controller.CourseEpaos(getRequest) as ViewResult;
+
+            var model = result.Model as CourseEpaosViewModel;
+            model.Course.Should().BeEquivalentTo((CourseListItemViewModel)mediatorResult.Course);
+            model.Epaos.Should().BeEmpty();
         }
     }
 }
