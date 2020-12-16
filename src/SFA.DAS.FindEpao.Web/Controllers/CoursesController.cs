@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
@@ -50,10 +50,6 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                 var query = new GetCourseEpaosQuery {CourseId = request.SelectedCourseId};
                 var result = await _mediator.Send(query);
 
-                if (result?.Epaos?.Count < 1)
-                {
-                    //todo: future story
-                }
                 if (result?.Epaos?.Count == 1)
                 {
                     return RedirectToRoute(RouteNames.CourseEpaoDetails, new GetCourseEpaoDetailsRequest
