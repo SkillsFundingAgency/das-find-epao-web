@@ -36,7 +36,7 @@ namespace SFA.DAS.FindEpao.MockServer
                     .WithHeader("Content-Type", "application/json")
                     .WithBodyFromFile("course-no-epaos.json"));
             
-            server.Given(Request.Create().WithPath(s => Regex.IsMatch(s,"/courses/(?!(2)$)\\d+/epaos$"))
+            server.Given(Request.Create().WithPath(s => Regex.IsMatch(s,"/courses/(?!(?:2))\\d/epaos$"))
                 .UsingGet()
             ).RespondWith(
                 Response.Create()
