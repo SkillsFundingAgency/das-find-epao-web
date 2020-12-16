@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <None Remove="course-epaos.json" />
+    <None Remove="course-no-epaos.json" />
     <None Remove="course-list.json" />
     <None Remove="delivery-areas.json" />
   </ItemGroup>
@@ -16,6 +17,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="course-list.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="course-no-epaos.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="delivery-areas.json">
