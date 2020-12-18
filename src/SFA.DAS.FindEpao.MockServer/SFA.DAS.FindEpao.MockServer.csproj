@@ -12,6 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="course-epaos-integrated.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="course.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
