@@ -28,6 +28,23 @@ namespace SFA.DAS.FindEpao.MockServer
                     .WithHeader("Content-Type", "application/json")
                     .WithBodyFromFile("course-list.json"));
 
+            server.Given(Request.Create().WithPath(s => Regex.IsMatch(s,"/courses/14$"))
+                .UsingGet()
+            ).RespondWith(
+                Response.Create()
+                    .WithStatusCode(200)
+                    .WithHeader("Content-Type", "application/json")
+                    .WithBodyFromFile("course-integrated.json"));
+            
+            
+            server.Given(Request.Create().WithPath(s => Regex.IsMatch(s,"/courses/(?!(?:14))\\d$"))
+                .UsingGet()
+            ).RespondWith(
+                Response.Create()
+                    .WithStatusCode(200)
+                    .WithHeader("Content-Type", "application/json")
+                    .WithBodyFromFile("course.json"));
+            
             server.Given(Request.Create().WithPath(s => Regex.IsMatch(s,"/courses/\\d+/epaos$"))
                 .UsingGet()
             ).RespondWith(
