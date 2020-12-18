@@ -47,6 +47,7 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
             [Frozen] Mock<IMediator> mockMediator,
             [Greedy] CoursesController controller)
         {
+            mediatorResult.Course = new CourseListItem(mediatorResult.Course.Id,mediatorResult.Course.Title,mediatorResult.Course.Level, false);
             mockMediator
                 .Setup(mediator => mediator.Send(
                     It.Is<GetCourseEpaosQuery>(query => query.CourseId == postRequest.SelectedCourseId), 
@@ -68,6 +69,7 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
             [Frozen] Mock<IMediator> mockMediator,
             [Greedy] CoursesController controller)
         {
+            mediatorResult.Course = new CourseListItem(mediatorResult.Course.Id,mediatorResult.Course.Title,mediatorResult.Course.Level, false);
             mediatorResult.Epaos = new List<EpaoListItem> {foundEpao};
             mockMediator
                 .Setup(mediator => mediator.Send(
