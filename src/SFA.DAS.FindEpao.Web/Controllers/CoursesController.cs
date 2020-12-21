@@ -130,7 +130,7 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                 };
                 return View(model);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return RedirectToRoute(RouteNames.Error500);
             }

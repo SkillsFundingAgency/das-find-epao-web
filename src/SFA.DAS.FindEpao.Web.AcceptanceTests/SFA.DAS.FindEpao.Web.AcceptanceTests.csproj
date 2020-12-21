@@ -24,7 +24,33 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Infrastructure\" />
+    <SpecFlowFeatureFiles Update="Features\IntegratedApprenticeship.feature">
+      <CodeBehindFile>Features/IntegratedApprenticeship.feature.cs</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Features\ChooseCourse.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ChooseCourse.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Features\CourseEpaos.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CourseEpaos.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Features\Error.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Error.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Features\Home.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Home.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Features\ChooseCourse.feature" />
+    <Content Include="Features\CourseEpaos.feature" />
+    <Content Include="Features\Error.feature" />
+    <Content Include="Features\Home.feature" />
+    <Content Include="Features\IntegratedApprenticeship.feature" />
   </ItemGroup>
 
 
