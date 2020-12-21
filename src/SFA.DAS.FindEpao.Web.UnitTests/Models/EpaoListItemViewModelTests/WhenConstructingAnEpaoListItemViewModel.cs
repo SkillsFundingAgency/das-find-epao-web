@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AutoFixture.NUnit3;
 using FluentAssertions;
 using NUnit.Framework;
@@ -13,9 +14,10 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Models.EpaoListItemViewModelTests
         [Test, AutoData]
         public void Then_Maps_All_Properties(
             EpaoListItem source, 
-            List<DeliveryArea> deliveryAreas)
+            List<DeliveryArea> deliveryAreas,
+            Func<IReadOnlyList<EpaoDeliveryArea>, IReadOnlyList<DeliveryArea>, string> buildLocations)
         {
-            var viewModel = new EpaoListItemViewModel(source, deliveryAreas);
+            var viewModel = new EpaoListItemViewModel(source, deliveryAreas, buildLocations);
             
             viewModel.Should().BeEquivalentTo(source, config => config.ExcludingMissingMembers());
         }

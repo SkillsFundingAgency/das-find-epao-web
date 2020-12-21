@@ -9,6 +9,7 @@ using SFA.DAS.FindEpao.Application.Courses.Queries.GetCourseEpao;
 using SFA.DAS.FindEpao.Application.Courses.Queries.GetCourseEpaos;
 using SFA.DAS.FindEpao.Application.Courses.Queries.GetCourses;
 using SFA.DAS.FindEpao.Web.Infrastructure;
+using SFA.DAS.FindEpao.Web.Infrastructure.Interfaces;
 using SFA.DAS.FindEpao.Web.Models;
 
 namespace SFA.DAS.FindEpao.Web.Controllers
@@ -17,10 +18,14 @@ namespace SFA.DAS.FindEpao.Web.Controllers
     public class CoursesController : Controller
     {
         private readonly IMediator _mediator;
+        private readonly ILocationStringBuilder _locationStringBuilder;
 
-        public CoursesController(IMediator mediator)
+        public CoursesController(
+            IMediator mediator,
+            ILocationStringBuilder locationStringBuilder)
         {
             _mediator = mediator;
+            _locationStringBuilder = locationStringBuilder;
         }
 
         [HttpGet]
@@ -92,7 +97,10 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                 var model = new CourseEpaosViewModel
                 {
                     Course = result.Course,
-                    Epaos = result.Epaos.Select(item => new EpaoListItemViewModel(item, result.DeliveryAreas))
+                    Epaos = result.Epaos.Select(item => new EpaoListItemViewModel(
+                        item, 
+                        result.DeliveryAreas, 
+                        _locationStringBuilder.BuildLocationString))
                 };
                 return View(model);
             }
@@ -117,7 +125,7 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                 var model = new CourseEpaoViewModel
                 {
                     Course = result.Course,
-                    Epao = new EpaoListItemViewModel(result.Epao, result.DeliveryAreas)
+                    //Epao = new EpaoListItemViewModel(result.Epao, result.DeliveryAreas)
                 };
                 return View(model);
             }

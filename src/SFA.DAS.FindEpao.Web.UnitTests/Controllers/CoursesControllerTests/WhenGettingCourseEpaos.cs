@@ -11,6 +11,7 @@ using NUnit.Framework;
 using SFA.DAS.FindEpao.Application.Courses.Queries.GetCourseEpaos;
 using SFA.DAS.FindEpao.Web.Controllers;
 using SFA.DAS.FindEpao.Web.Infrastructure;
+using SFA.DAS.FindEpao.Web.Infrastructure.Interfaces;
 using SFA.DAS.FindEpao.Web.Models;
 using SFA.DAS.Testing.AutoFixture;
 
@@ -40,6 +41,7 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
         public async Task Then_Gets_Epaos_From_Handler(
             GetCourseEpaosRequest getRequest,
             GetCourseEpaosResult mediatorResult,
+            [Frozen] Mock<ILocationStringBuilder> mockLocationStringBuilder,
             [Frozen] Mock<IMediator> mockMediator,
             [Greedy] CoursesController controller)
         {
@@ -53,7 +55,10 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
 
             var model = result.Model as CourseEpaosViewModel;
             model.Course.Should().BeEquivalentTo((CourseListItemViewModel)mediatorResult.Course);
-            model.Epaos.Should().BeEquivalentTo(mediatorResult.Epaos.Select(item => new EpaoListItemViewModel(item, mediatorResult.DeliveryAreas)));
+            model.Epaos.Should().BeEquivalentTo(mediatorResult.Epaos.Select(item => new EpaoListItemViewModel(
+                item, 
+                mediatorResult.DeliveryAreas, 
+                mockLocationStringBuilder.Object.BuildLocationString)));
         }
     }
 }
