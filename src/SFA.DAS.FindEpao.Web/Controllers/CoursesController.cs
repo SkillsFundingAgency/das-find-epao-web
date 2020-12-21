@@ -125,7 +125,12 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                 var model = new CourseEpaoViewModel
                 {
                     Course = result.Course,
-                    //Epao = new EpaoListItemViewModel(result.Epao, result.DeliveryAreas)
+                    Epao = new EpaoDetailsViewModel(
+                        result.Epao, 
+                        result.EpaoDeliveryAreas,
+                        result.DeliveryAreas,
+                        _locationStringBuilder.BuildLocationString),
+                    CourseEpaosCount = result.CourseEpaosCount
                 };
                 return View(model);
             }

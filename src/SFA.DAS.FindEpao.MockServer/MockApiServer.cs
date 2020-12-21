@@ -50,7 +50,7 @@ namespace SFA.DAS.FindEpao.MockServer
                 Response.Create()
                     .WithStatusCode(404));
 
-            server.Given(Request.Create().WithPath(s => Regex.IsMatch(s,"/courses/\\d+/epaos/[eE][pP][aA][0-9]{4,9}$"))
+            server.Given(Request.Create().WithPath(s => Regex.IsMatch(s,"/courses/\\d+/epaos/[eE][pP][aA](?!(?:9999)$)[0-9]{4,9}$"))
                 .UsingGet()
             ).RespondWith(
                 Response.Create()

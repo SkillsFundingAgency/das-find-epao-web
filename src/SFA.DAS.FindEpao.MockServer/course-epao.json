@@ -5,10 +5,10 @@
     "ukprn": 10030009,
     "status": "Live",
     "organisationTypeId": 1,
-    "primaryContactName": "Paul Paice",
+    "primaryContactName": "Test McTestface",
     "organisationData": {
-      "email": "paul.paice@icanqualify.co.uk.test",
-      "phoneNumber": "07984 201555",
+      "email": "test.mctestface@icanqualify.co.uk.test",
+      "phoneNumber": "07999 111555",
       "websiteLink": "https://icanqualify.net/",
       "address1": "4th Floor",
       "address2": "Salt Quay House",
