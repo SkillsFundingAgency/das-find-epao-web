@@ -4,6 +4,8 @@ using SFA.DAS.FindEpao.Application.Epaos.Services;
 using SFA.DAS.FindEpao.Domain.Interfaces;
 using SFA.DAS.FindEpao.Infrastructure.Api;
 using SFA.DAS.FindEpao.Infrastructure.Services;
+using SFA.DAS.FindEpao.Web.Infrastructure.Interfaces;
+using SFA.DAS.FindEpao.Web.Services;
 
 namespace SFA.DAS.FindEpao.Web.AppStart
 {
@@ -16,6 +18,7 @@ namespace SFA.DAS.FindEpao.Web.AppStart
             services.AddTransient<IEpaoService, EpaoService>();
             services.AddHttpContextAccessor();
             services.AddTransient<ICacheStorageService, CacheStorageService>();
+            services.AddTransient<ILocationStringBuilder, LocationStringBuilderService>();
         }
     }
 }
