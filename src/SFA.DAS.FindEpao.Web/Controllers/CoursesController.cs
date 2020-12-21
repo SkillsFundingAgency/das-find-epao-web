@@ -1,8 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using SFA.DAS.FindEpao.Application.Courses.Queries.GetCourse;
 using SFA.DAS.FindEpao.Application.Courses.Queries.GetCourseEpaos;
 using SFA.DAS.FindEpao.Application.Courses.Queries.GetCourses;
 using SFA.DAS.FindEpao.Web.Infrastructure;
@@ -113,8 +115,26 @@ namespace SFA.DAS.FindEpao.Web.Controllers
         [Route("{id}/course-integrated-apprenticeship", Name = RouteNames.IntegratedApprenticeship)]
         public async Task<IActionResult> CourseIntegrated(GetIntegratedApprenticeshipCourseRequest request)
         {
+            try
+            {
+                var result = await _mediator.Send(new GetCourseQuery {CourseId = request.Id});
+
+                if (result.Course == null || !result.Course.IntegratedApprenticeship)
+                {
+                    return RedirectToRoute(RouteNames.Error404);
+                }
+                
+                var model = new IntegratedApprenticeshipCourseViewModel
+                {
+                    Course = result.Course
+                };
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return RedirectToRoute(RouteNames.Error500);
+            }
             
-            return View();
         }
     }
 }
