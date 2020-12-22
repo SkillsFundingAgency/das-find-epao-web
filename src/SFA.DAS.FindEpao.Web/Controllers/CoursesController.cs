@@ -1,13 +1,14 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SFA.DAS.FindEpao.Application.Courses.Queries.GetCourseEpao;
 using SFA.DAS.FindEpao.Application.Courses.Queries.GetCourseEpaos;
 using SFA.DAS.FindEpao.Application.Courses.Queries.GetCourses;
+using SFA.DAS.FindEpao.Domain.Courses;
+using SFA.DAS.FindEpao.Domain.Exceptions;
 using SFA.DAS.FindEpao.Web.Infrastructure;
 using SFA.DAS.FindEpao.Web.Infrastructure.Interfaces;
 using SFA.DAS.FindEpao.Web.Models;
@@ -136,8 +137,9 @@ namespace SFA.DAS.FindEpao.Web.Controllers
             }
             catch(Exception ex) when (
                 ex is ValidationException 
-                || ex is HttpRequestException)
+                || ex is NotFoundException<CourseEpao>)
             {
+                
                 return RedirectToRoute(RouteNames.Error404);
             }
         }

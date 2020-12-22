@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
 using SFA.DAS.FindEpao.Application.Courses.Queries.GetCourseEpao;
+using SFA.DAS.FindEpao.Domain.Courses;
+using SFA.DAS.FindEpao.Domain.Exceptions;
 using SFA.DAS.FindEpao.Web.Controllers;
 using SFA.DAS.FindEpao.Web.Infrastructure;
 using SFA.DAS.FindEpao.Web.Infrastructure.Interfaces;
@@ -40,7 +42,7 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
         [Test, MoqAutoData]
         public async Task And_NotFoundException_Then_Redirect_To_Not_Found(
             GetCourseEpaoRequest getRequest,
-            HttpRequestException exception,//todo: notfoundexception
+            NotFoundException<CourseEpao> exception,
             [Frozen] Mock<IMediator> mockMediator,
             [Greedy] CoursesController controller)
         {
