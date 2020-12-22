@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,8 +33,8 @@ namespace SFA.DAS.FindEpao.Web
                 .AddJsonFile("appsettings.Development.json", true)
 #endif
                 .AddEnvironmentVariables();
-            
 
+            
             _configuration = config.Build();
         }
 
@@ -53,7 +52,7 @@ namespace SFA.DAS.FindEpao.Web
             services.AddOptions();
             services.Configure<FindEpaoApi>(_configuration.GetSection("FindEpaoApi"));
             services.AddSingleton(cfg => cfg.GetService<IOptions<FindEpaoApi>>().Value);
-
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddServiceRegistration();
