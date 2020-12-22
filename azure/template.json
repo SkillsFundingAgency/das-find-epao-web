@@ -179,6 +179,18 @@
                                     "value": "[parameters('cdnUrl')]"
                                 },
                                 {
+                                    "name": "FindEpaoWeb:ZendeskSectionId",
+                                    "value": "[parameters('apimBaseUrl')]"
+                                },
+                                {
+                                    "name": "FindEpaoWeb:ZendeskSnippetKey",
+                                    "value": "[parameters('outerApiPingUrl')]"
+                                },
+                                {
+                                    "name": "FindEpaoWeb:ZendeskCoBrowsingSnippetKey",
+                                    "value": "[reference(resourceId(parameters('sharedApimResourceGroup'),'Microsoft.ApiManagement/service/subscriptions', parameters('sharedApimName'), variables('appServiceName')), '2019-01-01').primaryKey]"
+                                },
+                                {
                                     "name": "ConfigurationStorageConnectionString",
                                     "value": "[parameters('configurationStorageConnectionString')]"
                                 },
