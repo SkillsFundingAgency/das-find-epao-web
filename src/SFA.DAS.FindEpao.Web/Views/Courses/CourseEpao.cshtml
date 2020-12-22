@@ -4,6 +4,11 @@
 @{
     ViewData["Title"] = Model.Epao.Name;
     ViewData["BackRouteName"] = RouteNames.CourseEpaos;
+    var backRouteData = new Dictionary<string, string>
+    {
+        {"Id", Model.Course.Id}
+    };
+    ViewData["BackRouteData"] = backRouteData;
 }
 <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
     <div class="govuk-grid-row">
