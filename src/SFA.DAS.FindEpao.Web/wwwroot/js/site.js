@@ -56,7 +56,7 @@ var backLinkOrHome = function () {
 
     var backLink = $('<a>')
         .attr({'href': '#', 'class': 'govuk-back-link'})
-        .text('Back')
+        .text('Home')
         .on('click', function (e) {
             window.history.back();
             e.preventDefault();
