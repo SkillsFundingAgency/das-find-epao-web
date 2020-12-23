@@ -84,8 +84,8 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
             result.RouteValues["epaoId"].Should().Be(foundEpao.EpaoId);
         }
 
-        [Test, MoqAutoData, Ignore("confirm")]
-        public async Task And_Zero_Epao_Then_Redirect_To_(
+        [Test, MoqAutoData]
+        public async Task And_Zero_Epao_Then_Redirect_To_GetCourseEpaosRequest(
             PostChooseCourseRequest postRequest,
             GetCourseEpaosResult mediatorResult,
             EpaoListItem foundEpao,
@@ -101,7 +101,9 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
 
             var result = await controller.PostChooseCourse(postRequest) as RedirectToRouteResult;
 
-            result.RouteName.Should().Be(RouteNames.Error404);//???
+            result.RouteName.Should().Be(RouteNames.CourseEpaos);
+            result.RouteValues.Should().ContainKey("id");
+            result.RouteValues["id"].Should().Be(postRequest.SelectedCourseId);
         }
 
         [Test, MoqAutoData, Ignore("future story")]

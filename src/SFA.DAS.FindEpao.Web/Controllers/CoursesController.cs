@@ -50,10 +50,6 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                 var query = new GetCourseEpaosQuery {CourseId = request.SelectedCourseId};
                 var result = await _mediator.Send(query);
 
-                if (result?.Epaos?.Count < 1)
-                {
-                    //todo: future story
-                }
                 if (result?.Epaos?.Count == 1)
                 {
                     return RedirectToRoute(RouteNames.CourseEpaoDetails, new GetCourseEpaoDetailsRequest
@@ -62,13 +58,11 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                         EpaoId = result.Epaos.First().EpaoId
                     });
                 }
-                else
+
+                return RedirectToRoute(RouteNames.CourseEpaos, new GetCourseEpaosRequest
                 {
-                    return RedirectToRoute(RouteNames.CourseEpaos, new GetCourseEpaosRequest
-                    {
-                        Id = request.SelectedCourseId
-                    });
-                }
+                    Id = request.SelectedCourseId
+                });
             }
             catch (ValidationException)
             {
