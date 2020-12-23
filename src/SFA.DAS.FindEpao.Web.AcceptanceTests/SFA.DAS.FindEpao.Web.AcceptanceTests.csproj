@@ -22,7 +22,7 @@
     <ProjectReference Include="..\SFA.DAS.FindEpao.MockServer\SFA.DAS.FindEpao.MockServer.csproj" />
     <ProjectReference Include="..\SFA.DAS.FindEpao.Web\SFA.DAS.FindEpao.Web.csproj" />
   </ItemGroup>
-
+  
   <ItemGroup>
     <SpecFlowFeatureFiles Update="Features\IntegratedApprenticeship.feature">
       <CodeBehindFile>Features/IntegratedApprenticeship.feature.cs</CodeBehindFile>
@@ -44,6 +44,7 @@
       <LastGenOutput>Home.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
   </ItemGroup>
+  
 
   <ItemGroup>
     <Content Include="Features\ChooseCourse.feature" />

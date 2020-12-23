@@ -86,14 +86,15 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
             result.RouteValues["epaoId"].Should().Be(foundEpao.EpaoId);
         }
 
-        [Test, MoqAutoData, Ignore("confirm")]
-        public async Task And_Zero_Epao_Then_Redirect_To_(
+        [Test, MoqAutoData]
+        public async Task And_Zero_Epao_Then_Redirect_To_GetCourseEpaosRequest(
             PostChooseCourseRequest postRequest,
             GetCourseEpaosResult mediatorResult,
             EpaoListItem foundEpao,
             [Frozen] Mock<IMediator> mockMediator,
             [Greedy] CoursesController controller)
         {
+            mediatorResult.Course = new CourseListItem(mediatorResult.Course.Id, mediatorResult.Course.Title, mediatorResult.Course.Level, false);
             mediatorResult.Epaos = new List<EpaoListItem>();
             mockMediator
                 .Setup(mediator => mediator.Send(
@@ -103,7 +104,9 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
 
             var result = await controller.PostChooseCourse(postRequest) as RedirectToRouteResult;
 
-            result.RouteName.Should().Be(RouteNames.Error404);//???
+            result.RouteName.Should().Be(RouteNames.CourseEpaos);
+            result.RouteValues.Should().ContainKey("id");
+            result.RouteValues["id"].Should().Be(postRequest.SelectedCourseId);
         }
         
         [Test, MoqAutoData]

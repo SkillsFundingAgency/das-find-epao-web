@@ -34,7 +34,8 @@ namespace SFA.DAS.FindEpao.Web.AcceptanceTests.Infrastructure
         [AfterTestRun]
         public static void StopEnvironment()
         {
-            _staticServer.Stop();
+            _staticServer?.Stop();
+            _staticServer?.Dispose();
         }
     }
 }
