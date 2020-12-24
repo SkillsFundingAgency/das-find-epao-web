@@ -63,7 +63,7 @@ var backLinkOrHome = function () {
         referrerHost = new URL(referrer).hostname;
     }
 
-    if (!!referrer || referrerHost && referrerHost !== document.location.hostname) {
+    if (!referrer || referrerHost && referrerHost !== document.location.hostname) {
         $backLinkOrHome.replaceWith(homeLink);
     }
 }
