@@ -8,6 +8,9 @@
   <ItemGroup>
     <None Remove="course-epao.json" />
     <None Remove="course-epaos.json" />
+    <None Remove="course-integrated.json" />
+    <None Remove="course-epaos-integrated.json" />
+    <None Remove="course.json" />
     <None Remove="course-no-epaos.json" />
     <None Remove="course-list.json" />
     <None Remove="delivery-areas.json" />
@@ -17,7 +20,16 @@
     <Content Include="course-epao.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="course-epaos-integrated.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="course.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="course-epaos.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="course-integrated.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="course-list.json">

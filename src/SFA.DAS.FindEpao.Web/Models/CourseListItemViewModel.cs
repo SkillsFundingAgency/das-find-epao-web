@@ -8,6 +8,7 @@ namespace SFA.DAS.FindEpao.Web.Models
         public string Title { get; set; }
         public int Level { get; set; }
         public string Description { get; set; }
+        public bool IntegratedApprenticeship { get ; set ; }
 
         public static implicit operator CourseListItemViewModel(CourseListItem course)
         {
@@ -17,6 +18,7 @@ namespace SFA.DAS.FindEpao.Web.Models
                 Title = course.Title,
                 Level = course.Level,
                 Description = course.Description,
+                IntegratedApprenticeship = course.IntegratedApprenticeship
             };
         }
     }

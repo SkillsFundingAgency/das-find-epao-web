@@ -12,15 +12,17 @@ namespace SFA.DAS.FindEpao.Domain.UnitTests.Courses
             var expectedCourseId = "1-21-1";
             var expectedCourseTitle = "Course 1";
             var expectedCourseLevel = 4;
+            var expectedIntegratedApprenticeship = true;
 
 
             //Act
-            var actual = new CourseListItem (expectedCourseId, expectedCourseTitle,expectedCourseLevel );
+            var actual = new CourseListItem (expectedCourseId, expectedCourseTitle,expectedCourseLevel, expectedIntegratedApprenticeship);
 
             //Assert
             Assert.AreEqual(expectedCourseId, actual.Id);
             Assert.AreEqual(expectedCourseTitle, actual.Title);
             Assert.AreEqual(expectedCourseLevel, actual.Level);
+            Assert.AreEqual(expectedIntegratedApprenticeship, actual.IntegratedApprenticeship);
         }
 
         [TestCase("")]
@@ -31,7 +33,7 @@ namespace SFA.DAS.FindEpao.Domain.UnitTests.Courses
             var expectedString = "Unknown";
 
             //Act
-            var course = new CourseListItem("",expectedTitle,3);
+            var course = new CourseListItem("",expectedTitle,3, true);
 
             //Assert
             Assert.AreEqual(expectedString, course.Description);
@@ -43,7 +45,7 @@ namespace SFA.DAS.FindEpao.Domain.UnitTests.Courses
         public void Then_The_Course_Description_Is_Taken_From_The_Title_And_Level()
         {
             //Arrange Act
-            var actualApprenticeship = new CourseListItem("", "Some title", 1);
+            var actualApprenticeship = new CourseListItem("", "Some title", 1, false);
 
             //Assert
             Assert.AreEqual("Some title (level 1)", actualApprenticeship.Description);
@@ -56,7 +58,7 @@ namespace SFA.DAS.FindEpao.Domain.UnitTests.Courses
             var expectedString = "Unknown";
 
             //Act
-            var course = new CourseListItem(null, null, 0);
+            var course = new CourseListItem(null, null, 0, false);
 
             //Assert
             Assert.AreEqual(expectedString, course.Description);

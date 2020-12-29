@@ -35,8 +35,34 @@ namespace SFA.DAS.FindEpao.MockServer
                     .WithStatusCode(200)
                     .WithHeader("Content-Type", "application/json")
                     .WithBodyFromFile("course-no-epaos.json"));
+                    
+            server.Given(Request.Create().WithPath(s => Regex.IsMatch(s,"/courses/14$"))
+                .UsingGet()
+            ).RespondWith(
+                Response.Create()
+                    .WithStatusCode(200)
+                    .WithHeader("Content-Type", "application/json")
+                    .WithBodyFromFile("course-integrated.json"));
             
-            server.Given(Request.Create().WithPath(s => Regex.IsMatch(s,"/courses/(?!(?:2))\\d/epaos$"))
+            server.Given(Request.Create().WithPath(s => Regex.IsMatch(s,"/courses/14/epaos$"))
+                .UsingGet()
+            ).RespondWith(
+                Response.Create()
+                    .WithStatusCode(200)
+                    .WithHeader("Content-Type", "application/json")
+                    .WithBodyFromFile("course-epaos-integrated.json"));
+            
+            server.Given(Request.Create().WithPath(s => Regex.IsMatch(s,"/courses/(?!(?:14|2))\\d$"))
+                .UsingGet()
+            ).RespondWith(
+                Response.Create()
+                    .WithStatusCode(200)
+                    .WithHeader("Content-Type", "application/json")
+                    .WithBodyFromFile("course.json"));
+            
+
+
+            server.Given(Request.Create().WithPath(s => Regex.IsMatch(s,"/courses/(?!(?:14|2))\\d/epaos$"))
                 .UsingGet()
             ).RespondWith(
                 Response.Create()
