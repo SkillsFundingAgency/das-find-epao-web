@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using SFA.DAS.FindEpao.Domain.Configuration;
+using SFA.DAS.FindEpao.Domain.Exceptions;
 using SFA.DAS.FindEpao.Domain.Interfaces;
 
 namespace SFA.DAS.FindEpao.Infrastructure.Api
@@ -28,7 +30,12 @@ namespace SFA.DAS.FindEpao.Infrastructure.Api
 
             var response = await _httpClient.GetAsync(request.GetUrl).ConfigureAwait(false);
 
+            if (!response.IsSuccessStatusCode && response.StatusCode == HttpStatusCode.NotFound)
+            {
+                throw new NotFoundException<TResponse>();
+            }
             response.EnsureSuccessStatusCode();
+
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             return JsonConvert.DeserializeObject<TResponse>(json);
         }

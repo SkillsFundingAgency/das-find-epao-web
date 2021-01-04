@@ -9,6 +9,7 @@ using Moq;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using SFA.DAS.FindEpao.Domain.Configuration;
+using SFA.DAS.FindEpao.Domain.Exceptions;
 using SFA.DAS.FindEpao.Domain.Interfaces;
 using SFA.DAS.FindEpao.Infrastructure.Api;
 
@@ -44,7 +45,7 @@ namespace SFA.DAS.FindEpao.Infrastructure.UnitTests.Api
         }
         
         [Test, AutoData]
-        public void Then_If_It_Is_Not_Successful_An_Exception_Is_Thrown(
+        public void And_Not_Successful_And_Not_404_Then_An_Exception_Is_Thrown(
             GetTestRequest getTestRequest,
             FindEpaoApi config)
         {
@@ -64,7 +65,29 @@ namespace SFA.DAS.FindEpao.Infrastructure.UnitTests.Api
             
             //Act Assert
             Assert.ThrowsAsync<HttpRequestException>(() => apiClient.Get<List<string>>(getTestRequest));
+        }
+
+        [Test, AutoData]
+        public void And_Not_Successful_And_Is_404_Then_NotFoundException_Is_Thrown(
+            GetTestRequest getTestRequest,
+            FindEpaoApi config)
+        {
+            //Arrange
+            config.BaseUrl = "http://valid-url/";
+            var configMock = new Mock<IOptions<FindEpaoApi>>();
+            configMock.Setup(x => x.Value).Returns(config);
+            var response = new HttpResponseMessage
+            {
+                Content = new StringContent(""),
+                StatusCode = HttpStatusCode.NotFound
+            };
             
+            var httpMessageHandler = MessageHandler.SetupMessageHandlerMock(response, $"{config.BaseUrl}{getTestRequest.GetUrl}", config.Key);
+            var client = new HttpClient(httpMessageHandler.Object);
+            var apiClient = new ApiClient(client, configMock.Object);
+            
+            //Act Assert
+            Assert.ThrowsAsync<NotFoundException<List<string>>>(() => apiClient.Get<List<string>>(getTestRequest));
         }
 
         public class GetTestRequest : IGetApiRequest
