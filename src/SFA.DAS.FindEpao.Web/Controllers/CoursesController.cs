@@ -1,11 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using SFA.DAS.FindEpao.Application.Courses.Queries.GetCourse;
+using SFA.DAS.FindEpao.Application.Courses.Queries.GetCourseEpao;
 using SFA.DAS.FindEpao.Application.Courses.Queries.GetCourseEpaos;
 using SFA.DAS.FindEpao.Application.Courses.Queries.GetCourses;
+using SFA.DAS.FindEpao.Domain.Courses;
+using SFA.DAS.FindEpao.Domain.Exceptions;
 using SFA.DAS.FindEpao.Web.Infrastructure;
+using SFA.DAS.FindEpao.Web.Infrastructure.Interfaces;
 using SFA.DAS.FindEpao.Web.Models;
 
 namespace SFA.DAS.FindEpao.Web.Controllers
@@ -14,10 +20,14 @@ namespace SFA.DAS.FindEpao.Web.Controllers
     public class CoursesController : Controller
     {
         private readonly IMediator _mediator;
+        private readonly ILocationStringBuilder _locationStringBuilder;
 
-        public CoursesController(IMediator mediator)
+        public CoursesController(
+            IMediator mediator,
+            ILocationStringBuilder locationStringBuilder)
         {
             _mediator = mediator;
+            _locationStringBuilder = locationStringBuilder;
         }
 
         [HttpGet]
@@ -50,9 +60,23 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                 var query = new GetCourseEpaosQuery {CourseId = request.SelectedCourseId};
                 var result = await _mediator.Send(query);
 
+
+                if (result.Course.IntegratedApprenticeship)
+                {
+                    return RedirectToRoute(RouteNames.IntegratedApprenticeship,
+                        new GetIntegratedApprenticeshipCourseRequest
+                        {
+                            Id = request.SelectedCourseId
+                        });
+                }
+                
+                if (result?.Epaos?.Count < 1)
+                {
+                    //todo: future story
+                }
                 if (result?.Epaos?.Count == 1)
                 {
-                    return RedirectToRoute(RouteNames.CourseEpaoDetails, new GetCourseEpaoDetailsRequest
+                    return RedirectToRoute(RouteNames.CourseEpao, new GetCourseEpaoDetailsRequest
                     {
                         Id = request.SelectedCourseId,
                         EpaoId = result.Epaos.First().EpaoId
@@ -83,12 +107,74 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                 var model = new CourseEpaosViewModel
                 {
                     Course = result.Course,
-                    Epaos = result.Epaos.Select(item => new EpaoListItemViewModel(item, result.DeliveryAreas))
+                    Epaos = result.Epaos.Select(item => new EpaoListItemViewModel(
+                        item, 
+                        result.DeliveryAreas, 
+                        _locationStringBuilder.BuildLocationString))
                 };
                 return View(model);
             }
             catch (ValidationException)
             {
+                return RedirectToRoute(RouteNames.Error404);
+            }
+        }
+
+        [HttpGet]
+        [Route("{id}/course-integrated-apprenticeship", Name = RouteNames.IntegratedApprenticeship)]
+        public async Task<IActionResult> CourseIntegrated(GetIntegratedApprenticeshipCourseRequest request)
+        {
+            try
+            {
+                var result = await _mediator.Send(new GetCourseQuery {CourseId = request.Id});
+
+                if (result.Course == null || !result.Course.IntegratedApprenticeship)
+                {
+                    return RedirectToRoute(RouteNames.Error404);
+                }
+                
+                var model = new IntegratedApprenticeshipCourseViewModel
+                {
+                    Course = result.Course
+                };
+                return View(model);
+            }
+            catch (Exception)
+            {
+                return RedirectToRoute(RouteNames.Error500);
+            }
+            
+        }
+
+        [HttpGet]
+        [Route("{id}/assessment-organisations/{epaoId}", Name = RouteNames.CourseEpao)]
+        public async Task<IActionResult> CourseEpao(GetCourseEpaoRequest request)
+        {
+            try
+            {
+                var query = new GetCourseEpaoQuery
+                {
+                    CourseId = request.Id,
+                    EpaoId = request.EpaoId
+                };
+                var result = await _mediator.Send(query);
+                var model = new CourseEpaoViewModel
+                {
+                    Course = result.Course,
+                    Epao = new EpaoDetailsViewModel(
+                        result.Epao, 
+                        result.EpaoDeliveryAreas,
+                        result.DeliveryAreas,
+                        _locationStringBuilder.BuildLocationString),
+                    CourseEpaosCount = result.CourseEpaosCount
+                };
+                return View(model);
+            }
+            catch(Exception ex) when (
+                ex is ValidationException 
+                || ex is NotFoundException<CourseEpao>)
+            {
+                
                 return RedirectToRoute(RouteNames.Error404);
             }
         }

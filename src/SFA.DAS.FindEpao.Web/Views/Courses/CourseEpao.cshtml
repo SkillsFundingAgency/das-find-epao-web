@@ -1,0 +1,109 @@
+﻿@using SFA.DAS.FindEpao.Web.Infrastructure
+@using SFA.DAS.FindEpao.Web.Models
+@model CourseEpaoViewModel
+@{
+    ViewData["Title"] = Model.Epao.Name;
+    ViewData["BackRouteName"] = RouteNames.CourseEpaos;
+    var backRouteData = new Dictionary<string, string>
+    {
+        {"Id", Model.Course.Id}
+    };
+    ViewData["BackRouteData"] = backRouteData;
+}
+<main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            <h1 class="govuk-heading-xl ">@Model.Epao.Name</h1>
+            <p class="govuk-body govuk-!-margin-bottom-6">
+                <span class="govuk-!-font-weight-bold">End-point assessment organisation for </span>
+                <br> @Model.Course.Title <span class="das-no-wrap">(level @Model.Course.Level)</span>
+            </p>
+            <dl class="govuk-summary-list">
+                @if (!string.IsNullOrEmpty(Model.Epao?.PrimaryContactName))
+                {
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">Contact name</dt>
+                        <dd class="govuk-summary-list__value">@Model.Epao.PrimaryContactName</dd>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(Model.Epao?.ContactDetails?.WebsiteLink))
+                {
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">Website</dt>
+                        <dd class="govuk-summary-list__value">
+                            <a class="govuk-link" href="@Model.Epao.ContactDetails.WebsiteLink">@Model.Epao.ContactDetails.WebsiteLink</a>
+                        </dd>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(Model.Epao?.ContactDetails?.Email))
+                {
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">Email</dt>
+                        <dd class="govuk-summary-list__value">
+                            <a class="govuk-link" href="mailto:@Model.Epao.ContactDetails.Email">@Model.Epao.ContactDetails.Email</a>
+                        </dd>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(Model.Epao?.ContactDetails?.Email))
+                {
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">Telephone</dt>
+                        <dd class="govuk-summary-list__value">@Model.Epao.ContactDetails.PhoneNumber</dd>
+                    </div>
+                }
+                @if (Model.Epao?.ContactDetails?.HasAddress() ?? false)
+                {
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">Address</dt>
+                        <dd class="govuk-summary-list__value">
+                            @if (!string.IsNullOrEmpty(Model.Epao.ContactDetails.Address1))
+                            {
+                                @Model.Epao.ContactDetails.Address1 <br/>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.Epao.ContactDetails.Address2))
+                            {
+                                @Model.Epao.ContactDetails.Address2 <br/>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.Epao.ContactDetails.Address3))
+                            {
+                                @Model.Epao.ContactDetails.Address3 <br/>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.Epao.ContactDetails.Address4))
+                            {
+                                @Model.Epao.ContactDetails.Address4 <br/>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.Epao.ContactDetails.Postcode))
+                            {
+                                @Model.Epao.ContactDetails.Postcode
+                            }
+                        </dd>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(Model.Epao?.Locations))
+                {
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">Locations covered</dt>
+                        <dd class="govuk-summary-list__value">@Model.Epao.Locations</dd>
+                    </div>
+                }
+            </dl>
+            @if (Model.CourseEpaosCount > 1)
+            {
+                <p class="govuk-body">
+                    @Model.Epao.Name is 1 of @Model.CourseEpaosCount end-point assessment organisations for @Model.Course.Title <span class="das-no-wrap">(level @Model.Course.Level).</span>
+                </p>
+                <p class="govuk-body govuk-!-margin-bottom-6">
+                    <a class="govuk-link"
+                       asp-route-id="@Model.Course.Id"
+                       asp-route="@RouteNames.CourseEpaos">View other end-point assessment organisations</a>
+                </p>
+            }
+            else
+            {
+                <p class="govuk-body govuk-!-margin-bottom-6">
+                    @Model.Epao.Name is the only end-point assessment organisation for @Model.Course.Title <span class="das-no-wrap">(level @Model.Course.Level).</span>
+                </p>
+            }
+        </div>
+    </div>
+</main>

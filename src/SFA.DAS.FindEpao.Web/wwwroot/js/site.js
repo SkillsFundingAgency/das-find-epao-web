@@ -42,3 +42,32 @@ if (selectEl) {
 }
 
 forms.attr('novalidate', 'novalidate');
+
+
+
+// BACK LINK
+// If users history-1 does not come from this site, 
+// then show a link to homepage
+var $backLinkOrHome = $('.das-js-back-link-or-home');
+var backLinkOrHome = function () {
+
+    var referrer = document.referrer;
+    var isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
+    var referrerHost;
+
+    var homeLink = $('<a>')
+        .attr({'href': '/', 'class': 'govuk-back-link'})
+        .text('Home');
+    
+    if (!isIE11 && referrer) {
+        referrerHost = new URL(referrer).hostname;
+    }
+
+    if (!referrer || referrerHost && referrerHost !== document.location.hostname) {
+        $backLinkOrHome.replaceWith(homeLink);
+    }
+}
+
+if ($backLinkOrHome) {
+    backLinkOrHome();
+}
