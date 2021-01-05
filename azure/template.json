@@ -66,6 +66,15 @@
         },
         "configurationStorageConnectionString": {
             "type": "securestring"
+        },
+        "zendeskSectionId": {
+            "type": "string"
+        },
+        "zendeskSnippetKey": {
+            "type": "securestring"
+        },
+        "zendeskCoBrowsingSnippetKey": {
+            "type": "securestring"
         }
     },
     "variables": {
@@ -177,6 +186,18 @@
                                 {
                                     "name": "Cdn:Url",
                                     "value": "[parameters('cdnUrl')]"
+                                },
+                                {
+                                    "name": "FindEpaoWeb:ZendeskSectionId",
+                                    "value": "[parameters('zendeskSectionId')]"
+                                },
+                                {
+                                    "name": "FindEpaoWeb:ZendeskSnippetKey",
+                                    "value": "[parameters('zendeskSnippetKey')]"
+                                },
+                                {
+                                    "name": "FindEpaoWeb:ZendeskCoBrowsingSnippetKey",
+                                    "value": "[parameters('zendeskCoBrowsingSnippetKey')]"
                                 },
                                 {
                                     "name": "ConfigurationStorageConnectionString",

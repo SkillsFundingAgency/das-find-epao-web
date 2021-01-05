@@ -52,6 +52,8 @@ namespace SFA.DAS.FindEpao.Web
             services.AddOptions();
             services.Configure<FindEpaoApi>(_configuration.GetSection("FindEpaoApi"));
             services.AddSingleton(cfg => cfg.GetService<IOptions<FindEpaoApi>>().Value);
+            services.Configure<FindEpaoWeb>(_configuration.GetSection("FindEpaoWeb"));
+            services.AddSingleton(cfg => cfg.GetService<IOptions<FindEpaoWeb>>().Value);
             
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
