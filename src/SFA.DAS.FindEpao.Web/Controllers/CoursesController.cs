@@ -175,7 +175,7 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                 || ex is NotFoundException<CourseEpao>)
             {
                 
-                return RedirectToRoute(RouteNames.Error404);
+                return RedirectToRoute(RouteNames.ErrorEpaoUnavailable);
             }
         }
     }
