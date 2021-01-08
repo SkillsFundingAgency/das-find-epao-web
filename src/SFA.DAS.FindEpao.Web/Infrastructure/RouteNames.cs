@@ -13,5 +13,7 @@
         public const string CourseEpao = "course-epao";
 
         public const string IntegratedApprenticeship = "course-integrated-apprenticeship";
+
+        public const string AccessibilityStatement = "accessibility-statement";
     }
 }
