@@ -19,7 +19,6 @@
                     </span>
                     }
                     <select id="SelectedCourseId" name="SelectedCourseId" class="govuk-select" aria-describedby="choose-course-hint">
-                        <option value="">Select an apprenticeship training course</option>
                         @foreach (var course in Model.Courses)
                         {
                             <option value="@course.Id">@course.Description</option>
