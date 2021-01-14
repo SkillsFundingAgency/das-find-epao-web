@@ -17,6 +17,7 @@ namespace SFA.DAS.FindEpao.Web.Models
             Name = epao.Name;
             City = epao.City;
             Postcode = epao.Postcode;
+            EffectiveFrom = epao.EffectiveFrom;
         }
 
         public string EpaoId { get; }
@@ -24,5 +25,6 @@ namespace SFA.DAS.FindEpao.Web.Models
         public string City { get; }
         public string Postcode { get; }
         public string Address => $"{City}, {Postcode}";
+        public DateTime? EffectiveFrom { get; set; }
     }
 }

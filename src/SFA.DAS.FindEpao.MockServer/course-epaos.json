@@ -20,7 +20,8 @@
       "epaoId": "EPA0014",
       "name": "An Assessor",
       "city": "Sheffield",
-      "postcode": "S1 2BJ"
+      "postcode": "S1 2BJ",
+      "effectiveFrom": "2021-01-01" 
     },
     {
       "deliveryAreas": [
@@ -34,7 +35,8 @@
       "epaoId": "EPA0015",
       "name": "Another Assessor",
       "city": "Buxton",
-      "postcode": "S2 2BJ"
+      "postcode": "S2 2BJ",
+      "effectiveFrom": "2021-01-01"
     },
     {
       "deliveryAreas": [
@@ -45,7 +47,8 @@
       "epaoId": "EPA0016",
       "name": "Different Company",
       "city": "Ashbourne",
-      "postcode": "S3 3BJ"
+      "postcode": "S3 3BJ",
+      "effectiveFrom": "2022-01-01"
     },
     {
       "deliveryAreas": [
@@ -80,7 +83,8 @@
       "epaoId": "EPA0017",
       "name": "Somebody Else Ltd",
       "city": "Leek",
-      "postcode": "S4 4BJ"
+      "postcode": "S4 4BJ",
+      "effectiveFrom": "2022-01-01"
     }
   ]
 }
