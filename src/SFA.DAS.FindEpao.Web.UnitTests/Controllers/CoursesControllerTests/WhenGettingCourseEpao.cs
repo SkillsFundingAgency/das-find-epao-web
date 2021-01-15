@@ -22,7 +22,7 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
     public class WhenGettingCourseEpao
     {
         [Test, MoqAutoData]
-        public async Task And_Model_Invalid_Redirect_To_Not_Found(
+        public async Task And_Model_Invalid_Redirect_To_Epao_Unavailable(
             GetCourseEpaoRequest getRequest,
             ValidationException exception,
             [Frozen] Mock<IMediator> mockMediator,
@@ -36,11 +36,11 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
 
             var result = await controller.CourseEpao(getRequest) as RedirectToRouteResult;
 
-            result!.RouteName.Should().Be(RouteNames.Error404);
+            result!.RouteName.Should().Be(RouteNames.ErrorEpaoUnavailable);
         }
 
         [Test, MoqAutoData]
-        public async Task And_NotFoundException_Then_Redirect_To_Not_Found(
+        public async Task And_NotFoundException_Then_Redirect_To_Epao_Unavailable(
             GetCourseEpaoRequest getRequest,
             NotFoundException<CourseEpao> exception,
             [Frozen] Mock<IMediator> mockMediator,
@@ -54,7 +54,7 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
 
             var result = await controller.CourseEpao(getRequest) as RedirectToRouteResult;
 
-            result!.RouteName.Should().Be(RouteNames.Error404);
+            result!.RouteName.Should().Be(RouteNames.ErrorEpaoUnavailable);
         }
 
         [Test, MoqAutoData]

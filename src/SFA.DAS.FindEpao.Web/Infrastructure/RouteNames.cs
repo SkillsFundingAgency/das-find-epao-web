@@ -8,6 +8,7 @@
         public const string CookiesDetails = "cookies-details";
 
         public const string Error404 = "404";
+        public const string ErrorEpaoUnavailable = "epao-unavailable";
         public const string Error500 = "500";
 
         public const string ChooseCourse = "choose-course";
