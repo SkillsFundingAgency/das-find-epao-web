@@ -25,6 +25,6 @@ namespace SFA.DAS.FindEpao.Web.Models
         public string City { get; }
         public string Postcode { get; }
         public string Address => $"{City}, {Postcode}";
-        public DateTime? EffectiveFrom { get; set; }
+        public DateTime EffectiveFrom { get; set; }
     }
 }
