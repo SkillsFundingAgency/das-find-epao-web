@@ -21,6 +21,12 @@ namespace SFA.DAS.FindEpao.Web.Controllers
             return View();
         }
 
+        [Route("epao-unavailable", Name = RouteNames.ErrorEpaoUnavailable)]
+        public IActionResult EpaoUnavailable()
+        {
+            return View();
+        }
+
         [Route("500", Name = RouteNames.Error500)]
         public IActionResult ApplicationError()
         {
