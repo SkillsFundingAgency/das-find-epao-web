@@ -10,7 +10,7 @@ if (selectEl) {
         autoselect: true,
         defaultValue: '',
         displayMenu: 'overlay',
-        placeholder: 'Start typing to search for an apprenticeship training course',
+        placeholder: '',
         onConfirm: function (opt) {
             var txtInput = document.querySelector('#' + idSelectField);
             var searchString = opt || txtInput.value;
