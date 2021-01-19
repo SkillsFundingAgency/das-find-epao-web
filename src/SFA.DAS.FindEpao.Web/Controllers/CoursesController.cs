@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -70,16 +70,13 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                         });
                 }
                 
-                if (result?.Epaos?.Count < 1)
-                {
-                    //todo: future story
-                }
                 if (result?.Epaos?.Count == 1)
                 {
                     return RedirectToRoute(RouteNames.CourseEpao, new GetCourseEpaoDetailsRequest
                     {
                         Id = request.SelectedCourseId,
-                        EpaoId = result.Epaos.First().EpaoId
+                        EpaoId = result.Epaos.First().EpaoId,
+                        Single = true
                     });
                 }
 
