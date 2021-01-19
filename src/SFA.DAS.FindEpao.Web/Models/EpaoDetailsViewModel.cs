@@ -11,18 +11,21 @@ namespace SFA.DAS.FindEpao.Web.Models
             EpaoDetails epao,
             IReadOnlyList<EpaoDeliveryArea> epaoDeliveryAreas, 
             IReadOnlyList<DeliveryArea> deliveryAreas, 
-            Func<IReadOnlyList<EpaoDeliveryArea>, IReadOnlyList<DeliveryArea>, string> buildLocations) 
+            Func<IReadOnlyList<EpaoDeliveryArea>, IReadOnlyList<DeliveryArea>, string> buildLocations, bool singleSearchResult) 
             : base(epaoDeliveryAreas, deliveryAreas, buildLocations)
         {
             EpaoId = epao.EpaoId;
             Name = epao.Name;
             PrimaryContactName = epao.PrimaryContactName;
             ContactDetails = epao.ContactDetails;
+            SingleSearchResult = singleSearchResult;
         }
+
 
         public string EpaoId { get; }
         public string Name { get; }
         public string PrimaryContactName { get; }
         public EpaoContactDetailsViewModel ContactDetails { get; }
+        public bool SingleSearchResult { get ;}
     }
 }

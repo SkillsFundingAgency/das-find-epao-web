@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -145,7 +145,7 @@ namespace SFA.DAS.FindEpao.Web.Controllers
 
         [HttpGet]
         [Route("{id}/assessment-organisations/{epaoId}", Name = RouteNames.CourseEpao)]
-        public async Task<IActionResult> CourseEpao(GetCourseEpaoRequest request)
+        public async Task<IActionResult> CourseEpao(GetCourseEpaoDetailsRequest request)
         {
             try
             {
@@ -162,7 +162,8 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                         result.Epao, 
                         result.EpaoDeliveryAreas,
                         result.DeliveryAreas,
-                        _locationStringBuilder.BuildLocationString),
+                        _locationStringBuilder.BuildLocationString,
+                        request.Single),
                     CourseEpaosCount = result.CourseEpaosCount
                 };
                 return View(model);
