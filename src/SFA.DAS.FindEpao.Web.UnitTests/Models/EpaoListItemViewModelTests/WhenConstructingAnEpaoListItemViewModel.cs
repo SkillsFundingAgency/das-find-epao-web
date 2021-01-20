@@ -20,6 +20,7 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Models.EpaoListItemViewModelTests
             var viewModel = new EpaoListItemViewModel(source, deliveryAreas, buildLocations);
             
             viewModel.Should().BeEquivalentTo(source, config => config.ExcludingMissingMembers());
+            viewModel.EffectiveFrom.Should().Be(source.EffectiveFrom);
         }
     }
 }
