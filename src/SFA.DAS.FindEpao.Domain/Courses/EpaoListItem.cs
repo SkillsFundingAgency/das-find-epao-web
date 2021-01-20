@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SFA.DAS.FindEpao.Domain.Courses
 {
@@ -9,6 +10,7 @@ namespace SFA.DAS.FindEpao.Domain.Courses
         public string City { get; set; }
         public string Postcode { get; set; }
         public IReadOnlyList<EpaoDeliveryArea> DeliveryAreas { get; set; }
+        public DateTime EffectiveFrom { get; set; }
     }
 
     public class EpaoDeliveryArea
