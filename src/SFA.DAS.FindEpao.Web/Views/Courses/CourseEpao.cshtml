@@ -26,11 +26,15 @@
             <div class="das-highlight">
                 <p class="govuk-body">
                     @Model.Course.Title <span class="das-no-wrap">(level @Model.Course.Level)</span><br />
-                    <span class="govuk-!-font-weight-bold">Available to assess 
-                        @if (Model.EffectiveFrom.Date > DateTime.Today)
-                        {
-                            @:from @Model.EffectiveFrom.ToString("d MMMM yyyy")
-                        }</span>
+                    
+                    @if (Model.EffectiveFrom.Date > DateTime.Today)
+                    {
+                        <span class="govuk-!-font-weight-bold">Available to assess from @Model.EffectiveFrom.ToString("d MMMM yyyy")</span>
+                    }
+                    else
+                    {
+                        <span class="govuk-!-font-weight-bold">Available to assess now</span>
+                    }
                 </p>
                 @if (Model.CourseEpaosCount > 1)
                 {
