@@ -35,9 +35,11 @@ namespace SFA.DAS.FindEpao.Application.Courses.Queries.GetCourseEpao
             {
                 Course = courseEpao.Course,
                 Epao = courseEpao.Epao,
+                CourseEpaosCount = courseEpao.CourseEpaosCount,
+                EffectiveFrom = courseEpao.EffectiveFrom,
                 EpaoDeliveryAreas = courseEpao.EpaoDeliveryAreas,
                 DeliveryAreas = courseEpao.DeliveryAreas,
-                CourseEpaosCount = courseEpao.CourseEpaosCount
+                OtherCourses = courseEpao.OtherCourses
             };
         }
     }

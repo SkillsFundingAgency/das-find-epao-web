@@ -52,8 +52,10 @@ namespace SFA.DAS.FindEpao.Application.UnitTests.Courses.Queries.GetCourseEpao
             result.Course.Should().BeEquivalentTo(courseEpao.Course);
             result.Epao.Should().BeEquivalentTo(courseEpao.Epao);
             result.CourseEpaosCount.Should().Be(courseEpao.CourseEpaosCount);
+            result.EffectiveFrom.Should().Be(courseEpao.EffectiveFrom);
             result.EpaoDeliveryAreas.Should().BeEquivalentTo(courseEpao.EpaoDeliveryAreas);
             result.DeliveryAreas.Should().BeEquivalentTo(courseEpao.DeliveryAreas);
+            result.OtherCourses.Should().BeEquivalentTo(courseEpao.OtherCourses);
         }
     }
 }
