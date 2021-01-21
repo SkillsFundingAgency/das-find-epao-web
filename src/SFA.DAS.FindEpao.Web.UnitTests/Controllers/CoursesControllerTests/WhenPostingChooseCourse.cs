@@ -84,6 +84,7 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
             result.RouteValues["id"].Should().Be(postRequest.SelectedCourseId);
             result.RouteValues.Should().ContainKey("epaoId");
             result.RouteValues["epaoId"].Should().Be(foundEpao.EpaoId);
+            result.RouteValues["single"].Should().Be(true);
         }
 
         [Test, MoqAutoData]
@@ -131,13 +132,6 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
             result.RouteName.Should().Be(RouteNames.IntegratedApprenticeship);
             result.RouteValues.Should().ContainKey("id");
             result.RouteValues["id"].Should().Be(postRequest.SelectedCourseId);
-        }
-        
-
-        [Test, MoqAutoData, Ignore("future story")]
-        public async Task And_Epao_Not_AllEngland_Then_Redirect_To_ChooseLocation()
-        {
-
         }
     }
 }

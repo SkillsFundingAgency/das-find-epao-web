@@ -13,12 +13,13 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Models.EpaoDetailsViewModelTests
     {
         [Test, AutoData]
         public void Then_Maps_All_Properties(
+            bool isSingleEpaoResult,
             EpaoDetails source, 
             List<EpaoDeliveryArea> epoaDeliveryAreas,
             List<DeliveryArea> deliveryAreas,
             Func<IReadOnlyList<EpaoDeliveryArea>, IReadOnlyList<DeliveryArea>, string> buildLocations)
         {
-            var viewModel = new EpaoDetailsViewModel(source, epoaDeliveryAreas, deliveryAreas, buildLocations);
+            var viewModel = new EpaoDetailsViewModel(source, epoaDeliveryAreas, deliveryAreas, buildLocations, isSingleEpaoResult);
             
             viewModel.Should().BeEquivalentTo(source, config => config.ExcludingMissingMembers());
         }

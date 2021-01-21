@@ -70,16 +70,13 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                         });
                 }
                 
-                if (result?.Epaos?.Count < 1)
-                {
-                    //todo: future story
-                }
                 if (result?.Epaos?.Count == 1)
                 {
                     return RedirectToRoute(RouteNames.CourseEpao, new GetCourseEpaoDetailsRequest
                     {
                         Id = request.SelectedCourseId,
-                        EpaoId = result.Epaos.First().EpaoId
+                        EpaoId = result.Epaos.First().EpaoId,
+                        Single = true
                     });
                 }
 
@@ -148,7 +145,7 @@ namespace SFA.DAS.FindEpao.Web.Controllers
 
         [HttpGet]
         [Route("{id}/assessment-organisations/{epaoId}", Name = RouteNames.CourseEpao)]
-        public async Task<IActionResult> CourseEpao(GetCourseEpaoRequest request)
+        public async Task<IActionResult> CourseEpao(GetCourseEpaoDetailsRequest request)
         {
             try
             {
@@ -165,7 +162,8 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                         result.Epao, 
                         result.EpaoDeliveryAreas,
                         result.DeliveryAreas,
-                        _locationStringBuilder.BuildLocationString),
+                        _locationStringBuilder.BuildLocationString,
+                        request.Single),
                     CourseEpaosCount = result.CourseEpaosCount
                 };
                 return View(model);

@@ -23,7 +23,7 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
     {
         [Test, MoqAutoData]
         public async Task And_Model_Invalid_Redirect_To_Epao_Unavailable(
-            GetCourseEpaoRequest getRequest,
+            GetCourseEpaoDetailsRequest getRequest,
             ValidationException exception,
             [Frozen] Mock<IMediator> mockMediator,
             [Greedy] CoursesController controller)
@@ -41,7 +41,7 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
 
         [Test, MoqAutoData]
         public async Task And_NotFoundException_Then_Redirect_To_Epao_Unavailable(
-            GetCourseEpaoRequest getRequest,
+            GetCourseEpaoDetailsRequest getRequest,
             NotFoundException<CourseEpao> exception,
             [Frozen] Mock<IMediator> mockMediator,
             [Greedy] CoursesController controller)
@@ -59,7 +59,7 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
 
         [Test, MoqAutoData]
         public async Task Then_Gets_CourseEpao_From_Handler(
-            GetCourseEpaoRequest getRequest,
+            GetCourseEpaoDetailsRequest getRequest,
             GetCourseEpaoResult mediatorResult,
             [Frozen] Mock<IMediator> mockMediator,
             [Frozen] Mock<ILocationStringBuilder> mockLocationStringBuilder,
@@ -82,7 +82,9 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
                 mediatorResult.Epao, 
                 mediatorResult.EpaoDeliveryAreas,
                 mediatorResult.DeliveryAreas,
-                mockLocationStringBuilder.Object.BuildLocationString));
+                mockLocationStringBuilder.Object.BuildLocationString,
+                getRequest.Single
+                ));
         }
     }
 }
