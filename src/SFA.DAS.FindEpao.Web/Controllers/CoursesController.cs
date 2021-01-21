@@ -166,7 +166,9 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                         request.Single),
                     CourseEpaosCount = result.CourseEpaosCount,
                     EffectiveFrom = result.EffectiveFrom,
-                    OtherCourses = result.OtherCourses.Select(item => (CourseListItemViewModel)item)
+                    OtherCourses = result.OtherCourses
+                        .Select(item => (CourseListItemViewModel)item)
+                        .ToList()
                 };
                 return View(model);
             }

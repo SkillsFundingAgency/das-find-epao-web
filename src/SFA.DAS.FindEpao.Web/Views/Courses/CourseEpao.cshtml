@@ -21,12 +21,37 @@
 <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
+            <span class="govuk-caption-xl">End-point assessment organisation</span>
             <h1 class="govuk-heading-xl ">@Model.Epao.Name</h1>
-            <p class="govuk-body govuk-!-margin-bottom-6">
-                <span class="govuk-!-font-weight-bold">End-point assessment organisation for </span>
-                <br> @Model.Course.Title <span class="das-no-wrap">(level @Model.Course.Level)</span>
-            </p>
-            <dl class="govuk-summary-list">
+            <div class="das-highlight">
+                <p class="govuk-body">
+                    @Model.Course.Title <span class="das-no-wrap">(level @Model.Course.Level)</span><br />
+                    <span class="govuk-!-font-weight-bold">Available to assess 
+                        @if (Model.EffectiveFrom.Date > DateTime.Today)
+                        {
+                            @:from @Model.EffectiveFrom.ToString("d MMMM yyyy")
+                        }</span>
+                </p>
+                @if (Model.CourseEpaosCount > 1)
+                {
+                    <p class="govuk-body">
+                        @Model.Epao.Name is 1 of @Model.CourseEpaosCount end-point assessment organisations for @Model.Course.Title <span class="das-no-wrap">(level @Model.Course.Level).</span>
+                    </p>
+                    <p class="govuk-body">
+                        <a class="govuk-link"
+                           asp-route-id="@Model.Course.Id"
+                           asp-route="@RouteNames.CourseEpaos">View the other end-point assessment organisations</a>
+                    </p>
+                }
+                else
+                {
+                    <p class="govuk-body">
+                        @Model.Epao.Name is the only end-point assessment organisation for @Model.Course.Title <span class="das-no-wrap">(level @Model.Course.Level).</span>
+                    </p>
+                }
+            </div>
+            
+            <dl class="govuk-summary-list govuk-!-margin-bottom-6">
                 @if (!string.IsNullOrEmpty(Model.Epao?.PrimaryContactName))
                 {
                     <div class="govuk-summary-list__row">
@@ -87,31 +112,34 @@
                         </dd>
                     </div>
                 }
-                @if (!string.IsNullOrEmpty(Model.Epao?.Locations))
+                @if (!string.IsNullOrEmpty(Model.Epao.Locations))
                 {
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">Locations covered</dt>
                         <dd class="govuk-summary-list__value">@Model.Epao.Locations</dd>
                     </div>
                 }
+                
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">Apprenticeship training courses</dt>
+                    <dd class="govuk-summary-list__value">
+                    @if (Model.OtherCourses.Count == 1)
+                    {
+                        @Model.OtherCourses[0].Title <span class="das-no-wrap">(level @Model.OtherCourses[0].Level)</span>
+                    }
+                    else
+                    {
+                        <ul class="govuk-list govuk-list--bullet">
+                        @foreach (var course in Model.OtherCourses)
+                        {
+                            <li>@course.Title <span class="das-no-wrap">(level @course.Level)</span></li>
+                        }
+                        </ul>
+                    }
+                    </dd>
+                </div>
+                
             </dl>
-            @if (Model.CourseEpaosCount > 1)
-            {
-                <p class="govuk-body">
-                    @Model.Epao.Name is 1 of @Model.CourseEpaosCount end-point assessment organisations for @Model.Course.Title <span class="das-no-wrap">(level @Model.Course.Level).</span>
-                </p>
-                <p class="govuk-body govuk-!-margin-bottom-6">
-                    <a class="govuk-link"
-                       asp-route-id="@Model.Course.Id"
-                       asp-route="@RouteNames.CourseEpaos">View other end-point assessment organisations</a>
-                </p>
-            }
-            else
-            {
-                <p class="govuk-body govuk-!-margin-bottom-6">
-                    @Model.Epao.Name is the only end-point assessment organisation for @Model.Course.Title <span class="das-no-wrap">(level @Model.Course.Level).</span>
-                </p>
-            }
         </div>
     </div>
 </main>
