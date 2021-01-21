@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -85,6 +86,9 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
                 mockLocationStringBuilder.Object.BuildLocationString,
                 getRequest.Single
                 ));
+            model!.EffectiveFrom.Should().Be(mediatorResult.EffectiveFrom);
+            model!.OtherCourses.Should().BeEquivalentTo(
+                mediatorResult.OtherCourses.Select(item => (CourseListItemViewModel)item));
         }
     }
 }
