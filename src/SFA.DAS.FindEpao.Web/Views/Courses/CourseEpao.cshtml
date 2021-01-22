@@ -41,7 +41,7 @@
                     <p class="govuk-body">
                         @Model.Epao.Name is 1 of @Model.CourseEpaosCount end-point assessment organisations for @Model.Course.Title <span class="das-no-wrap">(level @Model.Course.Level).</span>
                     </p>
-                    <p class="govuk-body">
+                    <p class="govuk-body govuk-!-margin-bottom-1">
                         <a class="govuk-link"
                            asp-route-id="@Model.Course.Id"
                            asp-route="@RouteNames.CourseEpaos">View the other end-point assessment organisations</a>
@@ -49,13 +49,13 @@
                 }
                 else
                 {
-                    <p class="govuk-body">
+                    <p class="govuk-body govuk-!-margin-bottom-1">
                         @Model.Epao.Name is the only end-point assessment organisation for @Model.Course.Title <span class="das-no-wrap">(level @Model.Course.Level).</span>
                     </p>
                 }
             </div>
             
-            <dl class="govuk-summary-list govuk-!-margin-bottom-6">
+            <dl class="govuk-summary-list govuk-!-margin-bottom-8">
                 @if (!string.IsNullOrEmpty(Model.Epao?.PrimaryContactName))
                 {
                     <div class="govuk-summary-list__row">
