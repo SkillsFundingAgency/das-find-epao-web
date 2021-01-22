@@ -110,23 +110,23 @@
     }
   ],
   "otherCourses": [
-      {
-          "title": "Brewer",
-          "level": 4,
-          "id": 294,
-          "integratedApprenticeship": false
-      },
-      {
-          "title": "Water environment worker",
-          "level": 3,
-          "id": 508,
-          "integratedApprenticeship": false
-      },
-      {
-          "title": "Water network operative",
-          "level": 2,
-          "id": 568,
-          "integratedApprenticeship": false
-      }
+    {
+      "title": "Water environment worker",
+      "level": 3,
+      "id": 508,
+      "integratedApprenticeship": false
+    },
+    {
+      "title": "Brewer",
+      "level": 4,
+      "id": 294,
+      "integratedApprenticeship": false
+    },
+    {
+      "title": "Water network operative",
+      "level": 2,
+      "id": 568,
+      "integratedApprenticeship": false
+    }
   ]
 }
