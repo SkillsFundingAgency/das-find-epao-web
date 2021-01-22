@@ -40,7 +40,7 @@ namespace SFA.DAS.FindEpao.Application.Courses.Queries.GetCourseEpao
                 EffectiveFrom = courseEpao.EffectiveFrom,
                 EpaoDeliveryAreas = courseEpao.EpaoDeliveryAreas,
                 DeliveryAreas = courseEpao.DeliveryAreas,
-                OtherCourses = courseEpao.OtherCourses.OrderBy(item => item.Description).ToList()
+                AllCourses = courseEpao.AllCourses.OrderBy(item => item.Description).ToList()
             };
         }
     }

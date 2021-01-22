@@ -87,8 +87,8 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
                 getRequest.Single
                 ));
             model!.EffectiveFrom.Should().Be(mediatorResult.EffectiveFrom);
-            model!.OtherCourses.Should().BeEquivalentTo(
-                mediatorResult.OtherCourses.Select(item => (CourseListItemViewModel)item));
+            model!.AllCourses.Should().BeEquivalentTo(
+                mediatorResult.AllCourses.Select(item => (CourseListItemViewModel)item));
         }
     }
 }

@@ -12,6 +12,6 @@ namespace SFA.DAS.FindEpao.Domain.Courses
         public DateTime EffectiveFrom { get; set; }
         public IReadOnlyList<EpaoDeliveryArea> EpaoDeliveryAreas { get; set; }
         public IReadOnlyList<DeliveryArea> DeliveryAreas { get; set; }
-        public IReadOnlyList<CourseListItem> OtherCourses { get; set; }
+        public IReadOnlyList<CourseListItem> AllCourses { get; set; }
     }
 }

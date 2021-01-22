@@ -127,14 +127,14 @@
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">Apprenticeship training courses</dt>
                     <dd class="govuk-summary-list__value">
-                    @if (Model.OtherCourses.Count == 1)
+                    @if (Model.AllCourses.Count == 1)
                     {
-                        @Model.OtherCourses[0].Title <span class="das-no-wrap">(level @Model.OtherCourses[0].Level)</span>
+                        @Model.AllCourses[0].Title <span class="das-no-wrap">(level @Model.AllCourses[0].Level)</span>
                     }
                     else
                     {
                         <ul class="govuk-list govuk-list--bullet">
-                        @foreach (var course in Model.OtherCourses)
+                        @foreach (var course in Model.AllCourses)
                         {
                             <li>@course.Title <span class="das-no-wrap">(level @course.Level)</span></li>
                         }
