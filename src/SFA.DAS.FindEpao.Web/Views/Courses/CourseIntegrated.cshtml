@@ -2,7 +2,8 @@
 @using SFA.DAS.FindEpao.Web.Models
 @model IntegratedApprenticeshipCourseViewModel
 @{
-    ViewData["Title"] = "Integrated Apprenticeship Course";
+    ViewData["Title"] = $"The training provider will carry out the end-point assessment for {Model.Course.Description}";
+    ViewData["Description"] = $"{Model.Course.Description} is an integrated apprenticeship. The end-point assessment for integrated apprenticeships is carried out by the training provider.";
     ViewData["BackRouteName"] = RouteNames.ChooseCourse;
 }
 <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
