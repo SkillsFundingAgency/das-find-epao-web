@@ -3,6 +3,7 @@
 @model CourseEpaoViewModel
 @{
     ViewData["Title"] = Model.Epao.Name;
+    ViewData["Description"] = $"View {Model.Epao.Name}’s contact details and address.";
     if (Model.Epao.SingleSearchResult)
     {
         ViewData["BackRouteName"] = RouteNames.ChooseCourse;
