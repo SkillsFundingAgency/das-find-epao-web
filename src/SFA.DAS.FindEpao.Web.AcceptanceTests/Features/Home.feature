@@ -7,9 +7,9 @@
 Scenario: Navigate to home page
 When I navigate to the following url: /
 Then an http status code of 200 is returned
-And the page content includes the following: Find an apprenticeship assessment organisation
+And the page content includes the following: Find an end-point assessment organisation for your apprentice
 
 Scenario: Navigate to start page
 When I navigate to the following url: /start
 Then an http status code of 200 is returned
-And the page content includes the following: Find an apprenticeship assessment organisation
+And the page content includes the following: Find an end-point assessment organisation for your apprentice
