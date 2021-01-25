@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
@@ -40,9 +41,12 @@ namespace SFA.DAS.FindEpao.Application.UnitTests.Courses.Queries.GetCourseEpao
         public async Task Then_Gets_CourseEpao_From_Service(
             GetCourseEpaoQuery query,
             CourseEpao courseEpao,
+            List<CourseListItem> allCourses,
             [Frozen] Mock<ICourseService> mockCourseService,
             GetCourseEpaoQueryHandler handler)
         {
+            allCourses.Add(new CourseListItem("3", "aaaaa", 3, false));
+            courseEpao.AllCourses = allCourses;
             mockCourseService
                 .Setup(service => service.GetCourseEpao(query.CourseId, query.EpaoId))
                 .ReturnsAsync(courseEpao);
@@ -52,8 +56,11 @@ namespace SFA.DAS.FindEpao.Application.UnitTests.Courses.Queries.GetCourseEpao
             result.Course.Should().BeEquivalentTo(courseEpao.Course);
             result.Epao.Should().BeEquivalentTo(courseEpao.Epao);
             result.CourseEpaosCount.Should().Be(courseEpao.CourseEpaosCount);
+            result.EffectiveFrom.Should().Be(courseEpao.EffectiveFrom);
             result.EpaoDeliveryAreas.Should().BeEquivalentTo(courseEpao.EpaoDeliveryAreas);
             result.DeliveryAreas.Should().BeEquivalentTo(courseEpao.DeliveryAreas);
+            result.AllCourses.Should().BeEquivalentTo(courseEpao.AllCourses)
+                .And.BeInAscendingOrder(item => item.Description);
         }
     }
 }

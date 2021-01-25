@@ -23,6 +23,7 @@
     "id": 1
   },
   "courseEpaosCount": 20,
+  "effectiveFrom": "2023-06-17T00:00:00",
   "epaoDeliveryAreas": [
     {
       "deliveryAreaId": 1
@@ -106,6 +107,26 @@
       "area": "South West",
       "status": "Live",
       "ordering": 9
+    }
+  ],
+  "allCourses": [
+    {
+      "title": "Water environment worker",
+      "level": 3,
+      "id": 508,
+      "integratedApprenticeship": false
+    },
+    {
+      "title": "Brewer",
+      "level": 4,
+      "id": 294,
+      "integratedApprenticeship": false
+    },
+    {
+      "title": "Water network operative",
+      "level": 2,
+      "id": 568,
+      "integratedApprenticeship": false
     }
   ]
 }

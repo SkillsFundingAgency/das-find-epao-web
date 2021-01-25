@@ -32,11 +32,11 @@
                                     </a>
                                 </h2>
                                 <dl class="das-definition-list das-definition-list--meta das-search-results__meta govuk-list">
-                                    @if (epao.EffectiveFrom <= DateTime.Today)
+                                    @if (epao.EffectiveFrom.Date <= DateTime.Today)
                                     {
-                                        <dt class="govuk-!-margin-bottom-1">Available to assess</dt>
+                                        <dt class="govuk-!-margin-bottom-1">Available to assess now</dt>
                                     }
-                                    @if (epao.EffectiveFrom > DateTime.Today)
+                                    @if (epao.EffectiveFrom.Date > DateTime.Today)
                                     {
                                         <dt class="govuk-!-margin-bottom-1">Available to assess from @epao.EffectiveFrom.ToString("d MMMM yyyy")</dt>
                                     }
