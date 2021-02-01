@@ -12,5 +12,12 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Models.EpaoListItemViewModelTests
         {
             model.Address.Should().Be($"{model.City}, {model.Postcode}");
         }
+
+        [Test, AutoData]
+        public void And_No_City_Then_Formats_Address_Correctly(EpaoListItemViewModel model)
+        {
+            model.City = null;
+            model.Address.Should().Be(model.Postcode);
+        }
     }
 }
