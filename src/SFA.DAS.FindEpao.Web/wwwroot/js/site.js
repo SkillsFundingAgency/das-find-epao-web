@@ -55,10 +55,8 @@ var backLinkOrHome = function () {
     var isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
     var referrerHost;
 
-    var homeLink = $('<a>')
-        .attr({'href': '/', 'class': 'govuk-back-link'})
-        .text('Home');
-    
+    var homeLink = $('<div class="govuk-breadcrumbs"><ol class="govuk-breadcrumbs__list"><li class="govuk-breadcrumbs__list-item"><a href="/" class="govuk-breadcrumbs__link">Home</a></li></ol></div>');
+
     if (!isIE11 && referrer) {
         referrerHost = new URL(referrer).hostname;
     }
