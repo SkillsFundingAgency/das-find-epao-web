@@ -22,9 +22,19 @@ namespace SFA.DAS.FindEpao.Web.Models
 
         public string EpaoId { get; }
         public string Name { get; }
-        public string City { get; }
+        public string City { get; set; }
         public string Postcode { get; }
-        public string Address => $"{City}, {Postcode}";
+        public string Address => FormatAddress();
         public DateTime EffectiveFrom { get; set; }
+
+        private string FormatAddress()
+        {
+            if (string.IsNullOrEmpty(City))
+            {
+                return Postcode;
+            }
+
+            return $"{City}, {Postcode}";
+        }
     }
 }
