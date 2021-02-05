@@ -52,7 +52,10 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
 
             controller.ModelState.IsValid.Should().BeFalse();
             controller.ModelState.ContainsKey("SelectedCourseId").Should().BeTrue();
+            controller.ModelState.ContainsKey("SelectedCourseIdNoJs").Should().BeTrue();
             controller.ModelState["SelectedCourseId"].Errors[0].ErrorMessage
+                .Should().Be("Enter an apprenticeship training course");
+            controller.ModelState["SelectedCourseIdNoJs"].Errors[0].ErrorMessage
                 .Should().Be("Select an apprenticeship training course");
         }
     }
