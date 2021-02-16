@@ -28,8 +28,9 @@
 
                             var errorMessage = error.Value.Errors.FirstOrDefault()?.ErrorMessage;
 
-                            errorStringBuilder.Append($"<li><a href=\"#{errorKey}\">{errorMessage}</a></li>");
-                             
+                            var dasJsShowInlineClassName = error.Key.Contains("nojs", StringComparison.CurrentCultureIgnoreCase) ? "das-js-hide" : "das-js-show--inline";
+                            
+                            errorStringBuilder.Append($"<li class='{dasJsShowInlineClassName}'><a href=\"#{errorKey}\">{errorMessage}</a></li>");
                         }
                     }
                 }

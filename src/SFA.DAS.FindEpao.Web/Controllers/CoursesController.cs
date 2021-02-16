@@ -36,9 +36,8 @@ namespace SFA.DAS.FindEpao.Web.Controllers
         {
             if (!string.IsNullOrEmpty(request?.SelectedCourseId))
             {
-                ModelState.AddModelError(
-                    ValidationKeys.SelectedCourseId, 
-                    ValidationKeys.Messages[ValidationKeys.SelectedCourseId]);
+                ModelState.AddModelError(ValidationKeys.SelectedCourseId, ValidationKeys.Messages[ValidationKeys.SelectedCourseId]);
+                ModelState.AddModelError(ValidationKeys.SelectedCourseIdNoJs, ValidationKeys.Messages[ValidationKeys.SelectedCourseIdNoJs]);
             }
 
             var result = await _mediator.Send(new GetCoursesQuery());
