@@ -107,32 +107,6 @@ namespace SFA.DAS.FindEpao.Web.Controllers
         }
 
         [HttpGet]
-        [Route("{id}/course-integrated-apprenticeship", Name = RouteNames.IntegratedApprenticeship)]
-        public async Task<IActionResult> CourseIntegrated(GetIntegratedApprenticeshipCourseRequest request)
-        {
-            try
-            {
-                var result = await _mediator.Send(new GetCourseQuery {CourseId = request.Id});
-
-                if (result.Course == null || !result.Course.IntegratedApprenticeship)
-                {
-                    return RedirectToRoute(RouteNames.Error404);
-                }
-                
-                var model = new IntegratedApprenticeshipCourseViewModel
-                {
-                    Course = result.Course
-                };
-                return View(model);
-            }
-            catch (Exception)
-            {
-                return RedirectToRoute(RouteNames.Error500);
-            }
-            
-        }
-
-        [HttpGet]
         [Route("{id}/assessment-organisations/{epaoId}", Name = RouteNames.CourseEpao)]
         public async Task<IActionResult> CourseEpao(GetCourseEpaoDetailsRequest request)
         {
