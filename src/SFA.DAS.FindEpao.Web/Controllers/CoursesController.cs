@@ -59,16 +59,6 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                 var query = new GetCourseEpaosQuery {CourseId = request.SelectedCourseId};
                 var result = await _mediator.Send(query);
 
-
-                if (result.Course.IntegratedApprenticeship)
-                {
-                    return RedirectToRoute(RouteNames.IntegratedApprenticeship,
-                        new GetIntegratedApprenticeshipCourseRequest
-                        {
-                            Id = request.SelectedCourseId
-                        });
-                }
-                
                 if (result?.Epaos?.Count == 1)
                 {
                     return RedirectToRoute(RouteNames.CourseEpao, new GetCourseEpaoDetailsRequest
