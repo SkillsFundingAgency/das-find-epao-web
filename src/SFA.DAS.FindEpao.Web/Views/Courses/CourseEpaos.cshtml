@@ -22,6 +22,16 @@
                     <span class="govuk-!-font-weight-bold">Showing end-point assessment organisations for </span>
                     <br> @Model.Course.Description
                 </p>
+
+                @if (Model.Course.IntegratedApprenticeship)
+                {
+                    <div class="das-highlight">
+                        <h2 class="govuk-!-font-weight-bold">This is an integrated apprenticeship</h2>
+                        <p class="govuk-body">
+                            The end-point assessment for an integrated apprenticeship is usually carried out by the training provider. Contact the training provider to find out more about the assessment.
+                        </p>
+                    </div>
+                }
                 <hr class="govuk-section-break govuk-section-break--visible">
                 <div class="das-search-results">
                     <ol class="das-search-results__list">
