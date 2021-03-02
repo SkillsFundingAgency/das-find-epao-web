@@ -42,9 +42,14 @@
                     <p class="govuk-body">
                         @Model.Epao.Name is 1 of @Model.CourseEpaosCount end-point assessment organisations for @Model.Course.Title <span class="das-no-wrap">(level @Model.Course.Level).</span>
                     </p>
+                    var dataDictionary = new Dictionary<string,string>
+                    {
+                        {"Id", Model.Course.Id},
+                        {"FromEpao", "true"}
+                    };
                     <p class="govuk-body govuk-!-margin-bottom-1">
                         <a class="govuk-link govuk-link--no-visited-state"
-                           asp-route-id="@Model.Course.Id"
+                           asp-all-route-data="@dataDictionary"
                            asp-route="@RouteNames.CourseEpaos">View the other end-point assessment organisations</a>
                     </p>
                 }

@@ -8,5 +8,6 @@ namespace SFA.DAS.FindEpao.Web.Models
         public int Total => Epaos?.Count() ?? 0;
         public CourseListItemViewModel Course { get; set; }
         public IEnumerable<EpaoListItemViewModel> Epaos { get; set; }
+        public bool FromEpao { get; set; } = false;
     }
 }

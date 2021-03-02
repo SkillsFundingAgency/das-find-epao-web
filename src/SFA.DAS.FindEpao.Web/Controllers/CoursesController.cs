@@ -94,7 +94,7 @@ namespace SFA.DAS.FindEpao.Web.Controllers
 
         [HttpGet]
         [Route("{id}/assessment-organisations", Name = RouteNames.CourseEpaos)]
-        public async Task<IActionResult> CourseEpaos(GetCourseEpaosRequest request)
+        public async Task<IActionResult> CourseEpaos(GetCourseEpaosRequest request, [FromQuery]bool FromEpao)
         {
             try
             {
@@ -106,7 +106,8 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                     Epaos = result.Epaos.Select(item => new EpaoListItemViewModel(
                         item, 
                         result.DeliveryAreas, 
-                        _locationStringBuilder.BuildLocationString))
+                        _locationStringBuilder.BuildLocationString)),
+                    FromEpao = FromEpao
                 };
                 return View(model);
             }

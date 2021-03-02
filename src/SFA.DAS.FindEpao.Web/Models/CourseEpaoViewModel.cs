@@ -10,5 +10,6 @@ namespace SFA.DAS.FindEpao.Web.Models
         public int CourseEpaosCount { get; set; }
         public DateTime EffectiveFrom { get; set; }
         public IReadOnlyList<CourseListItemViewModel> AllCourses { get; set; }
+        public bool FromEpao { get; set; }
     }
 }
