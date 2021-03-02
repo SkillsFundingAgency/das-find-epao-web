@@ -59,16 +59,6 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                 var query = new GetCourseEpaosQuery {CourseId = request.SelectedCourseId};
                 var result = await _mediator.Send(query);
 
-
-                if (result.Course.IntegratedApprenticeship)
-                {
-                    return RedirectToRoute(RouteNames.IntegratedApprenticeship,
-                        new GetIntegratedApprenticeshipCourseRequest
-                        {
-                            Id = request.SelectedCourseId
-                        });
-                }
-                
                 if (result?.Epaos?.Count == 1)
                 {
                     return RedirectToRoute(RouteNames.CourseEpao, new GetCourseEpaoDetailsRequest
@@ -114,32 +104,6 @@ namespace SFA.DAS.FindEpao.Web.Controllers
             {
                 return RedirectToRoute(RouteNames.Error404);
             }
-        }
-
-        [HttpGet]
-        [Route("{id}/course-integrated-apprenticeship", Name = RouteNames.IntegratedApprenticeship)]
-        public async Task<IActionResult> CourseIntegrated(GetIntegratedApprenticeshipCourseRequest request)
-        {
-            try
-            {
-                var result = await _mediator.Send(new GetCourseQuery {CourseId = request.Id});
-
-                if (result.Course == null || !result.Course.IntegratedApprenticeship)
-                {
-                    return RedirectToRoute(RouteNames.Error404);
-                }
-                
-                var model = new IntegratedApprenticeshipCourseViewModel
-                {
-                    Course = result.Course
-                };
-                return View(model);
-            }
-            catch (Exception)
-            {
-                return RedirectToRoute(RouteNames.Error500);
-            }
-            
         }
 
         [HttpGet]

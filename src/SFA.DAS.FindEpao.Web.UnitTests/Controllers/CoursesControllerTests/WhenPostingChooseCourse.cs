@@ -109,29 +109,5 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
             result.RouteValues.Should().ContainKey("id");
             result.RouteValues["id"].Should().Be(postRequest.SelectedCourseId);
         }
-        
-        [Test, MoqAutoData]
-        public async Task And_Course_Is_IntegratedApprenticeship_Then_Redirect_To_IntegratedApprenticeship_View(
-            PostChooseCourseRequest postRequest,
-            GetCourseEpaosResult mediatorResult,
-            EpaoListItem foundEpao,
-            CourseListItem course,
-            [Frozen] Mock<IMediator> mockMediator,
-            [Greedy] CoursesController controller)
-        {
-            mediatorResult.Epaos = new List<EpaoListItem>();
-            mediatorResult.Course = new CourseListItem(course.Id, course.Title, course.Level, true);
-            mockMediator
-                .Setup(mediator => mediator.Send(
-                    It.Is<GetCourseEpaosQuery>(query => query.CourseId == postRequest.SelectedCourseId), 
-                    It.IsAny<CancellationToken>()))
-                .ReturnsAsync(mediatorResult);
-
-            var result = await controller.PostChooseCourse(postRequest) as RedirectToRouteResult;
-
-            result.RouteName.Should().Be(RouteNames.IntegratedApprenticeship);
-            result.RouteValues.Should().ContainKey("id");
-            result.RouteValues["id"].Should().Be(postRequest.SelectedCourseId);
-        }
     }
 }
