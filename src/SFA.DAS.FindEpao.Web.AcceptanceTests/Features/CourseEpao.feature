@@ -17,3 +17,8 @@ Scenario: EpaoId not found
 When I navigate to the following url: /courses/5/assessment-organisations/EPA9999
 Then an http status code of 200 is returned
 And the page content includes the following: This end-point assessment organisation is currently unavailable for the course
+
+Scenario: Course is an integrated apprenticeship
+When I navigate to the following url: /courses/14/assessment-organisations/EPA0058
+Then an http status code of 200 is returned
+And the page content includes the following: This is an integrated apprenticeship

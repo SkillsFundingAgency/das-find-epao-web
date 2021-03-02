@@ -18,3 +18,8 @@ Scenario: No EPAOs for selected course
 When I navigate to the following url: /courses/2/assessment-organisations
 Then an http status code of 200 is returned
 And the page content includes the following: 0 end-point assessment organisations 
+
+Scenario: Course is an integrated apprenticeship
+When I navigate to the following url: /courses/14/assessment-organisations 
+Then an http status code of 200 is returned
+And the page content includes the following: This is an integrated apprenticeship

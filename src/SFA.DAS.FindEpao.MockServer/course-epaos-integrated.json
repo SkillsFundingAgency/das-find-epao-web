@@ -1,9 +1,91 @@
 {
   "course": {
-    "courseid": 1,
-    "title": "acrobatics",
+    "courseid": 14,
+    "title": "Laboratory technician",
     "level": 3,
     "IntegratedApprenticeship": true
   },
-  "epaos": [  ]
+  "epaos": [
+      {
+          "deliveryAreas": [
+              {
+                  "deliveryAreaId": 4
+              },
+              {
+                  "deliveryAreaId": 5
+              },
+              {
+                  "deliveryAreaId": 9
+              }
+          ],
+          "epaoId": "EPA0014",
+          "name": "An Assessor",
+          "city": "Sheffield",
+          "postcode": "S1 2BJ",
+          "effectiveFrom": "2021-01-01"
+      },
+      {
+          "deliveryAreas": [
+              {
+                  "deliveryAreaId": 6
+              },
+              {
+                  "deliveryAreaId": 7
+              }
+          ],
+          "epaoId": "EPA0015",
+          "name": "Another Assessor",
+          "city": "Buxton",
+          "postcode": "S2 2BJ",
+          "effectiveFrom": "2021-01-01"
+      },
+      {
+          "deliveryAreas": [
+              {
+                  "deliveryAreaId": 4
+              }
+          ],
+          "epaoId": "EPA0016",
+          "name": "Different Company",
+          "city": "Ashbourne",
+          "postcode": "S3 3BJ",
+          "effectiveFrom": "2022-01-01"
+      },
+      {
+          "deliveryAreas": [
+              {
+                  "deliveryAreaId": 1
+              },
+              {
+                  "deliveryAreaId": 2
+              },
+              {
+                  "deliveryAreaId": 3
+              },
+              {
+                  "deliveryAreaId": 4
+              },
+              {
+                  "deliveryAreaId": 5
+              },
+              {
+                  "deliveryAreaId": 6
+              },
+              {
+                  "deliveryAreaId": 7
+              },
+              {
+                  "deliveryAreaId": 8
+              },
+              {
+                  "deliveryAreaId": 9
+              }
+          ],
+          "epaoId": "EPA0017",
+          "name": "Somebody Else Ltd",
+          "city": "Leek",
+          "postcode": "S4 4BJ",
+          "effectiveFrom": "2022-11-11"
+      }
+  ]
 }

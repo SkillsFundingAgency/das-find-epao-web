@@ -24,9 +24,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <SpecFlowFeatureFiles Update="Features\IntegratedApprenticeship.feature">
-      <CodeBehindFile>Features/IntegratedApprenticeship.feature.cs</CodeBehindFile>
-    </SpecFlowFeatureFiles>
     <SpecFlowFeatureFiles Update="Features\ChooseCourse.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ChooseCourse.feature.cs</LastGenOutput>
@@ -51,7 +48,6 @@
     <Content Include="Features\CourseEpaos.feature" />
     <Content Include="Features\Error.feature" />
     <Content Include="Features\Home.feature" />
-    <Content Include="Features\IntegratedApprenticeship.feature" />
   </ItemGroup>
 
 
