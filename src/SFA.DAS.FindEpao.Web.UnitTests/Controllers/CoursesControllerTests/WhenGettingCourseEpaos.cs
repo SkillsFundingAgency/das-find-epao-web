@@ -34,7 +34,7 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
                     It.IsAny<CancellationToken>()))
                 .ThrowsAsync(exception);
 
-            var result = await controller.CourseEpaos(getRequest) as RedirectToRouteResult;
+            var result = await controller.CourseEpaos(getRequest, false) as RedirectToRouteResult;
 
             result.RouteName.Should().Be(RouteNames.Error404);
         }
@@ -53,7 +53,7 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
                     It.IsAny<CancellationToken>()))
                 .ReturnsAsync(mediatorResult);
 
-            var result = await controller.CourseEpaos(getRequest) as ViewResult;
+            var result = await controller.CourseEpaos(getRequest,false) as ViewResult;
 
             var model = result.Model as CourseEpaosViewModel;
             model.Course.Should().BeEquivalentTo((CourseListItemViewModel)mediatorResult.Course);
@@ -77,7 +77,7 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
                     It.IsAny<CancellationToken>()))
                 .ReturnsAsync(mediatorResult);
 
-            var result = await controller.CourseEpaos(getRequest) as ViewResult;
+            var result = await controller.CourseEpaos(getRequest, false) as ViewResult;
 
             var model = result.Model as CourseEpaosViewModel;
             model.Course.Should().BeEquivalentTo((CourseListItemViewModel)mediatorResult.Course);
