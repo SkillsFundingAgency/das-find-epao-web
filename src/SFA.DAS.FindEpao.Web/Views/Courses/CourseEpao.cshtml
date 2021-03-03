@@ -4,19 +4,6 @@
 @{
     ViewData["Title"] = Model.Epao.Name;
     ViewData["Description"] = $"View {Model.Epao.Name}’s contact details and address.";
-    if (Model.Epao.SingleSearchResult)
-    {
-        ViewData["BackRouteName"] = RouteNames.ChooseCourse;
-    }
-    else
-    {
-        ViewData["BackRouteName"] = RouteNames.CourseEpaos;
-        var backRouteData = new Dictionary<string, string>
-        {
-            {"Id", Model.Course.Id}
-        };
-        ViewData["BackRouteData"] = backRouteData;    
-    }
     
 }
 <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
