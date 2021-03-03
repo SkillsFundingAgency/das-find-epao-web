@@ -64,8 +64,7 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                     return RedirectToRoute(RouteNames.CourseEpao, new GetCourseEpaoDetailsRequest
                     {
                         Id = request.SelectedCourseId,
-                        EpaoId = result.Epaos.First().EpaoId,
-                        Single = true
+                        EpaoId = result.Epaos.First().EpaoId
                     });
                 }
 
@@ -125,8 +124,7 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                         result.Epao, 
                         result.EpaoDeliveryAreas,
                         result.DeliveryAreas,
-                        _locationStringBuilder.BuildLocationString,
-                        request.Single),
+                        _locationStringBuilder.BuildLocationString),
                     CourseEpaosCount = result.CourseEpaosCount,
                     EffectiveFrom = result.EffectiveFrom,
                     AllCourses = result.AllCourses
