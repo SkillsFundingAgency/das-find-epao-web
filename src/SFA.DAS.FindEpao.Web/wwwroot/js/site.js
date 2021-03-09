@@ -44,28 +44,29 @@ if (selectEl) {
 forms.attr('novalidate', 'novalidate');
 
 
-
 // BACK LINK
 // If users history-1 does not come from this site, 
 // then show a link to homepage
+
 var $backLinkOrHome = $('.das-js-back-link-or-home');
 var backLinkOrHome = function () {
 
     var referrer = document.referrer;
-    var isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
-    var referrerHost;
 
-    var homeLink = $('<div class="govuk-breadcrumbs"><ol class="govuk-breadcrumbs__list"><li class="govuk-breadcrumbs__list-item"><a href="/" class="govuk-breadcrumbs__link">Home</a></li></ol></div>');
+    var backLink = $('<a>')
+        .attr({'href': '#', 'class': 'govuk-back-link'})
+        .text('Back')
+        .on('click', function (e) {
+            window.history.back();
+            e.preventDefault();
+        });
 
-    if (!isIE11 && referrer) {
-        referrerHost = new URL(referrer).hostname;
-    }
-
-    if (!referrer || referrerHost && referrerHost !== document.location.hostname) {
-        $backLinkOrHome.replaceWith(homeLink);
+    if (referrer && referrer !== document.location.href) {
+        $backLinkOrHome.replaceWith(backLink);
     }
 }
 
 if ($backLinkOrHome) {
     backLinkOrHome();
 }
+

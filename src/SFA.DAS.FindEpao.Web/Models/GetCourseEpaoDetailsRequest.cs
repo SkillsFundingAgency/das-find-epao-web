@@ -4,6 +4,5 @@
     {
         public string Id { get; set; }
         public string EpaoId { get; set; }
-        public bool Single { get ; set ; }
     }
 }
