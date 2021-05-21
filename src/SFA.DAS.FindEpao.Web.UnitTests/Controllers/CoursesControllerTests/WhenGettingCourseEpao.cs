@@ -83,8 +83,7 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
                 mediatorResult.Epao, 
                 mediatorResult.EpaoDeliveryAreas,
                 mediatorResult.DeliveryAreas,
-                mockLocationStringBuilder.Object.BuildLocationString,
-                getRequest.Single
+                mockLocationStringBuilder.Object.BuildLocationString
                 ));
             model!.EffectiveFrom.Should().Be(mediatorResult.EffectiveFrom);
             model!.AllCourses.Should().BeEquivalentTo(
