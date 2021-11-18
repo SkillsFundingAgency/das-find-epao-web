@@ -54,8 +54,13 @@
                                     {
                                         <dt class="govuk-!-margin-bottom-1">Available to assess from @epao.EffectiveFrom.ToString("d MMMM yyyy")</dt>
                                     }
-                                    <dt class="das-definition-list__title govuk-!-margin-bottom-1">Locations covered</dt><dd class="govuk-!-margin-bottom-1">@epao.Locations</dd>
-                                    <dt class="das-definition-list__title govuk-!-margin-bottom-1">Address</dt><dd class="govuk-!-margin-bottom-1">@epao.Address</dd>
+
+                                    <dt class="das-definition-list__title govuk-!-margin-bottom-1">Locations covered</dt>
+                                    <dd class="govuk-!-margin-bottom-1">@if ((epao.Locations == null) || (epao.Locations == "")) { <text>&nbsp;</text>; } else { @epao.Locations; }</dd>
+                                    <dt class="das-definition-list__title govuk-!-margin-bottom-1">Address</dt>
+                                    <dd class="govuk-!-margin-bottom-1">@if ((epao.Address == null) || (epao.Address == "")) { <text>&nbsp;</text>; } else { @epao.Address; }</dd>
+                                    <dt class="das-definition-list__title govuk-!-margin-bottom-1">Versions</dt>
+                                    <dd class="govuk-!-margin-bottom-1">@if ((epao.Versions == null) || (epao.Versions == "")) { <text>&nbsp;</text>; } else { @epao.Versions; }</dd>
                                 </dl>
                             </li>
                         }

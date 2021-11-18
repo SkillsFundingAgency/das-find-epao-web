@@ -11,10 +11,29 @@
         <div class="govuk-grid-column-two-thirds">
             <span class="govuk-caption-xl">End-point assessment organisation</span>
             <h1 class="govuk-heading-xl ">@Model.Epao.Name</h1>
+
+            @if (Model.CourseEpaosCount > 1)
+            {
+                <p class="govuk-body">
+                    @Model.Epao.Name is 1 of @Model.CourseEpaosCount end-point assessment organisations for @Model.Course.Title <span class="das-no-wrap">(level @Model.Course.Level).</span>
+                </p>
+                <p class="govuk-body govuk-!-margin-bottom-1">
+                    <a class="govuk-link govuk-link--no-visited-state"
+                       asp-route-id="@Model.Course.Id"
+                       asp-route="@RouteNames.CourseEpaos">View the other end-point assessment organisations</a>
+                </p>
+            }
+            else
+            {
+                <p class="govuk-body govuk-!-margin-bottom-1">
+                    @Model.Epao.Name is the only end-point assessment organisation for @Model.Course.Title <span class="das-no-wrap">(level @Model.Course.Level).</span>
+                </p>
+            }
+
             <div class="das-highlight">
                 <p class="govuk-body">
                     @Model.Course.Title <span class="das-no-wrap">(level @Model.Course.Level)</span><br />
-                    
+
                     @if (Model.EffectiveFrom.Date > DateTime.Today)
                     {
                         <span class="govuk-!-font-weight-bold">Available to assess from @Model.EffectiveFrom.ToString("d MMMM yyyy")</span>
@@ -24,25 +43,21 @@
                         <span class="govuk-!-font-weight-bold">Available to assess now</span>
                     }
                 </p>
-                @if (Model.CourseEpaosCount > 1)
-                {
-                    <p class="govuk-body">
-                        @Model.Epao.Name is 1 of @Model.CourseEpaosCount end-point assessment organisations for @Model.Course.Title <span class="das-no-wrap">(level @Model.Course.Level).</span>
-                    </p>
-                    <p class="govuk-body govuk-!-margin-bottom-1">
-                        <a class="govuk-link govuk-link--no-visited-state"
-                           asp-route-id="@Model.Course.Id"
-                           asp-route="@RouteNames.CourseEpaos">View the other end-point assessment organisations</a>
-                    </p>
-                }
-                else
-                {
-                    <p class="govuk-body govuk-!-margin-bottom-1">
-                        @Model.Epao.Name is the only end-point assessment organisation for @Model.Course.Title <span class="das-no-wrap">(level @Model.Course.Level).</span>
-                    </p>
-                }
+                <br />
+                <p class="govuk-!-font-weight-bold das-no-wrap">Standard Version Details
+                <table class="govuk-body das-no-wrap">
+                    <tr><td class="govuk-summary-list__value">Version</td><td class="govuk-summary-list__value">Effective From</td><td class="govuk-summary-list__value">Effective To</td></tr>
+                    @foreach (var versions in Model.apprenticeshipTrainingCourses)
+                    {
+                        @if (versions.larsCode.ToString() == Model.Course.Id)
+                        {
+                            <tr><td class="govuk-summary-list__value">@versions.version</td><td class="govuk-summary-list__value">@versions.effectiveFrom.Value.ToString("dd MMM yyyy")</td><td class="govuk-summary-list__value">@versions.effectiveTo</td></tr>
+                        }
+                    }
+                </table>
+                </p>
             </div>
-            
+
             @if (Model.Course.IntegratedApprenticeship)
             {
                 <div class="das-highlight">
@@ -52,14 +67,14 @@
                     </p>
                 </div>
             }
-            
+
             <dl class="govuk-summary-list govuk-!-margin-bottom-8">
                 @if (!string.IsNullOrEmpty(Model.Epao?.PrimaryContactName))
                 {
                     <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">Contact name</dt>
-                        <dd class="govuk-summary-list__value">@Model.Epao.PrimaryContactName</dd>
-                    </div>
+                    <dt class="govuk-summary-list__key">Contact name</dt>
+                    <dd class="govuk-summary-list__value">@Model.Epao.PrimaryContactName</dd>
+            </div>
                 }
                 @if (!string.IsNullOrEmpty(Model.Epao?.ContactDetails?.WebsiteLink))
                 {
@@ -122,24 +137,22 @@
                     </div>
                 }
                 
+                <br />
                 <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">Apprenticeship training courses</dt>
-                    <dd class="govuk-summary-list__value">
-                    @if (Model.AllCourses.Count == 1)
-                    {
-                        @Model.AllCourses[0].Title <span class="das-no-wrap">(level @Model.AllCourses[0].Level)</span>
-                    }
-                    else
-                    {
-                        <ul class="govuk-list govuk-list--bullet">
-                        @foreach (var course in Model.AllCourses)
-                        {
-                            <li>@course.Title <span class="das-no-wrap">(level @course.Level)</span></li>
-                        }
-                        </ul>
-                    }
-                    </dd>
-                </div>
+                    
+                    <p class="govuk-!-font-weight-bold das-no-wrap">Apprenticeship training courses<br />
+
+                        <table class="govuk-body das-no-wrap">
+                            <tr><td class="govuk-summary-list__value">Standard</td><td class="govuk-summary-list__value">Version(s)</td></tr>
+                            @foreach (var versions in Model.allVersions)
+                            {
+                                <tr><td class="govuk-summary-list__value">@versions.standardName</td><td class="govuk-summary-list__value">@versions.version</td></tr>
+                            }
+                        </table>
+
+
+                    </p>
+</div>
                 
             </dl>
         </div>

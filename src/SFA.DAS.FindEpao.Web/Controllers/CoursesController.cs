@@ -117,11 +117,12 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                     EpaoId = request.EpaoId
                 };
                 var result = await _mediator.Send(query);
+
                 var model = new CourseEpaoViewModel
                 {
                     Course = result.Course,
                     Epao = new EpaoDetailsViewModel(
-                        result.Epao, 
+                        result.Epao,
                         result.EpaoDeliveryAreas,
                         result.DeliveryAreas,
                         _locationStringBuilder.BuildLocationString),
@@ -129,8 +130,10 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                     EffectiveFrom = result.EffectiveFrom,
                     AllCourses = result.AllCourses
                         .Select(item => (CourseListItemViewModel)item)
-                        .ToList()
+                        .ToList(),
+                    standardVersions = result.standardVersions
                 };
+                model.CreateListOfVersions();
                 return View(model);
             }
             catch(Exception ex) when (
