@@ -26,34 +26,43 @@ namespace SFA.DAS.FindEpao.Web.Models
 
         public void CreateListOfVersions()
         {
-            foreach (var standard in standardVersions)
+            if (standardVersions != null)
             {
-                foreach (var ver in standard.standardVersions)
+                foreach (var standard in standardVersions)
                 {
-                    apprenticeshipTrainingCourses.Add(new ApprenticeShipTrainingCourses { 
-                        effectiveFrom = ver.effectiveFrom, effectiveTo = 
-                        ver.effectiveTo, version = ver.version, standardName = ver.title, larsCode = ver.larsCode  });
-
-                    if (allVersions.Any(x => x.larsCode == ver.larsCode))
+                    foreach (var ver in standard.standardVersions)
                     {
-                        foreach (var vers in allVersions)
+                        apprenticeshipTrainingCourses.Add(new ApprenticeShipTrainingCourses
                         {
-                            if (vers.larsCode == ver.larsCode)
-                            {
-                                vers.version += ", " + ver.version;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        allVersions.Add(new ApprenticeShipTrainingCourses
-                        {
-                            effectiveFrom = null,
-                            effectiveTo = null,
+                            effectiveFrom = ver.effectiveFrom,
+                            effectiveTo =
+                            ver.effectiveTo,
                             version = ver.version,
                             standardName = ver.title,
                             larsCode = ver.larsCode
                         });
+
+                        if (allVersions.Any(x => x.larsCode == ver.larsCode))
+                        {
+                            foreach (var vers in allVersions)
+                            {
+                                if (vers.larsCode == ver.larsCode)
+                                {
+                                    vers.version += ", " + ver.version;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            allVersions.Add(new ApprenticeShipTrainingCourses
+                            {
+                                effectiveFrom = null,
+                                effectiveTo = null,
+                                version = ver.version,
+                                standardName = ver.title,
+                                larsCode = ver.larsCode
+                            });
+                        }
                     }
                 }
             }
