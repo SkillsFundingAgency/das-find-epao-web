@@ -12,7 +12,7 @@ namespace SFA.DAS.FindEpao.Domain.Courses
         public IReadOnlyList<EpaoDeliveryArea> DeliveryAreas { get; set; }
         public DateTime EffectiveFrom { get; set; }
 
-        public List<EpaoStandardsListItem.StandardsListItem> standardVersions { get; set; }
+        public List<EpaoStandardsListItem> StandardVersions { get; set; }
 
     }
 
@@ -24,32 +24,15 @@ namespace SFA.DAS.FindEpao.Domain.Courses
 
     public class EpaoStandardsListItem
     {
-        public EpaoStandardsListItem()
-        {
-            standardVersions = new List<StandardsListItem>();
-        }
-
-        public string Id { get; set; }
-        public string organisationId { get; set; }
-        public int standardCode { get; set; }
-        public string standardReference { get; set; }
-        public DateTime? dateStandardApprovedOnRegister { get; set; }
-        public DateTime? effectiveFrom { get; set; }
-        public DateTime? effectiveTo { get; set; }
-        public List<StandardsListItem> standardVersions { get; set; }
-
-
-        public class StandardsListItem
-        {
-            public string standardUId { get; set; }
-            public string title { get; set; }
-            public int larsCode { get; set; }
-            public string version { get; set; }
-            public DateTime? effectiveFrom { get; set; }
-            public DateTime? effectiveTo { get; set; }
-            public DateTime? dateVersionApproved { get; set; }
-            public string status { get; set; }
-        }
+        public string StandardUId { get; set; }
+        public string Title { get; set; }
+        public int LarsCode { get; set; }
+        public string Version { get; set; }
+        public int Level { get; set; }
+        public DateTime? EffectiveFrom { get; set; }
+        public DateTime? EffectiveTo { get; set; }
+        public DateTime? DateVersionApproved { get; set; }
+        public string Status { get; set; }
 
     }
 }

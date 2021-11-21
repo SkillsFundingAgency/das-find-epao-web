@@ -7,7 +7,6 @@ namespace SFA.DAS.FindEpao.Web.Models
 {
     public class CourseEpaoViewModel
     {
-
         public CourseEpaoViewModel()
         {
             apprenticeshipTrainingCourses = new List<ApprenticeShipTrainingCourses>();
@@ -21,7 +20,6 @@ namespace SFA.DAS.FindEpao.Web.Models
         public IReadOnlyList<CourseListItemViewModel> AllCourses { get; set; }
         public List<EpaoStandardsListItem> standardVersions { get; set; }
         public List<ApprenticeShipTrainingCourses> apprenticeshipTrainingCourses {get; set;}
-    
         public List<ApprenticeShipTrainingCourses> allVersions { get; set; }
 
         public void CreateListOfVersions()
@@ -30,39 +28,37 @@ namespace SFA.DAS.FindEpao.Web.Models
             {
                 foreach (var standard in standardVersions)
                 {
-                    foreach (var ver in standard.standardVersions)
+                    apprenticeshipTrainingCourses.Add(new ApprenticeShipTrainingCourses
                     {
-                        apprenticeshipTrainingCourses.Add(new ApprenticeShipTrainingCourses
-                        {
-                            effectiveFrom = ver.effectiveFrom,
-                            effectiveTo =
-                            ver.effectiveTo,
-                            version = ver.version,
-                            standardName = ver.title,
-                            larsCode = ver.larsCode
-                        });
+                        EffectiveFrom = standard.EffectiveFrom,
+                        EffectiveTo = standard.EffectiveTo,
+                        Version = standard.Version,
+                        Level = standard.Level,
+                        StandardName = standard.Title,
+                        LarsCode = standard.LarsCode
+                    });
 
-                        if (allVersions.Any(x => x.larsCode == ver.larsCode))
+                    if (allVersions.Any(x => x.LarsCode == standard.LarsCode))
+                    {
+                        foreach (var vers in allVersions)
                         {
-                            foreach (var vers in allVersions)
+                            if (vers.LarsCode == standard.LarsCode && standard.Status == "Live")
                             {
-                                if (vers.larsCode == ver.larsCode)
-                                {
-                                    vers.version += ", " + ver.version;
-                                }
+                                vers.Version += ", " + standard.Version;
                             }
                         }
-                        else
+                    }
+                    else
+                    {
+                        allVersions.Add(new ApprenticeShipTrainingCourses
                         {
-                            allVersions.Add(new ApprenticeShipTrainingCourses
-                            {
-                                effectiveFrom = null,
-                                effectiveTo = null,
-                                version = ver.version,
-                                standardName = ver.title,
-                                larsCode = ver.larsCode
-                            });
-                        }
+                            EffectiveFrom = null,
+                            EffectiveTo = null,
+                            Version = standard.Version,
+                            Level = standard.Level,
+                            StandardName = standard.Title,
+                            LarsCode = standard.LarsCode
+                        });
                     }
                 }
             }
@@ -72,11 +68,12 @@ namespace SFA.DAS.FindEpao.Web.Models
 
     public class ApprenticeShipTrainingCourses
     {
-        public string standardName { get; set; }
-        public int larsCode { get; set; }
-        public DateTime? effectiveFrom { get; set; }
-        public DateTime? effectiveTo { get; set; }
-        public string version { get; set; }
+        public string StandardName { get; set; }
+        public int LarsCode { get; set; }
+        public int Level { get; set; }
+        public DateTime? EffectiveFrom { get; set; }
+        public DateTime? EffectiveTo { get; set; }
+        public string Version { get; set; }
     }
 
 }

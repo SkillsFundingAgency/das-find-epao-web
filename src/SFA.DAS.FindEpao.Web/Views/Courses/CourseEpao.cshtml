@@ -49,9 +49,9 @@
                     <tr><td class="govuk-summary-list__value">Version</td><td class="govuk-summary-list__value">Effective From</td><td class="govuk-summary-list__value">Effective To</td></tr>
                     @foreach (var versions in Model.apprenticeshipTrainingCourses)
                     {
-                        @if (versions.larsCode.ToString() == Model.Course.Id)
+                        @if (versions.LarsCode.ToString() == Model.Course.Id)
                         {
-                            <tr><td class="govuk-summary-list__value">@versions.version</td><td class="govuk-summary-list__value">@versions.effectiveFrom.Value.ToString("dd MMM yyyy")</td><td class="govuk-summary-list__value">@versions.effectiveTo</td></tr>
+                            <tr><td class="govuk-summary-list__value">@versions.Version</td><td class="govuk-summary-list__value">@versions.EffectiveFrom.Value.ToString("dd MMM yyyy")</td><td class="govuk-summary-list__value">@versions.EffectiveTo</td></tr>
                         }
                     }
                 </table>
@@ -137,7 +137,8 @@
                     </div>
                 }
                 
-                <br />
+                <br /><br />
+
                 <div class="govuk-summary-list__row">
                     
                     <p class="govuk-!-font-weight-bold das-no-wrap">Apprenticeship training courses<br />
@@ -146,7 +147,7 @@
                             <tr><td class="govuk-summary-list__value">Standard</td><td class="govuk-summary-list__value">Version(s)</td></tr>
                             @foreach (var versions in Model.allVersions)
                             {
-                                <tr><td class="govuk-summary-list__value">@versions.standardName</td><td class="govuk-summary-list__value">@versions.version</td></tr>
+                                <tr><td class="govuk-summary-list__value">@versions.StandardName&nbsp;(Level&nbsp;@versions.Level)</td><td class="govuk-summary-list__value">@versions.Version</td></tr>
                             }
                         </table>
 

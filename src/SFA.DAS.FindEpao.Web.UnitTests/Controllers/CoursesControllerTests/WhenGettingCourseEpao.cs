@@ -86,8 +86,6 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Controllers.CoursesControllerTests
                 mockLocationStringBuilder.Object.BuildLocationString
                 ));
             model!.EffectiveFrom.Should().Be(mediatorResult.EffectiveFrom);
-            model!.AllCourses.Should().BeEquivalentTo(
-                mediatorResult.AllCourses.Select(item => (CourseListItemViewModel)item));
         }
     }
 }
