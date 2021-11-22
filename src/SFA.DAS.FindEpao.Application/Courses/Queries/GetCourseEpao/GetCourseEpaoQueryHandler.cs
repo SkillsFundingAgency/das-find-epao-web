@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using SFA.DAS.FindEpao.Domain.Courses;
 using SFA.DAS.FindEpao.Domain.Interfaces;
 using SFA.DAS.FindEpao.Domain.Validation;
 

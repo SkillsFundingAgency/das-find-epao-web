@@ -1,10 +1,11 @@
 ﻿@using SFA.DAS.FindEpao.Web.Infrastructure
 @using SFA.DAS.FindEpao.Web.Models
+@using SFA.DAS.FindEpao.Web.Extensions
 @model CourseEpaoViewModel
 @{
     ViewData["Title"] = Model.Epao.Name;
     ViewData["Description"] = $"View {Model.Epao.Name}’s contact details and address.";
-    
+
 }
 <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
     <div class="govuk-grid-row">
@@ -43,18 +44,22 @@
                         <span class="govuk-!-font-weight-bold">Available to assess now</span>
                     }
                 </p>
-                <br />
-                <p class="govuk-!-font-weight-bold das-no-wrap">Standard Version Details
-                <table class="govuk-body das-no-wrap">
-                    <tr><td class="govuk-summary-list__value">Version</td><td class="govuk-summary-list__value">Effective From</td><td class="govuk-summary-list__value">Effective To</td></tr>
-                    @foreach (var versions in Model.apprenticeshipTrainingCourses)
-                    {
-                        @if (versions.LarsCode.ToString() == Model.Course.Id)
-                        {
-                            <tr><td class="govuk-summary-list__value">@versions.Version</td><td class="govuk-summary-list__value">@versions.EffectiveFrom.Value.ToString("dd MMM yyyy")</td><td class="govuk-summary-list__value">@versions.EffectiveTo</td></tr>
-                        }
-                    }
-                </table>
+
+                <p class="govuk-!-font-weight-bold das-no-wrap">
+                    <h2 class="govuk-!-font-weight-bold govuk-body">Standard version details</h2>
+                    <table class="govuk-table">
+                        <caption></caption>
+                        <tr><th scope="col" class="govuk-table__header"><td class="govuk-table__cell">Version</td><td class="govuk-table__cell">Effective from</td><td class="govuk-table__cell">Effective to</td></tr>
+                        <tbody class="govuk-table__body">
+                            @foreach (var versions in Model.ApprenticeshipTrainingCourses)
+                            {
+                                @if (versions.LarsCode.ToString() == Model.Course.Id)
+                                {
+                                    <tr><th scope="col" class="govuk-table__header"><td class="govuk-table__cell">@versions.Version</td><td class="govuk-table__cell">@DateFormatExtensions.LongDateFormat(@versions.EffectiveFrom)</td><td class="govuk-table__cell">@DateFormatExtensions.LongDateFormat(@versions.EffectiveTo)</td></tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
                 </p>
             </div>
 
@@ -72,16 +77,16 @@
                 @if (!string.IsNullOrEmpty(Model.Epao?.PrimaryContactName))
                 {
                     <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">Contact name</dt>
-                    <dd class="govuk-summary-list__value">@Model.Epao.PrimaryContactName</dd>
-            </div>
-                }
+                        <dt class="govuk-summary-list__key">Contact name</dt>
+                        <dd class="govuk-summary-list__value">@Model.Epao.PrimaryContactName</dd>
+                    </div>
+        }
                 @if (!string.IsNullOrEmpty(Model.Epao?.ContactDetails?.WebsiteLink))
                 {
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">Website</dt>
                         <dd class="govuk-summary-list__value">
-                            <a class="govuk-link" href="@Model.Epao.ContactDetails.WebsiteLink" target="_blank" rel="noreferrer noopener" >@Model.Epao.ContactDetails.WebsiteLink</a>
+                            <a class="govuk-link" href="@Model.Epao.ContactDetails.WebsiteLink" target="_blank" rel="noreferrer noopener">@Model.Epao.ContactDetails.WebsiteLink</a>
                         </dd>
                     </div>
                 }
@@ -108,19 +113,19 @@
                         <dd class="govuk-summary-list__value">
                             @if (!string.IsNullOrEmpty(Model.Epao.ContactDetails.Address1))
                             {
-                                @Model.Epao.ContactDetails.Address1 <br/>
+                                @Model.Epao.ContactDetails.Address1 <br />
                             }
                             @if (!string.IsNullOrEmpty(Model.Epao.ContactDetails.Address2))
                             {
-                                @Model.Epao.ContactDetails.Address2 <br/>
+                                @Model.Epao.ContactDetails.Address2 <br />
                             }
                             @if (!string.IsNullOrEmpty(Model.Epao.ContactDetails.Address3))
                             {
-                                @Model.Epao.ContactDetails.Address3 <br/>
+                                @Model.Epao.ContactDetails.Address3 <br />
                             }
                             @if (!string.IsNullOrEmpty(Model.Epao.ContactDetails.Address4))
                             {
-                                @Model.Epao.ContactDetails.Address4 <br/>
+                                @Model.Epao.ContactDetails.Address4 <br />
                             }
                             @if (!string.IsNullOrEmpty(Model.Epao.ContactDetails.Postcode))
                             {
@@ -136,26 +141,22 @@
                         <dd class="govuk-summary-list__value">@Model.Epao.Locations</dd>
                     </div>
                 }
-                
-                <br /><br />
 
-                <div class="govuk-summary-list__row">
-                    
-                    <p class="govuk-!-font-weight-bold das-no-wrap">Apprenticeship training courses<br />
-
-                        <table class="govuk-body das-no-wrap">
-                            <tr><td class="govuk-summary-list__value">Standard</td><td class="govuk-summary-list__value">Version(s)</td></tr>
-                            @foreach (var versions in Model.allVersions)
+                <div class="das-no-wrap">
+                    <h2 class="govuk-!-font-weight-bold govuk-body">Apprenticeship training courses</h2>
+                    <table class="govuk-table">
+                        <caption></caption>
+                        <tbody class="govuk-table__body">
+                            <tr><th scope="col" class="govuk-table__header"><td class="govuk-table__cell">Standard</td>
+                                                                            <td class="govuk-table__cell">Versions</td></tr>
+                            @foreach (var versions in Model.AllVersions)
                             {
-                                <tr><td class="govuk-summary-list__value">@versions.StandardName&nbsp;(Level&nbsp;@versions.Level)</td><td class="govuk-summary-list__value">@versions.Version</td></tr>
+                                <tr><th scope="row"><td class="govuk-table__cell">@versions.StandardName&nbsp;(Level&nbsp;@versions.Level)</td>
+                                                    <td class="govuk-table__cell">@versions.Version</td>
+                                </tr>
                             }
-                        </table>
-
-
-                    </p>
-</div>
-                
-            </dl>
-        </div>
+                        </tbody>
+                    </table>
+                </div>
     </div>
 </main>

@@ -9,26 +9,27 @@ namespace SFA.DAS.FindEpao.Web.Models
     {
         public CourseEpaoViewModel()
         {
-            apprenticeshipTrainingCourses = new List<ApprenticeShipTrainingCourses>();
-            allVersions = new List<ApprenticeShipTrainingCourses>(); 
+            ApprenticeshipTrainingCourses = new List<ApprenticeshipTrainingCourses>();
+            AllVersions = new List<ApprenticeshipTrainingCourses>(); 
         }
-
         public CourseListItemViewModel Course { set; get; }
         public EpaoDetailsViewModel Epao { get; set; }
         public int CourseEpaosCount { get; set; }
         public DateTime EffectiveFrom { get; set; }
         public IReadOnlyList<CourseListItemViewModel> AllCourses { get; set; }
-        public List<EpaoStandardsListItem> standardVersions { get; set; }
-        public List<ApprenticeShipTrainingCourses> apprenticeshipTrainingCourses {get; set;}
-        public List<ApprenticeShipTrainingCourses> allVersions { get; set; }
+        public List<EpaoStandardsListItem> StandardVersions { get; set; }
+        public List<ApprenticeshipTrainingCourses> ApprenticeshipTrainingCourses {get; set;}
+        public List<ApprenticeshipTrainingCourses> AllVersions { get; set; }
 
         public void CreateListOfVersions()
         {
-            if (standardVersions != null)
+            var versionsSb = new System.Text.StringBuilder();
+
+            if (StandardVersions != null)
             {
-                foreach (var standard in standardVersions)
+                foreach (var standard in StandardVersions)
                 {
-                    apprenticeshipTrainingCourses.Add(new ApprenticeShipTrainingCourses
+                    ApprenticeshipTrainingCourses.Add(new ApprenticeshipTrainingCourses
                     {
                         EffectiveFrom = standard.EffectiveFrom,
                         EffectiveTo = standard.EffectiveTo,
@@ -38,19 +39,21 @@ namespace SFA.DAS.FindEpao.Web.Models
                         LarsCode = standard.LarsCode
                     });
 
-                    if (allVersions.Any(x => x.LarsCode == standard.LarsCode))
+                    if (AllVersions.Any(x => x.LarsCode == standard.LarsCode))
                     {
-                        foreach (var vers in allVersions)
+                        foreach (var vers in AllVersions)
                         {
                             if (vers.LarsCode == standard.LarsCode && standard.Status == "Live")
                             {
-                                vers.Version += ", " + standard.Version;
+                                versionsSb.Append(", ");
+                                versionsSb.Append(standard.Version);
+                                vers.Version = versionsSb.ToString();
                             }
                         }
                     }
                     else
                     {
-                        allVersions.Add(new ApprenticeShipTrainingCourses
+                        AllVersions.Add(new ApprenticeshipTrainingCourses
                         {
                             EffectiveFrom = null,
                             EffectiveTo = null,
@@ -59,6 +62,7 @@ namespace SFA.DAS.FindEpao.Web.Models
                             StandardName = standard.Title,
                             LarsCode = standard.LarsCode
                         });
+                        versionsSb.Append(standard.Version);
                     }
                 }
             }
@@ -66,7 +70,7 @@ namespace SFA.DAS.FindEpao.Web.Models
 
     }
 
-    public class ApprenticeShipTrainingCourses
+    public class ApprenticeshipTrainingCourses
     {
         public string StandardName { get; set; }
         public int LarsCode { get; set; }

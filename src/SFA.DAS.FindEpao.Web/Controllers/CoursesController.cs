@@ -128,7 +128,7 @@ namespace SFA.DAS.FindEpao.Web.Controllers
                         _locationStringBuilder.BuildLocationString),
                     CourseEpaosCount = result.CourseEpaosCount,
                     EffectiveFrom = result.EffectiveFrom,
-                    standardVersions = result.StandardVersions
+                    StandardVersions = result.StandardVersions
                 };
                 model.CreateListOfVersions();
                 return View(model);

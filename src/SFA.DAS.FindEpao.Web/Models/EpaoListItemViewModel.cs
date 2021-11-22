@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using SFA.DAS.FindEpao.Domain.Courses;
 using SFA.DAS.FindEpao.Domain.Epaos;
 
@@ -42,29 +43,9 @@ namespace SFA.DAS.FindEpao.Web.Models
             return $"{City}, {Postcode}";
         }
     
-        private string GetVersions(List<EpaoStandardsListItem> vers)
+        private string GetVersions(List<EpaoStandardsListItem> standardVersions)
         {
-            string concat = string.Empty;
-            int i = 0;
-
-            if (vers != null)
-            {
-                foreach (var version in vers)
-                {
-                    if (i == 0)
-                    {
-                        concat += version.Version;
-                    }
-                    else
-                    {
-                        concat += ", " + version.Version;
-                    }
-
-                    i++;
-                }
-            }
-            
-            return concat;
+            return string.Join(", ", standardVersions.Select(x => x.Version));
         }
 
     }
