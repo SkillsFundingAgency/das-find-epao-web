@@ -45,7 +45,7 @@ namespace SFA.DAS.FindEpao.Application.UnitTests.Courses.Queries.GetCourseEpao
             [Frozen] Mock<ICourseService> mockCourseService,
             GetCourseEpaoQueryHandler handler)
         {
-            allCourses.Add(new CourseListItem("3", "aaaaa", 3, false));
+            allCourses.Add(new CourseListItem("3", "aaaaa", 3, false, "1.0"));
             courseEpao.AllCourses = allCourses;
             mockCourseService
                 .Setup(service => service.GetCourseEpao(query.CourseId, query.EpaoId))
@@ -59,6 +59,9 @@ namespace SFA.DAS.FindEpao.Application.UnitTests.Courses.Queries.GetCourseEpao
             result.EffectiveFrom.Should().Be(courseEpao.EffectiveFrom);
             result.EpaoDeliveryAreas.Should().BeEquivalentTo(courseEpao.EpaoDeliveryAreas);
             result.DeliveryAreas.Should().BeEquivalentTo(courseEpao.DeliveryAreas);
+            result.AllCourses.Should().BeEquivalentTo(courseEpao.AllCourses)
+                .And.BeInAscendingOrder(item => item.Description);
+
         }
     }
 }

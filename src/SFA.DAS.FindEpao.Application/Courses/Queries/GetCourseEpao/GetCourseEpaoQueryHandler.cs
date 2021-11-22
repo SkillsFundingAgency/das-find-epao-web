@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -40,6 +41,7 @@ namespace SFA.DAS.FindEpao.Application.Courses.Queries.GetCourseEpao
                 EffectiveFrom = courseEpao.EffectiveFrom,
                 EpaoDeliveryAreas = courseEpao.EpaoDeliveryAreas,
                 DeliveryAreas = courseEpao.DeliveryAreas,
+                AllCourses = courseEpao.AllCourses.OrderBy(item => item.Description).ToList(),
                 StandardVersions = courseEpao.standardVersions
             };
         }

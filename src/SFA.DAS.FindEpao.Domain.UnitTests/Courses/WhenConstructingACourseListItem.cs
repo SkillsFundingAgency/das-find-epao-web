@@ -13,16 +13,17 @@ namespace SFA.DAS.FindEpao.Domain.UnitTests.Courses
             var expectedCourseTitle = "Course 1";
             var expectedCourseLevel = 4;
             var expectedIntegratedApprenticeship = true;
-
+            var expectedVersions = "1.0";
 
             //Act
-            var actual = new CourseListItem (expectedCourseId, expectedCourseTitle,expectedCourseLevel, expectedIntegratedApprenticeship);
+            var actual = new CourseListItem (expectedCourseId, expectedCourseTitle,expectedCourseLevel, expectedIntegratedApprenticeship, expectedVersions);
 
             //Assert
             Assert.AreEqual(expectedCourseId, actual.Id);
             Assert.AreEqual(expectedCourseTitle, actual.Title);
             Assert.AreEqual(expectedCourseLevel, actual.Level);
             Assert.AreEqual(expectedIntegratedApprenticeship, actual.IntegratedApprenticeship);
+            Assert.AreEqual(expectedVersions, actual.Versions);
         }
 
         [TestCase("")]
@@ -33,7 +34,7 @@ namespace SFA.DAS.FindEpao.Domain.UnitTests.Courses
             var expectedString = "Unknown";
 
             //Act
-            var course = new CourseListItem("",expectedTitle,3, true);
+            var course = new CourseListItem("",expectedTitle,3, true, "1.0");
 
             //Assert
             Assert.AreEqual(expectedString, course.Description);
@@ -45,7 +46,7 @@ namespace SFA.DAS.FindEpao.Domain.UnitTests.Courses
         public void Then_The_Course_Description_Is_Taken_From_The_Title_And_Level()
         {
             //Arrange Act
-            var actualApprenticeship = new CourseListItem("", "Some title", 1, false);
+            var actualApprenticeship = new CourseListItem("", "Some title", 1, false, "1.0");
 
             //Assert
             Assert.AreEqual("Some title (level 1)", actualApprenticeship.Description);
@@ -58,7 +59,7 @@ namespace SFA.DAS.FindEpao.Domain.UnitTests.Courses
             var expectedString = "Unknown";
 
             //Act
-            var course = new CourseListItem(null, null, 0, false);
+            var course = new CourseListItem(null, null, 0, false, "1.0");
 
             //Assert
             Assert.AreEqual(expectedString, course.Description);

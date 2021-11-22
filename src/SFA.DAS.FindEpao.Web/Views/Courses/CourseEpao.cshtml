@@ -51,9 +51,9 @@
                         <caption></caption>
                         <tr><th scope="col" class="govuk-table__header"><td class="govuk-table__cell">Version</td><td class="govuk-table__cell">Effective from</td><td class="govuk-table__cell">Effective to</td></tr>
                         <tbody class="govuk-table__body">
-                            @foreach (var versions in Model.ApprenticeshipTrainingCourses)
+                            @if (Model.StandardVersions != null)
                             {
-                                @if (versions.LarsCode.ToString() == Model.Course.Id)
+                                @foreach (var versions in Model.StandardVersions)
                                 {
                                     <tr><th scope="col" class="govuk-table__header"><td class="govuk-table__cell">@versions.Version</td><td class="govuk-table__cell">@DateFormatExtensions.LongDateFormat(@versions.EffectiveFrom)</td><td class="govuk-table__cell">@DateFormatExtensions.LongDateFormat(@versions.EffectiveTo)</td></tr>
                                 }
@@ -149,11 +149,14 @@
                         <tbody class="govuk-table__body">
                             <tr><th scope="col" class="govuk-table__header"><td class="govuk-table__cell">Standard</td>
                                                                             <td class="govuk-table__cell">Versions</td></tr>
-                            @foreach (var versions in Model.AllVersions)
+                            @if (Model.AllCourses != null)
                             {
-                                <tr><th scope="row"><td class="govuk-table__cell">@versions.StandardName&nbsp;(Level&nbsp;@versions.Level)</td>
-                                                    <td class="govuk-table__cell">@versions.Version</td>
+                                @foreach (var versions in Model.AllCourses)
+                                {
+                                <tr><th scope="row"><td class="govuk-table__cell">@versions.Title&nbsp;(Level&nbsp;@versions.Level)</td>
+                                                    <td class="govuk-table__cell">@versions.Versions</td>
                                 </tr>
+                                }
                             }
                         </tbody>
                     </table>

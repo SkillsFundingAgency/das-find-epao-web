@@ -45,7 +45,10 @@ namespace SFA.DAS.FindEpao.Web.Models
     
         private string GetVersions(List<EpaoStandardsListItem> standardVersions)
         {
-            return string.Join(", ", standardVersions.Select(x => x.Version));
+            if (standardVersions != null)
+                return string.Join(", ", standardVersions.Select(x => x.Version));
+            else
+                return string.Empty;
         }
 
     }
