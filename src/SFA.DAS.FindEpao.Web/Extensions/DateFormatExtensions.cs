@@ -11,7 +11,7 @@ namespace SFA.DAS.FindEpao.Web.Extensions
         {
             if (sourceDateTime.HasValue)
             {
-                return sourceDateTime.Value.ToString("D");
+                return sourceDateTime.Value.ToString("d MMMM yyyy");
             }
             else
             {
