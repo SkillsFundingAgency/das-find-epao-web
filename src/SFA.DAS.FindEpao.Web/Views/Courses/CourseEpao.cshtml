@@ -45,7 +45,7 @@
                     }
                 </p>
 
-                <h2 class="govuk-!-font-weight-bold govuk-body">Standard version details</h2>
+                <h2 class="govuk-heading-m">Standard version details</h2>
                 <table class="govuk-table">
                     <caption></caption>
                     <tr><th scope="col" class="govuk-table__header"><td class="govuk-table__cell govuk-!-font-weight-bold">Version</td><td class="govuk-table__cell govuk-!-font-weight-bold">Effective from</td><td class="govuk-table__cell govuk-!-font-weight-bold">Effective to</td></tr>
@@ -75,10 +75,10 @@
                 @if (!string.IsNullOrEmpty(Model.Epao?.PrimaryContactName))
                 {
                     <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">Contact name</dt>
-                    <dd class="govuk-summary-list__value">@Model.Epao.PrimaryContactName</dd>
-            </div>
-        }
+                        <dt class="govuk-summary-list__key">Contact name</dt>
+                        <dd class="govuk-summary-list__value">@Model.Epao.PrimaryContactName</dd>
+                    </div>
+                }
                 @if (!string.IsNullOrEmpty(Model.Epao?.ContactDetails?.WebsiteLink))
                 {
                     <div class="govuk-summary-list__row">
@@ -140,28 +140,28 @@
                     </div>
                 }
 
-                <div class="govuk-grid-row">
-                    <table class="govuk-table govuk-grid-column-two-thirds" aria-describedby="Apprenticeship training courses"><caption></caption>
-                        <thead class="govuk-table__header"><h2 class="govuk-!-font-weight-bold govuk-body">Apprenticeship training courses</h2></thead>
-                        <tbody class="govuk-table__body govuk-grid-column-two-thirds">
-                            <tr>
-                                <th scope="col" class="govuk-table__header">
-                                <td colspan="2" class="govuk-table__cell govuk-!-font-weight-bold">Standard</td>
-                                <td colspan="2" class="govuk-table__cell govuk-!-font-weight-bold">Versions</td>
-                            </tr>
-                            @if (Model.AllCourses != null)
-                            {
-                                @foreach (var versions in Model.AllCourses)
-                                {
-                                    <tr>
-                                        <th scope="col">
-                                        <td colspan="2"class="govuk-table__cell">@versions.Title&nbsp;(Level&nbsp;@versions.Level)</td>
-                                        <td colspan="2" class="govuk-table__cell">@versions.Versions</td>
-                                    </tr>
-                                }
-                            }
-                        </tbody>
-                    </table>
-                </div>
             </div>
+            
+            <table class="govuk-table" aria-describedby="Apprenticeship training courses"><caption></caption>
+                <thead class="govuk-table__header"><h2 class="govuk-heading-m">Apprenticeship training courses</h2></thead>
+                <tbody class="govuk-table__body">
+                    <tr>
+                        <th  class="govuk-table__header">
+                        <td  class="govuk-table__cell govuk-!-font-weight-bold">Standard</td>
+                        <td  class="govuk-table__cell govuk-!-font-weight-bold">Versions</td>
+                    </tr>
+                    @if (Model.AllCourses != null)
+                    {
+                        @foreach (var versions in Model.AllCourses)
+                        {
+                            <tr>
+                                <th>
+                                <td class="govuk-table__cell">@versions.Title&nbsp;(Level&nbsp;@versions.Level)</td>
+                                <td class="govuk-table__cell">@versions.StandardVersions</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
 </main>
