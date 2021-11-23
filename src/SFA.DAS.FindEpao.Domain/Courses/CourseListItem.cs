@@ -5,13 +5,13 @@ namespace SFA.DAS.FindEpao.Domain.Courses
 {
     public class CourseListItem
     {
-        public CourseListItem(string id, string title, int level, bool integratedApprenticeship, string versions)
+        public CourseListItem(string id, string title, int level, bool integratedApprenticeship, string standardVersions)
         {
             Title = SetDefaultTitleIfEmpty(title);
             Id = id;
             Level = level;
             IntegratedApprenticeship = integratedApprenticeship;
-            Versions = versions;
+            StandardVersions = standardVersions;
         }
 
         [JsonProperty("CourseId")]
@@ -22,7 +22,7 @@ namespace SFA.DAS.FindEpao.Domain.Courses
         public int Level { get; }
         public bool IntegratedApprenticeship { get;}
 
-        public string Versions { get; }
+        public string StandardVersions { get; }
 
         public string Description => Title.Equals("UNKNOWN",StringComparison.CurrentCultureIgnoreCase) ? Title : $"{Title} (level {Level})";
 

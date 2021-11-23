@@ -21,7 +21,7 @@ namespace SFA.DAS.FindEpao.Web.Models
                 Level = course.Level,
                 Description = course.Description,
                 IntegratedApprenticeship = course.IntegratedApprenticeship,
-                Versions = course.Versions
+                Versions = course.StandardVersions
             };
         }
     }

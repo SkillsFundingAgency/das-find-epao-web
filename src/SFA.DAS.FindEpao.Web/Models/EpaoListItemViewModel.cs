@@ -29,8 +29,7 @@ namespace SFA.DAS.FindEpao.Web.Models
         public string Postcode { get; }
         public string Address => FormatAddress();
         public DateTime EffectiveFrom { get; set; }
-        public List<EpaoStandardsListItem> StandardVersions {get; set;}
-
+        public string[] StandardVersions {get; set;}
         public string Versions { get; set; }
 
         private string FormatAddress()
@@ -43,12 +42,9 @@ namespace SFA.DAS.FindEpao.Web.Models
             return $"{City}, {Postcode}";
         }
     
-        private string GetVersions(List<EpaoStandardsListItem> standardVersions)
+        private string GetVersions(string[] standardVersions)
         {
-            if (standardVersions != null)
-                return string.Join(", ", standardVersions.Select(x => x.Version));
-            else
-                return string.Empty;
+            return string.Join(", ", standardVersions);
         }
 
     }

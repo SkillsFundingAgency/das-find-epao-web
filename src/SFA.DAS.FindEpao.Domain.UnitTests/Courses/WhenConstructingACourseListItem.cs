@@ -23,7 +23,7 @@ namespace SFA.DAS.FindEpao.Domain.UnitTests.Courses
             Assert.AreEqual(expectedCourseTitle, actual.Title);
             Assert.AreEqual(expectedCourseLevel, actual.Level);
             Assert.AreEqual(expectedIntegratedApprenticeship, actual.IntegratedApprenticeship);
-            Assert.AreEqual(expectedVersions, actual.Versions);
+            Assert.AreEqual(expectedVersions, actual.StandardVersions);
         }
 
         [TestCase("")]
