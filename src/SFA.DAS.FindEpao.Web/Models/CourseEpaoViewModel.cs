@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using SFA.DAS.FindEpao.Domain.Courses;
-using System.Linq;
 
 namespace SFA.DAS.FindEpao.Web.Models
 {

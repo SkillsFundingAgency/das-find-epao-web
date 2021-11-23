@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Linq;
-using Microsoft.AspNetCore.Html;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace SFA.DAS.FindEpao.Web.Extensions
 {
