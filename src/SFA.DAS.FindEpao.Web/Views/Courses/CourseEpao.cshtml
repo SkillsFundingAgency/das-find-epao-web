@@ -45,22 +45,20 @@
                     }
                 </p>
 
-                <p class="govuk-!-font-weight-bold das-no-wrap">
-                    <h2 class="govuk-!-font-weight-bold govuk-body">Standard version details</h2>
-                    <table class="govuk-table">
-                        <caption></caption>
-                        <tr><th scope="col" class="govuk-table__header"><td class="govuk-table__cell">Version</td><td class="govuk-table__cell">Effective from</td><td class="govuk-table__cell">Effective to</td></tr>
-                        <tbody class="govuk-table__body">
-                            @if (Model.StandardVersions != null)
+                <h2 class="govuk-!-font-weight-bold govuk-body">Standard version details</h2>
+                <table class="govuk-table">
+                    <caption></caption>
+                    <tr><th scope="col" class="govuk-table__header"><td class="govuk-table__cell govuk-!-font-weight-bold">Version</td><td class="govuk-table__cell govuk-!-font-weight-bold">Effective from</td><td class="govuk-table__cell govuk-!-font-weight-bold">Effective to</td></tr>
+                    <tbody class="govuk-table__body">
+                        @if (Model.StandardVersions != null)
+                        {
+                            @foreach (var versions in Model.StandardVersions)
                             {
-                                @foreach (var versions in Model.StandardVersions)
-                                {
-                                    <tr><th scope="col" class="govuk-table__header"><td class="govuk-table__cell">@versions.Version</td><td class="govuk-table__cell">@DateFormatExtensions.LongDateFormat(@versions.EffectiveFrom)</td><td class="govuk-table__cell">@DateFormatExtensions.LongDateFormat(@versions.EffectiveTo)</td></tr>
-                                }
+                                <tr><th scope="col" class="govuk-table__header"><td class="govuk-table__cell">@versions.Version</td><td class="govuk-table__cell">@DateFormatExtensions.LongDateFormat(@versions.EffectiveFrom)</td><td class="govuk-table__cell">@DateFormatExtensions.LongDateFormat(@versions.EffectiveTo)</td></tr>
                             }
-                        </tbody>
-                    </table>
-                </p>
+                        }
+                    </tbody>
+                </table>
             </div>
 
             @if (Model.Course.IntegratedApprenticeship)
@@ -77,10 +75,10 @@
                 @if (!string.IsNullOrEmpty(Model.Epao?.PrimaryContactName))
                 {
                     <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">Contact name</dt>
-                        <dd class="govuk-summary-list__value">@Model.Epao.PrimaryContactName</dd>
-                    </div>
-                }
+                    <dt class="govuk-summary-list__key">Contact name</dt>
+                    <dd class="govuk-summary-list__value">@Model.Epao.PrimaryContactName</dd>
+            </div>
+        }
                 @if (!string.IsNullOrEmpty(Model.Epao?.ContactDetails?.WebsiteLink))
                 {
                     <div class="govuk-summary-list__row">
@@ -143,23 +141,28 @@
                 }
 
                 <div class="das-no-wrap">
-                    <h2 class="govuk-!-font-weight-bold govuk-body">Apprenticeship training courses</h2>
-                    <table class="govuk-table">
+                    <table class="govuk-table govuk-grid-column-two-thirds">
+                        <thead class="govuk-table__header"><h2 class="govuk-!-font-weight-bold govuk-body">Apprenticeship training courses</h2></thead>
                         <caption></caption>
-                        <tbody class="govuk-table__body">
-                            <tr><th scope="col" class="govuk-table__header"><td class="govuk-table__cell">Standard</td>
-                                                                            <td class="govuk-table__cell">Versions</td></tr>
+                        <tbody class="govuk-table__body govuk-grid-column-two-thirds">
+                            <tr>
+                                <th scope="col" class="govuk-table__header">
+                                <td colspan="2" class="govuk-table__cell govuk-!-font-weight-bold">Standard</td>
+                                <td colspan="2" class="govuk-table__cell govuk-!-font-weight-bold">Versions</td>
+                            </tr>
                             @if (Model.AllCourses != null)
                             {
                                 @foreach (var versions in Model.AllCourses)
                                 {
-                                <tr><th scope="row"><td class="govuk-table__cell">@versions.Title&nbsp;(Level&nbsp;@versions.Level)</td>
-                                                    <td class="govuk-table__cell">@versions.Versions</td>
-                                </tr>
+                                    <tr>
+                                        <th scope="col">
+                                        <td colspan="2"class="govuk-table__cell">@versions.Title&nbsp;(Level&nbsp;@versions.Level)</td>
+                                        <td colspan="2" class="govuk-table__cell">@versions.Versions</td>
+                                    </tr>
                                 }
                             }
                         </tbody>
                     </table>
                 </div>
-    </div>
+            </div>
 </main>
