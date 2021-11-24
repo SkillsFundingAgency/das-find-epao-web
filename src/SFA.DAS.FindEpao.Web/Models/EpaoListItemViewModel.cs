@@ -19,7 +19,6 @@ namespace SFA.DAS.FindEpao.Web.Models
             Postcode = epao.Postcode;
             EffectiveFrom = epao.EffectiveFrom;
             StandardVersions = epao.StandardVersions;
-            Versions = GetVersions(StandardVersions);
         }
 
         public string EpaoId { get; }
@@ -28,8 +27,7 @@ namespace SFA.DAS.FindEpao.Web.Models
         public string Postcode { get; }
         public string Address => FormatAddress();
         public DateTime EffectiveFrom { get; set; }
-        public string[] StandardVersions {get; set;}
-        public string Versions { get; set; }
+        public string[] StandardVersions { get; set; }
 
         private string FormatAddress()
         {
@@ -40,14 +38,5 @@ namespace SFA.DAS.FindEpao.Web.Models
 
             return $"{City}, {Postcode}";
         }
-    
-        private string GetVersions(string[] standardVersions)
-        {
-            if (standardVersions != null)
-                return string.Join(", ", standardVersions);
-            else
-                return string.Empty;
-        }
-
     }
 }
