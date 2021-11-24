@@ -47,14 +47,23 @@
 
                 <h2 class="govuk-heading-m">Standard version details</h2>
                 <table class="govuk-table">
-                    <caption></caption>
-                    <tr><th scope="col" class="govuk-table__header"><td class="govuk-table__cell govuk-!-font-weight-bold">Version</td><td class="govuk-table__cell govuk-!-font-weight-bold">Effective from</td><td class="govuk-table__cell govuk-!-font-weight-bold">Effective to</td></tr>
+                    <thead class="govuk-table__header" id="ApprenticeshipTrainingCoursesHead">
+                        <tr>
+                            <th>Version</th>
+                            <th>Effective from</th>
+                            <th>Effective to</th>
+                        </tr>
+                    </thead>
                     <tbody class="govuk-table__body">
                         @if (Model.StandardVersions != null)
                         {
                             @foreach (var versions in Model.StandardVersions)
                             {
-                                <tr><th scope="col" class="govuk-table__header"><td class="govuk-table__cell">@versions.Version</td><td class="govuk-table__cell">@DateFormatExtensions.LongDateFormat(@versions.EffectiveFrom)</td><td class="govuk-table__cell">@DateFormatExtensions.LongDateFormat(@versions.EffectiveTo)</td></tr>
+                                <tr>
+                                    <td class="govuk-table__cell">@versions.Version</td>
+                                    <td class="govuk-table__cell">@DateFormatExtensions.LongDateFormat(@versions.EffectiveFrom)</td>
+                                    <td class="govuk-table__cell">@DateFormatExtensions.LongDateFormat(@versions.EffectiveTo)</td>
+                                </tr>
                             }
                         }
                     </tbody>
@@ -75,10 +84,10 @@
                 @if (!string.IsNullOrEmpty(Model.Epao?.PrimaryContactName))
                 {
                     <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">Contact name</dt>
-                        <dd class="govuk-summary-list__value">@Model.Epao.PrimaryContactName</dd>
-                    </div>
-                }
+                    <dt class="govuk-summary-list__key">Contact name</dt>
+                    <dd class="govuk-summary-list__value">@Model.Epao.PrimaryContactName</dd>
+            </div>
+        }
                 @if (!string.IsNullOrEmpty(Model.Epao?.ContactDetails?.WebsiteLink))
                 {
                     <div class="govuk-summary-list__row">
@@ -140,28 +149,28 @@
                     </div>
                 }
 
-            </dl>
-            
-            <table class="govuk-table" aria-describedby="Apprenticeship training courses"><caption></caption>
-                <thead class="govuk-table__header"><h2 class="govuk-heading-m">Apprenticeship training courses</h2></thead>
-                <tbody class="govuk-table__body">
-                    <tr>
-                        <th  class="govuk-table__header" id="ApprHeader">
-                        <td  class="govuk-table__cell govuk-!-font-weight-bold">Standard</td>
-                        <td  class="govuk-table__cell govuk-!-font-weight-bold">Versions</td>
-                    </tr>
-                    @if (Model.AllCourses != null)
-                    {
-                        @foreach (var versions in Model.AllCourses)
+                </dl>
+
+                <h2 class="govuk-heading-m">Apprenticeship training courses</h2>
+                <table class="govuk-table" aria-describedby="Apprenticeship training courses">
+                    <thead class="govuk-table__header" id="ApprenticeshipTrainingCoursesHead">
+                        <tr>
+                            <th>Standard</th>
+                            <th>Version</th>
+                        </tr>
+                    </thead>
+                    <tbody class="govuk-table__body">
+                        @if (Model.AllCourses != null)
                         {
-                            <tr>
-                                <th id="DetailRows">
-                                <td class="govuk-table__cell">@versions.Title&nbsp;(Level&nbsp;@versions.Level)</td>
-                                <td class="govuk-table__cell">@versions.StandardVersions</td>
-                            </tr>
+                            @foreach (var versions in Model.AllCourses)
+                            {
+                                <tr>
+                                    <td class="govuk-table__cell">@versions.Title&nbsp;(level&nbsp;@versions.Level)</td>
+                                    <td class="govuk-table__cell">@versions.StandardVersions</td>
+                                </tr>
+                            }
                         }
-                    }
-                </tbody>
-            </table>
-        </div>
+                    </tbody>
+                </table>
+            </div>
 </main>
