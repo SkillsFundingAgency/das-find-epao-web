@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using SFA.DAS.FindEpao.Domain.Courses;
 using SFA.DAS.FindEpao.Domain.Epaos;
 
