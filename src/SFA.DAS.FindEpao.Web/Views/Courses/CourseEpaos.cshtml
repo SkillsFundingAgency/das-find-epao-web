@@ -1,5 +1,6 @@
 ﻿@using SFA.DAS.FindEpao.Web.Infrastructure
 @using SFA.DAS.FindEpao.Web.Models
+@using SFA.DAS.FindEpao.Web.Extensions
 @model CourseEpaosViewModel
 @{
     ViewData["Title"] = $"{Model.Total} end-point assessment organisations for {Model.Course.Description}";
@@ -13,8 +14,8 @@
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
             <h1 class="govuk-heading-xl ">@Model.Total end-point assessment organisations</h1>
-            
-            
+
+
             @if (Model.Epaos.Count() != 0)
             {
                 <p class="govuk-body @(Model.Course.IntegratedApprenticeship ? "" : "govuk-!-margin-bottom-6")">
@@ -56,11 +57,11 @@
                                     }
 
                                     <dt class="das-definition-list__title govuk-!-margin-bottom-1">Standard versions</dt>
-                                    <dd class="govuk-!-margin-bottom-1">@if ((epao.Versions == null) || (epao.Versions == "")) { <span>&nbsp;</span>; } else { @epao.Versions; }</dd>
+                                        <dd class="govuk-!-margin-bottom-1">@StandardVersionsFormatExtensions.VersionsArrayToString(@epao.StandardVersions)</dd>
                                     <dt class="das-definition-list__title govuk-!-margin-bottom-1">Locations covered</dt>
-                                    <dd class="govuk-!-margin-bottom-1">@if ((epao.Locations == null) || (epao.Locations == "")) { <span>&nbsp;</span>; } else { @epao.Locations; }</dd>
+                                        <dd class="govuk-!-margin-bottom-1">@if ((epao.Locations == null) || (epao.Locations == "")){<span>&nbsp;</span>;}else{ @epao.Locations;}</dd>
                                     <dt class="das-definition-list__title govuk-!-margin-bottom-1">Address</dt>
-                                    <dd class="govuk-!-margin-bottom-1">@if ((epao.Address == null) || (epao.Address == "")) { <span>&nbsp;</span>; } else { @epao.Address; }</dd>
+                                        <dd class="govuk-!-margin-bottom-1">@if ((epao.Address == null) || (epao.Address == "")){<span>&nbsp;</span>;}else{ @epao.Address;}</dd>
                                 </dl>
                             </li>
                         }
@@ -82,7 +83,7 @@
                     Contact ESFA
                 </a>
             }
-            
+
         </div>
     </div>
 </main>
