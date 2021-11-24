@@ -37,7 +37,7 @@
 
                     @if (Model.EffectiveFrom.Date > DateTime.Today)
                     {
-                        <span class="govuk-!-font-weight-bold">Available to assess from @DateFormatExtensions.LongDateFormat(@Model.EffectiveFrom)</span>
+                        <span class="govuk-!-font-weight-bold">Available to assess from @Model.EffectiveFrom.LongDateFormat()</span>
                     }
                     else
                     {
