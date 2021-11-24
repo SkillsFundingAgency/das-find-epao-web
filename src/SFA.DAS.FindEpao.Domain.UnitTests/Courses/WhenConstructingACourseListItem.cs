@@ -13,7 +13,7 @@ namespace SFA.DAS.FindEpao.Domain.UnitTests.Courses
             var expectedCourseTitle = "Course 1";
             var expectedCourseLevel = 4;
             var expectedIntegratedApprenticeship = true;
-            var expectedVersions = "1.0";
+            var expectedVersions = new string[] { "1.0" };
 
             //Act
             var actual = new CourseListItem (expectedCourseId, expectedCourseTitle,expectedCourseLevel, expectedIntegratedApprenticeship, expectedVersions);
@@ -34,7 +34,7 @@ namespace SFA.DAS.FindEpao.Domain.UnitTests.Courses
             var expectedString = "Unknown";
 
             //Act
-            var course = new CourseListItem("",expectedTitle,3, true, "1.0");
+            var course = new CourseListItem("",expectedTitle,3, true, new string[] { "1.0" });
 
             //Assert
             Assert.AreEqual(expectedString, course.Description);
@@ -46,7 +46,7 @@ namespace SFA.DAS.FindEpao.Domain.UnitTests.Courses
         public void Then_The_Course_Description_Is_Taken_From_The_Title_And_Level()
         {
             //Arrange Act
-            var actualApprenticeship = new CourseListItem("", "Some title", 1, false, "1.0");
+            var actualApprenticeship = new CourseListItem("", "Some title", 1, false, new string[] { "1.0" });
 
             //Assert
             Assert.AreEqual("Some title (level 1)", actualApprenticeship.Description);
@@ -59,7 +59,7 @@ namespace SFA.DAS.FindEpao.Domain.UnitTests.Courses
             var expectedString = "Unknown";
 
             //Act
-            var course = new CourseListItem(null, null, 0, false, "1.0");
+            var course = new CourseListItem(null, null, 0, false, new string[] { "1.0" });
 
             //Assert
             Assert.AreEqual(expectedString, course.Description);

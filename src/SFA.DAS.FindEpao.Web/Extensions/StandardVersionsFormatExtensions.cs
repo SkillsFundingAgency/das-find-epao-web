@@ -8,15 +8,8 @@ namespace SFA.DAS.FindEpao.Web.Extensions
     public static class StandardVersionsFormatExtensions
     {
         public static string VersionsArrayToString(string[] standardVersions)
-        {
-            if ((standardVersions.Length < 0) || (standardVersions == null))
-            {
-                return string.Empty;
-            }
-            else
-            {
-                return string.Join(", ", standardVersions);
-            }
+        {            
+            return (standardVersions == null || standardVersions.Length < 0) ? string.Empty : string.Join(", ", standardVersions);
         }
     }
 

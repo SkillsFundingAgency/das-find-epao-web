@@ -5,32 +5,32 @@ VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.FindEpao.Web", "SFA.DAS.FindEpao.Web\SFA.DAS.FindEpao.Web.csproj", "{A62A4E4D-537D-440A-B00F-42ACE7A3D21F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.FindEpao.Web.UnitTests", "SFA.DAS.FindEpao.Web.UnitTests\SFA.DAS.FindEpao.Web.UnitTests.csproj", "{0FF48677-BCDA-4A0E-A63B-6E81609B470D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.FindEpao.Web.UnitTests", "SFA.DAS.FindEpao.Web.UnitTests\SFA.DAS.FindEpao.Web.UnitTests.csproj", "{0FF48677-BCDA-4A0E-A63B-6E81609B470D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.FindEpao.Web.AcceptanceTests", "SFA.DAS.FindEpao.Web.AcceptanceTests\SFA.DAS.FindEpao.Web.AcceptanceTests.csproj", "{E6170F8C-D5C4-4831-8F32-8CA08936A727}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.FindEpao.Web.AcceptanceTests", "SFA.DAS.FindEpao.Web.AcceptanceTests\SFA.DAS.FindEpao.Web.AcceptanceTests.csproj", "{E6170F8C-D5C4-4831-8F32-8CA08936A727}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{95589CB9-68DE-490E-8ED7-12A031067923}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MockServer", "MockServer", "{A65B6FEF-1B76-401E-BC92-EDA998675BD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.FindEpao.Application", "SFA.DAS.FindEpao.Application\SFA.DAS.FindEpao.Application.csproj", "{A3DE11C2-B3AC-4BFA-AD85-712DA9B9C0B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.FindEpao.Application", "SFA.DAS.FindEpao.Application\SFA.DAS.FindEpao.Application.csproj", "{A3DE11C2-B3AC-4BFA-AD85-712DA9B9C0B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.FindEpao.Domain", "SFA.DAS.FindEpao.Domain\SFA.DAS.FindEpao.Domain.csproj", "{21FCAB01-121C-4DE9-8879-8EBFF47B713A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.FindEpao.Domain", "SFA.DAS.FindEpao.Domain\SFA.DAS.FindEpao.Domain.csproj", "{21FCAB01-121C-4DE9-8879-8EBFF47B713A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.FindEpao.Infrastructure", "SFA.DAS.FindEpao.Infrastructure\SFA.DAS.FindEpao.Infrastructure.csproj", "{0BDB7BBC-31B2-4ABD-90DD-641482C47607}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.FindEpao.Infrastructure", "SFA.DAS.FindEpao.Infrastructure\SFA.DAS.FindEpao.Infrastructure.csproj", "{0BDB7BBC-31B2-4ABD-90DD-641482C47607}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.FindEpao.Domain.UnitTests", "SFA.DAS.FindEpao.Domain.UnitTests\SFA.DAS.FindEpao.Domain.UnitTests.csproj", "{C65057D7-844B-4B89-8A00-331484E2CCB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.FindEpao.Domain.UnitTests", "SFA.DAS.FindEpao.Domain.UnitTests\SFA.DAS.FindEpao.Domain.UnitTests.csproj", "{C65057D7-844B-4B89-8A00-331484E2CCB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.FindEpao.Application.UnitTests", "SFA.DAS.FindEpao.Application.UnitTests\SFA.DAS.FindEpao.Application.UnitTests.csproj", "{F05ABA21-3251-4365-B137-FAF24FD700F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.FindEpao.Application.UnitTests", "SFA.DAS.FindEpao.Application.UnitTests\SFA.DAS.FindEpao.Application.UnitTests.csproj", "{F05ABA21-3251-4365-B137-FAF24FD700F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.FindEpao.Infrastructure.UnitTests", "SFA.DAS.FindEpao.Infrastructure.UnitTests\SFA.DAS.FindEpao.Infrastructure.UnitTests.csproj", "{BAD299FF-2392-4BD1-A4A6-C6806A093FDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.FindEpao.Infrastructure.UnitTests", "SFA.DAS.FindEpao.Infrastructure.UnitTests\SFA.DAS.FindEpao.Infrastructure.UnitTests.csproj", "{BAD299FF-2392-4BD1-A4A6-C6806A093FDF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F1F2D102-8FFC-416D-9BFB-EB2ED79252D9}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.FindEpao.MockServer", "SFA.DAS.FindEpao.MockServer\SFA.DAS.FindEpao.MockServer.csproj", "{F58E9AE5-EA98-42ED-90F8-DA76343EAEDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.FindEpao.MockServer", "SFA.DAS.FindEpao.MockServer\SFA.DAS.FindEpao.MockServer.csproj", "{F58E9AE5-EA98-42ED-90F8-DA76343EAEDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
