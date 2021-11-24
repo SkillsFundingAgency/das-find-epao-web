@@ -4,16 +4,14 @@ namespace SFA.DAS.FindEpao.Web.Extensions
 {
     public static class DateFormatExtensions
     {
-        public static string LongDateFormat(DateTime? sourceDateTime)
+        public static string LongDateFormat(this DateTime? sourceDateTime)
         {
-            if (sourceDateTime.HasValue)
-            {
-                return sourceDateTime.Value.ToString("d MMMM yyyy");
-            }
-            else
-            {
-                return string.Empty;
-            }
+            return sourceDateTime.HasValue ? sourceDateTime.Value.LongDateFormat() : string.Empty;
+        }
+
+        public static string LongDateFormat(this DateTime sourceDateTime)
+        {
+            return sourceDateTime.ToString("dd MMMM yyyy");
         }
     }
 }

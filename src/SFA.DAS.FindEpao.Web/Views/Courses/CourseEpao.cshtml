@@ -37,7 +37,7 @@
 
                     @if (Model.EffectiveFrom.Date > DateTime.Today)
                     {
-                        <span class="govuk-!-font-weight-bold">Available to assess from @DateFormatExtensions.LongDateFormat(@Model.EffectiveFrom)</span>
+                        <span class="govuk-!-font-weight-bold">Available to assess from @Model.EffectiveFrom.LongDateFormat()</span>
                     }
                     else
                     {
@@ -57,12 +57,12 @@
                     <tbody class="govuk-table__body">
                         @if (Model.StandardVersions != null)
                         {
-                            @foreach (var versions in Model.StandardVersions)
+                            @foreach (var version in Model.StandardVersions)
                             {
                                 <tr>
-                                    <td class="govuk-table__cell">@versions.Version</td>
-                                    <td class="govuk-table__cell">@DateFormatExtensions.LongDateFormat(@versions.EffectiveFrom)</td>
-                                    <td class="govuk-table__cell">@DateFormatExtensions.LongDateFormat(@versions.EffectiveTo)</td>
+                                    <td class="govuk-table__cell">@version.Version</td>
+                                    <td class="govuk-table__cell">@version.EffectiveFrom.LongDateFormat()</td>
+                                    <td class="govuk-table__cell">@version.EffectiveTo.LongDateFormat()</td>
                                 </tr>
                             }
                         }
@@ -84,10 +84,10 @@
                 @if (!string.IsNullOrEmpty(Model.Epao?.PrimaryContactName))
                 {
                     <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">Contact name</dt>
-                    <dd class="govuk-summary-list__value">@Model.Epao.PrimaryContactName</dd>
-            </div>
-        }
+                        <dt class="govuk-summary-list__key">Contact name</dt>
+                        <dd class="govuk-summary-list__value">@Model.Epao.PrimaryContactName</dd>
+                    </div>
+                }
                 @if (!string.IsNullOrEmpty(Model.Epao?.ContactDetails?.WebsiteLink))
                 {
                     <div class="govuk-summary-list__row">
