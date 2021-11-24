@@ -9,7 +9,7 @@ namespace SFA.DAS.FindEpao.Web.Extensions
     {
         public static string VersionsArrayToString(string[] standardVersions)
         {            
-            return (standardVersions == null || standardVersions.Length < 0) ? string.Empty : string.Join(", ", standardVersions);
+            return standardVersions == null ? string.Empty : string.Join(", ", standardVersions);
         }
     }
 
