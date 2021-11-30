@@ -7,9 +7,8 @@ using SFA.DAS.FindEpao.Web.Extensions;
 
 namespace SFA.DAS.FindEpao.Web.UnitTests.Extensions
 {
-    
     [TestFixture]
-    public class WhenUsingExtensionMethods
+    public class WhenUsingStandardVersionsFormatExtensions
     {
 
         [Test]
@@ -42,37 +41,7 @@ namespace SFA.DAS.FindEpao.Web.UnitTests.Extensions
             Assert.AreEqual(outputString, result);
         }
 
-        [TestCase("2021/01/10")]
-        [TestCase("01/10/2021")]
-        [Test]
-        public void Date_Should_Be_Converted_To_Long_Date_Format(DateTime inputDate)
-        {
-            // Arrange
-            bool correctDateFormat = false;
-            DateTime outputDate;
 
-            // Act
-            var result = DateFormatExtensions.LongDateFormat(inputDate);
-            if (DateTime.TryParseExact(result, "dd MMMM yyyy", System.Globalization.CultureInfo.InvariantCulture, DateTimeStyles.None, out outputDate))
-            {
-                correctDateFormat = true;
-            }
-
-            // Assert
-            TestContext.WriteLine(outputDate);
-            Assert.IsTrue(correctDateFormat);
-        }
-
-        [TestCase(null)]
-        [Test]
-        public void When_Date_Has_No_Value_Return_Empty_String(DateTime? inputDate)
-        {
-            // Act
-            var result = DateFormatExtensions.LongDateFormat(inputDate);
-            
-            // Assert
-            Assert.IsEmpty(result);
-        }
 
     }
 }
