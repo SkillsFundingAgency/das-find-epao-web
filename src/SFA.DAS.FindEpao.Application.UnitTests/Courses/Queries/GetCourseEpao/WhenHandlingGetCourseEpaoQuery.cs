@@ -59,6 +59,7 @@ namespace SFA.DAS.FindEpao.Application.UnitTests.Courses.Queries.GetCourseEpao
             result.EffectiveFrom.Should().Be(courseEpao.EffectiveFrom);
             result.EpaoDeliveryAreas.Should().BeEquivalentTo(courseEpao.EpaoDeliveryAreas);
             result.DeliveryAreas.Should().BeEquivalentTo(courseEpao.DeliveryAreas);
+            result.StandardVersions.Should().BeEquivalentTo(courseEpao.StandardVersions);
             result.AllCourses.Should().BeEquivalentTo(courseEpao.AllCourses)
                 .And.BeInAscendingOrder(item => item.Description);
 

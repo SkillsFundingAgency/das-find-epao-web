@@ -16,7 +16,7 @@ namespace SFA.DAS.FindEpao.Domain.UnitTests.Courses
             var expectedVersions = new string[] { "1.0" };
 
             //Act
-            var actual = new CourseListItem (expectedCourseId, expectedCourseTitle,expectedCourseLevel, expectedIntegratedApprenticeship, expectedVersions);
+            var actual = new CourseListItem(expectedCourseId, expectedCourseTitle, expectedCourseLevel, expectedIntegratedApprenticeship, expectedVersions);
 
             //Assert
             Assert.AreEqual(expectedCourseId, actual.Id);
@@ -25,6 +25,19 @@ namespace SFA.DAS.FindEpao.Domain.UnitTests.Courses
             Assert.AreEqual(expectedIntegratedApprenticeship, actual.IntegratedApprenticeship);
             Assert.AreEqual(expectedVersions, actual.StandardVersions);
         }
+
+
+        [TestCase(null)]
+        public void WhenStandardVersionsAreNull_ReturnEmptyArray(string[] expectedVersions)
+        {
+            //Act
+            var course = new CourseListItem("", "Course 1", 3, true, expectedVersions);
+
+            //Assert
+            Assert.IsNull(course.StandardVersions);
+
+        }
+
 
         [TestCase("")]
         [TestCase(null)]
