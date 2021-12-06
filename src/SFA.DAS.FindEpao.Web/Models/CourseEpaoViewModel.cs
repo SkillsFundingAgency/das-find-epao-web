@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SFA.DAS.FindEpao.Domain.Courses;
 
 namespace SFA.DAS.FindEpao.Web.Models
 {
@@ -10,5 +11,6 @@ namespace SFA.DAS.FindEpao.Web.Models
         public int CourseEpaosCount { get; set; }
         public DateTime EffectiveFrom { get; set; }
         public IReadOnlyList<CourseListItemViewModel> AllCourses { get; set; }
+        public List<EpaoStandardsListItem> StandardVersions { get; set; }
     }
 }

@@ -32,6 +32,7 @@ namespace SFA.DAS.FindEpao.Application.Courses.Queries.GetCourseEpao
 
             var courseEpao = await _courseService.GetCourseEpao(query.CourseId, query.EpaoId);
 
+
             return new GetCourseEpaoResult
             {
                 Course = courseEpao.Course,
@@ -40,7 +41,8 @@ namespace SFA.DAS.FindEpao.Application.Courses.Queries.GetCourseEpao
                 EffectiveFrom = courseEpao.EffectiveFrom,
                 EpaoDeliveryAreas = courseEpao.EpaoDeliveryAreas,
                 DeliveryAreas = courseEpao.DeliveryAreas,
-                AllCourses = courseEpao.AllCourses.OrderBy(item => item.Description).ToList()
+                AllCourses = courseEpao.AllCourses.OrderBy(item => item.Description).ToList(),
+                StandardVersions = courseEpao.StandardVersions
             };
         }
     }

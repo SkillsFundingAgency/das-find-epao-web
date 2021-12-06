@@ -14,5 +14,6 @@ namespace SFA.DAS.FindEpao.Application.Courses.Queries.GetCourseEpao
         public IReadOnlyList<EpaoDeliveryArea> EpaoDeliveryAreas { get; set; }
         public IReadOnlyList<DeliveryArea> DeliveryAreas { get; set; }
         public IReadOnlyList<CourseListItem> AllCourses { get; set; }
+        public List<EpaoStandardsListItem> StandardVersions { get; set; }
     }
 }

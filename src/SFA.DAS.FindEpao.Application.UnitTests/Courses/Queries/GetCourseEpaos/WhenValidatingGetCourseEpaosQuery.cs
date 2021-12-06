@@ -40,7 +40,7 @@ namespace SFA.DAS.FindEpao.Application.UnitTests.Courses.Queries.GetCourseEpaos
             [Frozen] Mock<ICourseService> mockCourseService,
             GetCourseEpaosQueryValidator validator)
         {
-            courses.Add(new CourseListItem(query.CourseId, "title", 2, false));
+            courses.Add(new CourseListItem(query.CourseId, "title", 2, false, new string[]{"1.0"}));
             var courseList = new CourseList
             {
                 Courses = courses

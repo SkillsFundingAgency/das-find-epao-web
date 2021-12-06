@@ -11,10 +11,21 @@ namespace SFA.DAS.FindEpao.Domain.Courses
         public string Postcode { get; set; }
         public IReadOnlyList<EpaoDeliveryArea> DeliveryAreas { get; set; }
         public DateTime EffectiveFrom { get; set; }
+        public string[] StandardVersions { get; set; }
+
     }
 
     public class EpaoDeliveryArea
     {
         public int DeliveryAreaId { get; set; }
+    }
+
+
+    public class EpaoStandardsListItem
+    {
+        public string Version { get; set; }
+        public DateTime? EffectiveFrom { get; set; }
+        public DateTime? EffectiveTo { get; set; }
+
     }
 }

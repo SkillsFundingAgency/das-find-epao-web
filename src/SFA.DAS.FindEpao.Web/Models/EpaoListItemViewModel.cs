@@ -8,9 +8,9 @@ namespace SFA.DAS.FindEpao.Web.Models
     public class EpaoListItemViewModel : EpaoWithLocation
     {
         public EpaoListItemViewModel(
-            EpaoListItem epao, 
-            IReadOnlyList<DeliveryArea> deliveryAreas, 
-            Func<IReadOnlyList<EpaoDeliveryArea>, IReadOnlyList<DeliveryArea>, string> buildLocations) 
+            EpaoListItem epao,
+            IReadOnlyList<DeliveryArea> deliveryAreas,
+            Func<IReadOnlyList<EpaoDeliveryArea>, IReadOnlyList<DeliveryArea>, string> buildLocations)
             : base(epao.DeliveryAreas, deliveryAreas, buildLocations)
         {
             EpaoId = epao.EpaoId;
@@ -18,6 +18,7 @@ namespace SFA.DAS.FindEpao.Web.Models
             City = epao.City;
             Postcode = epao.Postcode;
             EffectiveFrom = epao.EffectiveFrom;
+            StandardVersions = epao.StandardVersions;
         }
 
         public string EpaoId { get; }
@@ -26,6 +27,7 @@ namespace SFA.DAS.FindEpao.Web.Models
         public string Postcode { get; }
         public string Address => FormatAddress();
         public DateTime EffectiveFrom { get; set; }
+        public string[] StandardVersions { get; set; }
 
         private string FormatAddress()
         {

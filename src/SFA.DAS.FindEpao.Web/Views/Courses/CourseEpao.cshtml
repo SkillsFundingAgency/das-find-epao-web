@@ -1,48 +1,75 @@
 ﻿@using SFA.DAS.FindEpao.Web.Infrastructure
 @using SFA.DAS.FindEpao.Web.Models
+@using SFA.DAS.FindEpao.Web.Extensions
 @model CourseEpaoViewModel
 @{
     ViewData["Title"] = Model.Epao.Name;
     ViewData["Description"] = $"View {Model.Epao.Name}’s contact details and address.";
-    
+
 }
 <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
             <span class="govuk-caption-xl">End-point assessment organisation</span>
             <h1 class="govuk-heading-xl ">@Model.Epao.Name</h1>
+
+            @if (Model.CourseEpaosCount > 1)
+            {
+                <p class="govuk-body">
+                    @Model.Epao.Name is 1 of @Model.CourseEpaosCount end-point assessment organisations for @Model.Course.Title <span class="das-no-wrap">(level @Model.Course.Level).</span>
+                </p>
+                <p class="govuk-body govuk-!-margin-bottom-1">
+                    <a class="govuk-link govuk-link--no-visited-state"
+                       asp-route-id="@Model.Course.Id"
+                       asp-route="@RouteNames.CourseEpaos">View the other end-point assessment organisations</a>
+                </p>
+            }
+            else
+            {
+                <p class="govuk-body govuk-!-margin-bottom-1">
+                    @Model.Epao.Name is the only end-point assessment organisation for @Model.Course.Title <span class="das-no-wrap">(level @Model.Course.Level).</span>
+                </p>
+            }
+
             <div class="das-highlight">
                 <p class="govuk-body">
                     @Model.Course.Title <span class="das-no-wrap">(level @Model.Course.Level)</span><br />
-                    
+
                     @if (Model.EffectiveFrom.Date > DateTime.Today)
                     {
-                        <span class="govuk-!-font-weight-bold">Available to assess from @Model.EffectiveFrom.ToString("d MMMM yyyy")</span>
+                        <span class="govuk-!-font-weight-bold">Available to assess from @Model.EffectiveFrom.LongDateFormat()</span>
                     }
                     else
                     {
                         <span class="govuk-!-font-weight-bold">Available to assess now</span>
                     }
                 </p>
-                @if (Model.CourseEpaosCount > 1)
-                {
-                    <p class="govuk-body">
-                        @Model.Epao.Name is 1 of @Model.CourseEpaosCount end-point assessment organisations for @Model.Course.Title <span class="das-no-wrap">(level @Model.Course.Level).</span>
-                    </p>
-                    <p class="govuk-body govuk-!-margin-bottom-1">
-                        <a class="govuk-link govuk-link--no-visited-state"
-                           asp-route-id="@Model.Course.Id"
-                           asp-route="@RouteNames.CourseEpaos">View the other end-point assessment organisations</a>
-                    </p>
-                }
-                else
-                {
-                    <p class="govuk-body govuk-!-margin-bottom-1">
-                        @Model.Epao.Name is the only end-point assessment organisation for @Model.Course.Title <span class="das-no-wrap">(level @Model.Course.Level).</span>
-                    </p>
-                }
+
+                <h2 class="govuk-heading-m" id="StandVerDetails">Standard version details</h2>
+                <table class="govuk-table" aria-describedby="StandVerDetails">
+                    <thead class="govuk-table__header" id="StandardVersionsHead">
+                        <tr>
+                            <th id="headerVersion" scope="col">Version</th>
+                            <th id="effectiveFrom" scope="col">Effective from</th>
+                            <th id="effectiveTo" scope="col">Effective to</th>
+                        </tr>
+                    </thead>
+                    <tbody class="govuk-table__body">
+                        @if (Model.StandardVersions != null)
+                        {
+                            @foreach (var version in Model.StandardVersions)
+                            {
+                                <tr>
+                                    <td class="govuk-table__cell">@version.Version</td>
+                                    <td class="govuk-table__cell">@version.EffectiveFrom.LongDateFormat()</td>
+                                    <td class="govuk-table__cell">@version.EffectiveTo.LongDateFormat()</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
             </div>
-            
+
             @if (Model.Course.IntegratedApprenticeship)
             {
                 <div class="das-highlight">
@@ -52,7 +79,7 @@
                     </p>
                 </div>
             }
-            
+
             <dl class="govuk-summary-list govuk-!-margin-bottom-8">
                 @if (!string.IsNullOrEmpty(Model.Epao?.PrimaryContactName))
                 {
@@ -66,7 +93,7 @@
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">Website</dt>
                         <dd class="govuk-summary-list__value">
-                            <a class="govuk-link" href="@Model.Epao.ContactDetails.WebsiteLink" target="_blank" rel="noreferrer noopener" >@Model.Epao.ContactDetails.WebsiteLink</a>
+                            <a class="govuk-link" href="@Model.Epao.ContactDetails.WebsiteLink" target="_blank" rel="noreferrer noopener">@Model.Epao.ContactDetails.WebsiteLink</a>
                         </dd>
                     </div>
                 }
@@ -93,19 +120,19 @@
                         <dd class="govuk-summary-list__value">
                             @if (!string.IsNullOrEmpty(Model.Epao.ContactDetails.Address1))
                             {
-                                @Model.Epao.ContactDetails.Address1 <br/>
+                                @Model.Epao.ContactDetails.Address1 <br />
                             }
                             @if (!string.IsNullOrEmpty(Model.Epao.ContactDetails.Address2))
                             {
-                                @Model.Epao.ContactDetails.Address2 <br/>
+                                @Model.Epao.ContactDetails.Address2 <br />
                             }
                             @if (!string.IsNullOrEmpty(Model.Epao.ContactDetails.Address3))
                             {
-                                @Model.Epao.ContactDetails.Address3 <br/>
+                                @Model.Epao.ContactDetails.Address3 <br />
                             }
                             @if (!string.IsNullOrEmpty(Model.Epao.ContactDetails.Address4))
                             {
-                                @Model.Epao.ContactDetails.Address4 <br/>
+                                @Model.Epao.ContactDetails.Address4 <br />
                             }
                             @if (!string.IsNullOrEmpty(Model.Epao.ContactDetails.Postcode))
                             {
@@ -121,27 +148,29 @@
                         <dd class="govuk-summary-list__value">@Model.Epao.Locations</dd>
                     </div>
                 }
-                
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">Apprenticeship training courses</dt>
-                    <dd class="govuk-summary-list__value">
-                    @if (Model.AllCourses.Count == 1)
-                    {
-                        @Model.AllCourses[0].Title <span class="das-no-wrap">(level @Model.AllCourses[0].Level)</span>
-                    }
-                    else
-                    {
-                        <ul class="govuk-list govuk-list--bullet">
-                        @foreach (var course in Model.AllCourses)
+
+                </dl>
+
+                <h2 class="govuk-heading-m" id="ApprTrainingCourses">Apprenticeship training courses</h2>
+                <table class="govuk-table" aria-describedby="ApprTrainingCourses">
+                    <thead class="govuk-table__header" id="ApprenticeshipTrainingCoursesHead">
+                        <tr>
+                            <th id="Standard" scope="col">Standard</th>
+                            <th id="Version" scope="col">Version</th>
+                        </tr>
+                    </thead>
+                    <tbody class="govuk-table__body">
+                        @if (Model.AllCourses != null)
                         {
-                            <li>@course.Title <span class="das-no-wrap">(level @course.Level)</span></li>
+                            @foreach (var versions in Model.AllCourses)
+                            {
+                                <tr>
+                                    <td class="govuk-table__cell">@versions.Title&nbsp;(level&nbsp;@versions.Level)</td>
+                                    <td class="govuk-table__cell">@StandardVersionsFormatExtensions.VersionsArrayToString(versions.StandardVersions)</td>
+                                </tr>
+                            }
                         }
-                        </ul>
-                    }
-                    </dd>
-                </div>
-                
-            </dl>
-        </div>
-    </div>
+                    </tbody>
+                </table>
+            </div>
 </main>
