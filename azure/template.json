@@ -97,7 +97,7 @@
         },
         {
             "apiVersion": "2020-10-01",
-            "name": "[concat('app-service-certificate-', parameters('utcValue'))]",
+            "name": "[concat(variables('appServiceName'), '-app-service-certificate-', parameters('utcValue'))]",
             "resourceGroup": "[parameters('sharedEnvResourceGroup')]",
             "type": "Microsoft.Resources/deployments",
             "properties": {
@@ -121,7 +121,7 @@
         },
         {
             "apiVersion": "2020-10-01",
-            "name": "[concat('application-insights-', parameters('utcValue'))]",
+            "name": "[concat(variables('appServiceName'), '-application-insights-', parameters('utcValue'))]",
             "resourceGroup": "[variables('resourceGroupName')]",
             "type": "Microsoft.Resources/deployments",
             "properties": {
@@ -142,10 +142,10 @@
         },
         {
             "apiVersion": "2020-10-01",
-            "name": "[concat('app-service-', parameters('utcValue'))]",
+            "name": "[concat(variables('appServiceName'), '-app-service-', parameters('utcValue'))]",
             "resourceGroup": "[variables('resourceGroupName')]",
             "dependsOn": [
-                "[concat('apim-product-subscription-', parameters('utcValue'))]"
+                "[concat(variables('appServiceName'), '-apim-product-subscription-', parameters('utcValue'))]"
             ],
             "type": "Microsoft.Resources/deployments",
             "properties": {
@@ -216,7 +216,7 @@
                                 },
                                 {
                                     "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
-                                    "value": "[reference(concat('application-insights-', parameters('utcValue'))).outputs.InstrumentationKey.value]"
+                                    "value": "[reference(concat(variables('appServiceName'), '-application-insights-', parameters('utcValue'))).outputs.InstrumentationKey.value]"
                                 }
                             ]
                         }
@@ -225,7 +225,7 @@
                         "value": "[parameters('customHostname')]"
                     },
                     "certificateThumbprint": {
-                        "value": "[reference(concat('app-service-certificate-', parameters('utcValue'))).outputs.certificateThumbprint.value]"
+                        "value": "[reference(concat(variables('appServiceName'), '-app-service-certificate-', parameters('utcValue'))).outputs.certificateThumbprint.value]"
                     },
                     "ipSecurityRestrictions": {
                         "value": "[parameters('frontEndAccessRestrictions')]"
@@ -235,7 +235,7 @@
         },
         {
             "apiVersion": "2020-10-01",
-            "name": "[concat('apim-product-subscription-', parameters('utcValue'))]",
+            "name": "[concat(variables('appServiceName'), '-apim-product-subscription-', parameters('utcValue'))]",
             "resourceGroup": "[parameters('sharedApimResourceGroup')]",
             "type": "Microsoft.Resources/deployments",
             "properties": {
