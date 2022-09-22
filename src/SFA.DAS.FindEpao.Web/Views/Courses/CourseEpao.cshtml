@@ -21,7 +21,8 @@
                 <p class="govuk-body govuk-!-margin-bottom-1">
                     <a class="govuk-link govuk-link--no-visited-state"
                        asp-route-id="@Model.Course.Id"
-                       asp-route="@RouteNames.CourseEpaos">View the other end-point assessment organisations</a>
+                       asp-route="@RouteNames.CourseEpaos">View the other end-point assessment organisations
+                    </a>
                 </p>
             }
             else
@@ -149,28 +150,29 @@
                     </div>
                 }
 
-                </dl>
+            </dl>
 
-                <h2 class="govuk-heading-m" id="ApprTrainingCourses">Apprenticeship training courses</h2>
-                <table class="govuk-table" aria-describedby="ApprTrainingCourses">
-                    <thead class="govuk-table__header" id="ApprenticeshipTrainingCoursesHead">
-                        <tr>
-                            <th id="Standard" scope="col">Standard</th>
-                            <th id="Version" scope="col">Version</th>
-                        </tr>
-                    </thead>
-                    <tbody class="govuk-table__body">
-                        @if (Model.AllCourses != null)
+            <h2 class="govuk-heading-m" id="ApprTrainingCourses">Apprenticeship training courses</h2>
+            <table class="govuk-table" aria-describedby="ApprTrainingCourses">
+                <thead class="govuk-table__header" id="ApprenticeshipTrainingCoursesHead">
+                    <tr>
+                        <th id="Standard" scope="col">Standard</th>
+                        <th id="Version" scope="col">Version</th>
+                    </tr>
+                </thead>
+                <tbody class="govuk-table__body">
+                    @if (Model.AllCourses != null)
+                    {
+                        @foreach (var versions in Model.AllCourses)
                         {
-                            @foreach (var versions in Model.AllCourses)
-                            {
-                                <tr>
-                                    <td class="govuk-table__cell">@versions.Title&nbsp;(level&nbsp;@versions.Level)</td>
-                                    <td class="govuk-table__cell">@StandardVersionsFormatExtensions.VersionsArrayToString(versions.StandardVersions)</td>
-                                </tr>
-                            }
+                            <tr>
+                                <td class="govuk-table__cell">@versions.Title&nbsp;(level&nbsp;@versions.Level)</td>
+                                <td class="govuk-table__cell">@StandardVersionsFormatExtensions.VersionsArrayToString(versions.StandardVersions)</td>
+                            </tr>
                         }
-                    </tbody>
-                </table>
-            </div>
+                    }
+                </tbody>
+            </table>
+        </div>
+
 </main>
