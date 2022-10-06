@@ -55,7 +55,7 @@ namespace SFA.DAS.FindEpao.Web
             services.Configure<FindEpaoWeb>(_configuration.GetSection("FindEpaoWeb"));
             services.AddSingleton(cfg => cfg.GetService<IOptions<FindEpaoWeb>>().Value);
             
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddControllersWithViews();
 
             services.AddServiceRegistration();
             services.AddMediatR(typeof(GetCoursesQueryHandler).Assembly);
