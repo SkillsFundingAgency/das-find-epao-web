@@ -19,7 +19,7 @@ namespace SFA.DAS.FindEpao.Application.UnitTests.Courses.Queries.GetCourseEpao
     public class WhenHandlingGetCourseEpaoQuery
     {
         [Test, MoqAutoData]
-        public async Task And_Query_InValid_Then_Throws_ValidationException(
+        public void And_Query_InValid_Then_Throws_ValidationException(
             GetCourseEpaoQuery query,
             string propertyName,
             ValidationResult validationResult,
@@ -45,7 +45,7 @@ namespace SFA.DAS.FindEpao.Application.UnitTests.Courses.Queries.GetCourseEpao
             [Frozen] Mock<ICourseService> mockCourseService,
             GetCourseEpaoQueryHandler handler)
         {
-            allCourses.Add(new CourseListItem("3", "aaaaa", 3, false, new string[] { "1.0" }));
+            allCourses.Add(new CourseListItem("3", "aaaaa", 3, false, ["1.0"]));
             courseEpao.AllCourses = allCourses;
             mockCourseService
                 .Setup(service => service.GetCourseEpao(query.CourseId, query.EpaoId))
