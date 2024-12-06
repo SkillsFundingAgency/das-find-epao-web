@@ -19,7 +19,7 @@ namespace SFA.DAS.FindEpao.Application.UnitTests.Courses.Queries.GetCourseEpaos
     public class WhenHandlingGetCourseEpaosQuery
     {
         [Test, MoqAutoData]
-        public async Task And_Query_InValid_Then_Throws_ValidationException(
+        public void And_Query_InValid_Then_Throws_ValidationException(
             GetCourseEpaosQuery query,
             string propertyName,
             ValidationResult validationResult,

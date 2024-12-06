@@ -1,9 +1,9 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -60,8 +60,11 @@ namespace SFA.DAS.FindEpao.Web
             services.AddServiceRegistration();
             services.AddMediatR(typeof(GetCoursesQueryHandler).Assembly);
             services.AddMediatRValidation();
-            
-            services.AddApplicationInsightsTelemetry(_configuration["APPINSIGHTS_INSTRUMENTATIONKEY"]);
+
+            services.AddApplicationInsightsTelemetry(options =>
+            {
+                options.ConnectionString = _configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
+            });
 
             services.AddRouting(options =>
             {
@@ -75,12 +78,12 @@ namespace SFA.DAS.FindEpao.Web
                     .AddCheck<FindEpaoOuterApiHealthCheck>(
                         "Find Epao Outer Api",
                         failureStatus: HealthStatus.Unhealthy,
-                        tags: new[] {"ready"});
+                        tags: ["ready"]);
             }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -105,7 +108,7 @@ namespace SFA.DAS.FindEpao.Web
                     context.Response.Headers.Remove("X-Frame-Options");
                 }
 
-                context.Response.Headers.Add("X-Frame-Options", "SAMEORIGIN");
+                context.Response.Headers.TryAdd("X-Frame-Options", "SAMEORIGIN");
 
                 await next();
 

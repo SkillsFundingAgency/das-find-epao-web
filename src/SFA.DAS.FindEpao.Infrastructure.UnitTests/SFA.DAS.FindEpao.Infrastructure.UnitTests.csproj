@@ -1,18 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.6" />
-    <PackageReference Include="nunit" Version="3.12.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
+    <!--AutoFixture.NUnit3 4.8.0 requires NUnit (>= 3.7.0 && < 4.0.0)-->
+    <PackageReference Include="nunit" Version="3.14.0" />
+    <!--AutoFixture.NUnit3 4.8.0 requires NUnit (>= 3.7.0 && < 4.0.0)-->
     <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
-    <PackageReference Include="SFA.DAS.Testing.AutoFixture" Version="3.0.169" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageReference Include="SFA.DAS.Testing.AutoFixture" Version="17.1.103" />
+    <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
