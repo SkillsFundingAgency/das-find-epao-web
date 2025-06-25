@@ -81,6 +81,9 @@
         },
         "deployPrivateLinkedScopedResource": {
             "type": "bool"
+        },
+        "FindEPAOApimSubscriptionKey": {
+            "type": "securestring"
         }
     },
     "variables": {
@@ -196,7 +199,7 @@
                                 },
                                 {
                                     "name": "FindEpaoApi:Key",
-                                    "value": "[reference(concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', parameters('sharedApimResourceGroup'), '/providers/Microsoft.ApiManagement/service/', parameters('sharedApimName'), '/subscriptions/', variables('appServiceName')), '2019-01-01').primaryKey]"
+                                    "value": "[parameters('FindEPAOApimSubscriptionKey')]"
                                 },
                                 {
                                     "name": "Cdn:Url",
