@@ -11,7 +11,6 @@ resources:
     name: SkillsFundingAgency/das-platform-building-blocks
     ref: refs/tags/2.2.7
     endpoint: SkillsFundingAgency
-
 stages:
 - stage: Build
   jobs:
