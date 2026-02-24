@@ -70,3 +70,36 @@ if ($backLinkOrHome) {
     backLinkOrHome();
 }
 
+// Add the accessibility name and description on the 
+// generated input created from the GOV.UK accessible autocomplete.
+(function attachAccessibleNameAndDescription() {
+    var input = document.getElementById(idSelectField);
+
+    if (!input) return;
+
+    // First off, ensure accessible name is explicitly tied to the label.
+    var label = document.getElementById(idSelectField + '-label');
+
+    if (label) {
+        input.setAttribute('aria-labelledby', label.id);
+    }
+
+    // Mirror hint and errors onto the auto generated input so audit tools sse the relationship.
+    var describedBy = [];
+    var hintId = 'choose-course-hint';
+    if (document.getElementById(hintId)) describedBy.push(hintId);
+
+    var jsErrorId = 'course-error-js';
+    var noJsErrorId = 'course-error-nojs';
+    if (document.getElementById(jsErrorId)) describedBy.push(jsErrorId);
+    if (document.getElementById(noJsErrorId)) describedBy.push(noJsErrorId);
+
+    if (describedBy.length) {
+        input.setAttribute('aria-describedby', describedBy.join(' '));
+    }
+
+    // Reflect server-side validation state
+    var meta = document.getElementById("autocomplete-metadata"); // Access the server-side value.
+    var hasError = meta && meta.getAttribute("data-has-error") === "true"  
+    if (hasError) input.setAttribute('aria-invalid', 'true');
+})();
