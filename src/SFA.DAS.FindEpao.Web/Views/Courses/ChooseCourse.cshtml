@@ -40,7 +40,7 @@
                         </div>
                     }
 
-                    <label class="govuk-label govuk-visually-hidden" id="SelectedCourseId-label" for="SelectedCourseId">
+                    <label class="govuk-label govuk-visually-hidden" for="SelectedCourseId">
                         Select an apprenticeship training course
                     </label>
                    
@@ -59,12 +59,7 @@
                             <option value="@course.Id">@course.Description</option>
                         }
                     </select>
-                </div>
-
-                <!-- Added to be read by the js files -->
-                <div id="autocomplete-metadata"
-                     data-has-error="@hasError.ToString().ToLower()">
-                </div>
+                </div>                
 
                 <button class="govuk-button" type="submit">Continue</button>
             </form>
