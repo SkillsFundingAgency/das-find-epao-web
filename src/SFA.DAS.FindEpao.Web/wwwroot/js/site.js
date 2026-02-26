@@ -70,6 +70,8 @@ if ($backLinkOrHome) {
     backLinkOrHome();
 }
 
+// P2-3071 BUG FIX //
+
 // Add the accessibility name and description on the 
 // generated input created from the GOV.UK accessible autocomplete.
 (function attachAccessibleNameAndDescription() {
@@ -104,6 +106,8 @@ if ($backLinkOrHome) {
     if (hasError) input.setAttribute('aria-invalid', 'true');
 })();
 
+
+// P2-3072 BUG FIX //
 
 (function attachAriaControls() {
     var input = document.getElementById(idSelectField);
