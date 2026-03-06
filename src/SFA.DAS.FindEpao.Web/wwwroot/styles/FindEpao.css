@@ -1,0 +1,44 @@
+﻿body {
+}
+
+
+/* Base: ensure the anchor has a minimum touch area */
+.govuk-footer__inline-list-item > .govuk-footer__link {
+    display: inline-flex; /* Gives us size & alignment control */
+    align-items: center;
+    justify-content: center;
+    min-width: 24px; /* Meets width */
+    min-height: 24px; /* Meets height */
+    line-height: 1.2; /* Avoid overly small line box */
+    padding: 4px 6px; /* Extra tap area without visually changing text */
+    text-decoration-thickness: from-font; /* Keep nice underline if used */
+}
+
+
+/* Space between inline list items */
+.govuk-footer__inline-list-item {
+    /* Horizontal spacing so adjacent targets have room */
+    margin-right: 12px;
+}
+
+/* Or space on the links themselves */
+.govuk-footer__inline-list-item > .govuk-footer__link {
+    margin-right: 12px;
+}
+
+/* Focus visibility */
+.govuk-footer__inline-list-item > .govuk-footer__link[target="_blank"][rel~="noopener"][rel~="noreferrer"]:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+/* Remove trailing margin from the last item */
+.govuk-footer__inline-list-item:last-child,
+.govuk-footer__inline-list-item > .govuk-footer__link:last-child {
+    margin-right: 0;
+}
+
+
+
+
