@@ -70,12 +70,10 @@ if ($backLinkOrHome) {
     backLinkOrHome();
 }
 
-// P2-3071 BUG FIX //
-
 // Add the accessibility name and description on the 
 // generated input created from the GOV.UK accessible autocomplete.
 (function attachAccessibleNameAndDescription() {
-    var input = document.getElementById(idSelectField);
+    var input = document.querySelector('#' + idSelectField + '.autocomplete__input');
 
     if (!input) return;
 
@@ -86,22 +84,20 @@ if ($backLinkOrHome) {
         input.setAttribute('aria-labelledby', label.id);
     }
 
-    // Mirror hint and errors onto the auto generated input so audit tools sse the relationship.
+    // Mirror hint and errors onto the auto generated input so audit tools see the relationship.
     var describedBy = [];
     var hintId = 'choose-course-hint';
     if (document.getElementById(hintId)) describedBy.push(hintId);
 
     var jsErrorId = 'course-error-js';
     var noJsErrorId = 'course-error-nojs';
-    if (document.getElementById(jsErrorId)) describedBy.push(jsErrorId);
-    if (document.getElementById(noJsErrorId)) describedBy.push(noJsErrorId);
+    
+    if (document.getElementById(noJsErrorId)) describedBy.push(jsErrorId);
 
     if (describedBy.length) {
         input.setAttribute('aria-describedby', describedBy.join(' '));
     }
-
-    // Reflect server-side validation state
-    var meta = document.getElementById("autocomplete-metadata"); // Access the server-side value.
-    var hasError = meta && meta.getAttribute("data-has-error") === "true"
-    if (hasError) input.setAttribute('aria-invalid', 'true');
+    
+    // If an error does exist or has been rendered then update aria attribute with the appropriate value.
+    if (document.getElementById(noJsErrorId)) input.setAttribute('aria-invalid', 'true');
 })();
