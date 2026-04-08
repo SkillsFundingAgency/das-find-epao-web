@@ -6,7 +6,7 @@
 }
 
 .govuk-footer__link:active, .govuk-footer__link:focus {
-    var(--govuk-link-colour, #1a65a6);
+    color: var(--govuk-link-colour, #1a65a6);
 }
 
 
@@ -31,7 +31,6 @@
     color: #fff;
     background: var(--govuk-brand-colour, #1d70b8);
 }
-
 
 /* 
     Overrides the original class in main.css that has an offending margin-bottom value 
