@@ -8,7 +8,17 @@
         ViewData["Title"] = "Error: What is the apprenticeship training course?";
     }
     ViewData["Description"] = "Enter an apprenticeship training course to find available end-point assessment organisations.";
+
+    var modelStateKey = "SelectedCourseId";
+    var hasError = ViewData.ModelState.ContainsKey(modelStateKey) && ViewData.ModelState[modelStateKey].Errors.Any();
+
+    // IDs used in aria-describedby
+    var hintId = "choose-course-hint";
+    var jsErrorId = "course-error-js";
+    var noJsErrorId = "course-error-nojs";
+
 }
+
 <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
@@ -16,25 +26,41 @@
             <h1 class="govuk-heading-xl ">What is the apprenticeship training course?</h1>
             <form method="post" asp-route="@RouteNames.ChooseCourse" class="validate-auto-complete">
                 <div class="govuk-form-group @(ViewData.ModelState.IsValid ? "" : "govuk-form-group--error")">
-                    @if (ViewData.ModelState.ContainsKey("SelectedCourseId") && ViewData.ModelState["SelectedCourseId"].Errors.Any())
+                    @if (hasError)
                     {
                         <div class="govuk-!-margin-bottom-3">
-                            <span id="Course" class="govuk-error-message das-js-show--inline">
+                            <span id="@jsErrorId" class="govuk-error-message das-js-show--inline">
+                                <span class="govuk-visually-hidden">Error:</span>
                                 @ViewData.ModelState["SelectedCourseId"].Errors.First().ErrorMessage
                             </span>
-                            <span id="Course" class="govuk-error-message das-js-hide">
+                            <span id="@noJsErrorId" class="govuk-error-message das-js-hide">
+                                <span class="govuk-visually-hidden">Error:</span>
                                 @ViewData.ModelState["SelectedCourseIdNoJs"].Errors.First().ErrorMessage
                             </span>
                         </div>
                     }
-                <select id="SelectedCourseId" name="SelectedCourseId" class="govuk-select" aria-describedby="choose-course-hint">
-                    <option value="">Select an apprenticeship training course</option>
-                    @foreach (var course in Model.Courses)
-                    {
-                        <option value="@course.Id">@course.Description</option>
-                    }
+
+                    <label class="govuk-label govuk-visually-hidden" for="SelectedCourseId">
+                        Select an apprenticeship training course
+                    </label>
+                   
+                    <div id="@hintId" class="govuk-hint govuk-visually-hidden">
+                        Start typing at least 3 characters, then choose a course from the list.
+                    </div>
+
+                    <select id="SelectedCourseId" 
+                            name="SelectedCourseId" 
+                            class="govuk-select"
+                            aria-describedby="@(hasError ? $"{hintId} {jsErrorId} {noJsErrorId}" : hintId)"
+                            @(hasError ? "aria-invalid=\"true\"" : null)>
+                        <option value="">Select an apprenticeship training course</option>
+                        @foreach (var course in Model.Courses)
+                        {
+                            <option value="@course.Id">@course.Description</option>
+                        }
                     </select>
-                </div>
+                </div>                
+
                 <button class="govuk-button" type="submit">Continue</button>
             </form>
         </div>

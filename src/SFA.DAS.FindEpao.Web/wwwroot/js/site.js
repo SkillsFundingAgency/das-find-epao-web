@@ -69,4 +69,3 @@ var backLinkOrHome = function () {
 if ($backLinkOrHome) {
     backLinkOrHome();
 }
-
