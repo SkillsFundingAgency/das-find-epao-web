@@ -3,6 +3,9 @@
 var idSelectField = 'SelectedCourseId';
 
 var selectEl = document.querySelector('#' + idSelectField);
+
+var EPAOHeading = 'EPAOHeading';
+
 if (selectEl) {
     accessibleAutocomplete.enhanceSelectElement({
         selectElement: selectEl,
@@ -70,3 +73,35 @@ if ($backLinkOrHome) {
     backLinkOrHome();
 }
 
+
+// Add the accessibility name and description on the 
+// generated input created from the GOV.UK accessible autocomplete.
+(function attachAccessibleNameAndDescription() {
+    var input = document.querySelector('#' + idSelectField + '.autocomplete__input');
+
+    if (!input) return;  
+    
+    // First off, ensure accessible name is explicitly tied to the heading.
+    var heading = document.getElementById(EPAOHeading);
+
+    if (heading) {
+        input.setAttribute('aria-labelledby', heading.id);
+    }    
+
+    // Mirror hint and errors onto the auto generated input so audit tools see the relationship.
+    var describedBy = [];
+    var hintId = 'choose-course-hint';
+    if (document.getElementById(hintId)) describedBy.push(hintId);
+
+    var jsErrorId = 'course-error-js';
+    var noJsErrorId = 'course-error-nojs';
+
+    if (document.getElementById(noJsErrorId)) describedBy.push(jsErrorId);
+
+    if (describedBy.length) {
+        input.setAttribute('aria-describedby', describedBy.join(' '));
+    }
+
+    // If an error does exist or has been rendered then update aria attribute with the appropriate value.
+    if (document.getElementById(noJsErrorId)) input.setAttribute('aria-invalid', 'true');
+})();
