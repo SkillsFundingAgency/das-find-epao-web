@@ -1,0 +1,44 @@
+﻿body {
+}
+
+.govuk-footer__link:link, .govuk-footer__link:visited {
+    color: var(--govuk-link-colour, #1a65a6);
+}
+
+.govuk-footer__link:active, .govuk-footer__link:focus {
+    color: var(--govuk-link-colour, #1a65a6);
+}
+
+
+.govuk-footer__link:link {
+    color: var(--govuk-link-colour, #1a65a6);
+}
+
+/* Prevent the Crown copyright logo from sharing the same blue color as the anchor links */
+.govuk-footer__copyright-logo:active, .govuk-footer__copyright-logo:link, .govuk-footer__copyright-logo:visited {
+    color: var(--govuk-text-colour, #0b0c0c);
+}
+
+/* New colors for Govuk-header banner */
+.govuk-header {
+    font-family: GDS Transport, arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1;
+    border-bottom: 1px solid transparent;
+    color: #fff;
+    background: var(--govuk-brand-colour, #1d70b8);
+}
+
+/* 
+    Overrides the original class in main.css that has an offending margin-bottom value 
+    that causes a mis-alignment with the govuk-header container and govuk-header banner.
+*/
+.govuk-header__container {
+    position: relative;  
+    margin-bottom:0px;
+    padding-top: 10px;
+    border-bottom: 10px solid #1d70b8;
+}
