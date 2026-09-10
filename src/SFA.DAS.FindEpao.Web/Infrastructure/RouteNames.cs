@@ -16,6 +16,5 @@
         public const string CourseEpao = "course-epao";
 
         public const string AccessibilityStatement = "accessibility-statement";
-        public const string Privacy = "privacy";
     }
 }
