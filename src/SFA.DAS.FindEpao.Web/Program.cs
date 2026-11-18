@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using NLog.Web;
 
 namespace SFA.DAS.FindEpao.Web;
 
@@ -15,6 +14,5 @@ public class Program
 
     public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
          WebHost.CreateDefaultBuilder(args)
-             .UseStartup<Startup>()
-             .UseNLog();
+             .UseStartup<Startup>();
 }

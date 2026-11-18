@@ -54,17 +54,14 @@ namespace SFA.DAS.FindEpao.Web
             services.AddSingleton(cfg => cfg.GetService<IOptions<FindEpaoApi>>().Value);
             services.Configure<FindEpaoWeb>(_configuration.GetSection("FindEpaoWeb"));
             services.AddSingleton(cfg => cfg.GetService<IOptions<FindEpaoWeb>>().Value);
-            
+
             services.AddControllersWithViews();
 
             services.AddServiceRegistration();
             services.AddMediatR(typeof(GetCoursesQueryHandler).Assembly);
             services.AddMediatRValidation();
 
-            services.AddApplicationInsightsTelemetry(options =>
-            {
-                options.ConnectionString = _configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
-            });
+            services.AddOpenTelemetryRegistration(_configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
 
             services.AddRouting(options =>
             {
